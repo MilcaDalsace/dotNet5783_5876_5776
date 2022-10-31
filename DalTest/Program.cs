@@ -86,7 +86,7 @@ namespace Dal
                     }
                     break;
                 case 3:
-                    //product.ReadAll();
+                    product.ReadAll();
                     break;
                 case 4:
                     Console.WriteLine("enter id of prudoct to update");
@@ -152,7 +152,7 @@ namespace Dal
                     }
                     break;
                 case 3:
-                    //product.ReadAll();
+                    product.ReadAll();
                     break;
                 case 4:
                     Console.WriteLine("enter id of prudoct to update");
@@ -223,7 +223,7 @@ namespace Dal
                     }
                     break;
                 case 3:
-                    //product.ReadAll();
+                    product.ReadAll();
                     break;
                 case 4:
                     Console.WriteLine("enter id of orderItem to update");
