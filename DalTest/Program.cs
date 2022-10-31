@@ -100,11 +100,14 @@ namespace Dal
                         Console.WriteLine(ex);
                     }
                     Console.WriteLine("enter new name price and amount inStock");
-                    prudoctToCreate.ID= idToUpdate;
-                    prudoctToCreate.Name = Console.ReadLine();
-                    prudoctToCreate.Price= int.Parse(Console.ReadLine());   
-                    prudoctToCreate.InStock= int.Parse(Console.ReadLine());
-                    product.UpDate(prudoctToCreate);
+                    string tempName = Console.ReadLine();
+                    double tempPrice=double.Parse(Console.ReadLine());
+                    int tempInStock = int.Parse(Console.ReadLine());
+                    prudoctToCreate.ID = idToUpdate;
+                    prudoctToCreate.Name = tempName==""? prudoctToCreate.Name : tempName;
+                    prudoctToCreate.Price = tempPrice ==null ? prudoctToCreate.Price : tempPrice;
+                    prudoctToCreate.InStock = tempInStock == null? prudoctToCreate.InStock : tempInStock;
+                    product.Update(prudoctToCreate);
                     break;
                 case 5:
                     Console.WriteLine("enter id of product to delete");
@@ -164,13 +167,19 @@ namespace Dal
                     }
                     Console.WriteLine("enter new customer name customer email customer adress order date ship date and delivery date");
                     orderToCreate.ID = idToUpdate;
-                    orderToCreate.CustomerName = Console.ReadLine();
-                    orderToCreate.CustomerEmail = Console.ReadLine();
-                    orderToCreate.CustomerAdress = Console.ReadLine();
-                    orderToCreate.OrderDate = DateTime.Parse(Console.ReadLine());
-                    orderToCreate.ShipDate = DateTime.Parse(Console.ReadLine());
-                    orderToCreate.DeliveryDate = DateTime.Parse(Console.ReadLine());
-                    order.UpDate(orderToCreate);
+                    string tempName = Console.ReadLine();
+                    string tempEmail = Console.ReadLine();
+                    string tempAdress = Console.ReadLine();
+                    DateTime tempOrderDate = DateTime.Parse(Console.ReadLine());
+                    DateTime tempShipDate = DateTime.Parse(Console.ReadLine());
+                    DateTime tempDeliveryDate = DateTime.Parse(Console.ReadLine());
+                    orderToCreate.CustomerName = tempName == "" ? orderToCreate.CustomerName : tempName;
+                    orderToCreate.CustomerEmail = tempEmail == null ? orderToCreate.CustomerEmail : tempEmail;
+                    orderToCreate.CustomerAdress = tempAdress == null ? orderToCreate.CustomerAdress : tempAdress;
+                    orderToCreate.OrderDate = tempOrderDate == null ? orderToCreate.OrderDate : tempOrderDate;
+                    orderToCreate.ShipDate = tempShipDate == null ? orderToCreate.ShipDate : tempShipDate;
+                    orderToCreate.DeliveryDate = tempDeliveryDate == null ? orderToCreate.DeliveryDate : tempDeliveryDate;
+                    order.Update(orderToCreate);
                     break;
                 case 5:
                     Console.WriteLine("enter id of product to delete");
@@ -182,12 +191,6 @@ namespace Dal
         }
         private void OrderItem(int userChoiceMethod)
         {
-        //    public int ID { get; set; }
-        //public int OrderId { get; set; }
-
-        //public int ProductId { get; set; }
-        //public double Price { get; set; }
-        //public int Amount { get; set; }
         DO.OrderItem orderItemToCreate = new DO.OrderItem();
             switch (userChoiceMethod)
             {
@@ -233,13 +236,17 @@ namespace Dal
                     {
                         Console.WriteLine(ex);
                     }
-                    Console.WriteLine("enter order id prudoct id price and amount");
+                    Console.WriteLine("enter order id, prudoct id, price and amount");
                     orderItemToCreate.ID= idToUpdate;
-                    orderItemToCreate.OrderId = int.Parse(Console.ReadLine());
-                    orderItemToCreate.ProductId = int.Parse(Console.ReadLine());
-                    orderItemToCreate.Price = int.Parse(Console.ReadLine());
-                    orderItemToCreate.Amount = int.Parse(Console.ReadLine());
-                    orderItem.UpDate(orderItemToCreate);
+                    int tempOrderId = int.Parse(Console.ReadLine());
+                    int tempProductId = int.Parse(Console.ReadLine());
+                    double tempPrice = double.Parse(Console.ReadLine());
+                    int tempAmount = int.Parse(Console.ReadLine());
+                    orderItemToCreate.OrderId = tempOrderId == null ? orderItemToCreate.OrderId : tempOrderId;
+                    orderItemToCreate.ProductId = tempProductId == null ? orderItemToCreate.ProductId : tempProductId;
+                    orderItemToCreate.Price = tempPrice == null ? orderItemToCreate.Price : tempPrice;
+                    orderItemToCreate.Amount = tempAmount == null ? orderItemToCreate.Amount : tempAmount;
+                    orderItem.Update(orderItemToCreate);
                     break;
                 case 5:
                     Console.WriteLine("enter id of oorderItem to delete");
