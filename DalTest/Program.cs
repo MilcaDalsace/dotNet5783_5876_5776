@@ -9,10 +9,10 @@ namespace Dal
 {
     internal class Program
     {
-       private DalOrders order=new DalOrders();
-       private DalProduct product = new DalProduct();
-       private DalOrderItem orderItem = new DalOrderItem();
-         public void Main(String[] args)
+       static private  DalOrders order=new DalOrders();
+        static private DalProduct product = new DalProduct();
+        static private DalOrderItem orderItem = new DalOrderItem();
+         public static void Main(String[] args)
         {
             Console.WriteLine(
                 "enter 0 to exit \n" +
@@ -21,6 +21,9 @@ namespace Dal
                 "enter 3 to orderItems \n"
                 );
           int userChoice = int.Parse(Console.ReadLine());
+            while(userChoice != 0) { 
+            if (userChoice == 0)
+                return;
             string userChoiceClass = userChoice == 1 ? "Product" : userChoice == 2 ? "Orders" : userChoice == 3 ? "OrderItem" : "Exit";
             Console.WriteLine("enter 1 to add a " + userChoiceClass + "\n" +
                       "enter 2 to  show  " + userChoiceClass + " by id \n" +
@@ -29,6 +32,7 @@ namespace Dal
                       "enter 5 to delete a " + userChoiceClass + " \n");
 
             int chooseMethod = int.Parse(Console.ReadLine());
+          
             switch (userChoice)
             {
                 case 1:
@@ -43,10 +47,16 @@ namespace Dal
                 default:
                     break;
             }
-            
-
+                Console.WriteLine(
+                   "enter 0 to exit \n" +
+                   "enter 1 to Products \n" +
+                   "enter 2 to  orders\n" +
+                   "enter 3 to orderItems \n"
+                   );
+                 userChoice = int.Parse(Console.ReadLine());
+            }
         }
-       private void Product(int userChoiceMethod)
+       private static void Product(int userChoiceMethod)
         {
             DO.Product prudoctToCreate=new DO.Product();
             switch (userChoiceMethod)
@@ -54,7 +64,7 @@ namespace Dal
                 case 1:
                     Console.WriteLine("enter nameProduct priceProduct and amountInStock");
                     prudoctToCreate.Name=Console.ReadLine();
-                    prudoctToCreate. Price= int.Parse(Console.ReadLine());
+                    prudoctToCreate.Price= double.Parse(Console.ReadLine());
                     prudoctToCreate.InStock = int.Parse(Console.ReadLine());
                     Console.WriteLine("enter 1 to babygrows\n" +
                         "enter 2 to shirts\n" +
@@ -86,7 +96,17 @@ namespace Dal
                     }
                     break;
                 case 3:
-                    product.ReadAll();
+                    DO.Product[] productToPrint =product.ReadAll(); 
+                    //new DO.Product[];
+                    for(int i=0;i< productToPrint.Length; i++)
+                    {
+                        if (productToPrint[i].ID == 0)
+                            i= productToPrint.Length;
+                        else
+                            Console.WriteLine(productToPrint[i]);
+
+                    }
+                    
                     break;
                 case 4:
                     Console.WriteLine("enter id of prudoct to update");
@@ -117,7 +137,7 @@ namespace Dal
                     break;
             }
         }
-        private void Order(int userChoiceMethod)
+        private static void Order(int userChoiceMethod)
         {
             DO.Order orderToCreate = new DO.Order();
             switch (userChoiceMethod)
@@ -189,7 +209,7 @@ namespace Dal
                     break;
             }
         }
-        private void OrderItem(int userChoiceMethod)
+        private static void OrderItem(int userChoiceMethod)
         {
         DO.OrderItem orderItemToCreate = new DO.OrderItem();
             switch (userChoiceMethod)

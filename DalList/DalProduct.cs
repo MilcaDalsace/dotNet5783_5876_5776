@@ -1,14 +1,19 @@
 ﻿
 using DO;
-
+using Dal;
 namespace Dal
 {
     public class DalProduct
     {
         public int Create(DO.Product newPrudoct)
         {
-            if (DataSource.Config._productNum == DataSource._products.Length)
+            //  sizeof(DataSource._products)
+           // Console.Write(DataSource._products);
+            Console.Write(DataSource._products.Length);
+            if (DataSource.Config._productNum == DataSource._products.Length) 
+            {
                 throw new Exception("the array is full");
+            }
             else
             {
                 int tempPrudoctNum = DataSource.Config._productNum++;
@@ -23,6 +28,9 @@ namespace Dal
             DO.Product[] tempProducts = new DO.Product[DataSource._products.Length];
             for (int i = 0; i < tempProducts.Length; i++)
             {
+                if (DataSource._products[i].ID == 0)
+                    i= tempProducts.Length;
+                else
                 tempProducts[i] = DataSource._products[i];
             }
             return tempProducts;

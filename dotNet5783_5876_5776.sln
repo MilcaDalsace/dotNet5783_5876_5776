@@ -1,15 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31005.135
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stage0", "Stage0\Stage0.csproj", "{B4AD7634-37EB-41BC-AD5F-865A3ECEDCA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stage0", "Stage0\Stage0.csproj", "{B4AD7634-37EB-41BC-AD5F-865A3ECEDCA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalFacade", "DalFacade\DalFacade.csproj", "{56F96E84-89CF-440B-AAF2-5605FBE79F0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalFacade", "DalFacade\DalFacade.csproj", "{56F96E84-89CF-440B-AAF2-5605FBE79F0E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalList", "DalList\DalList.csproj", "{CDA3E7E0-8B01-4E6E-9080-C19BFF895618}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalList", "DalList\DalList.csproj", "{CDA3E7E0-8B01-4E6E-9080-C19BFF895618}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalTest", "DalTest\DalTest.csproj", "{212B0946-B889-4E55-8883-98D5092E38C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalTest", "DalTest\DalTest.csproj", "{212B0946-B889-4E55-8883-98D5092E38C8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Stege1", "Stege1", "{E667E011-3597-4FC5-AB03-F7D06C632D44}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +38,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{56F96E84-89CF-440B-AAF2-5605FBE79F0E} = {E667E011-3597-4FC5-AB03-F7D06C632D44}
+		{CDA3E7E0-8B01-4E6E-9080-C19BFF895618} = {E667E011-3597-4FC5-AB03-F7D06C632D44}
+		{212B0946-B889-4E55-8883-98D5092E38C8} = {E667E011-3597-4FC5-AB03-F7D06C632D44}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AECA46A9-022A-4E0E-8EC6-1F9562FEFECF}

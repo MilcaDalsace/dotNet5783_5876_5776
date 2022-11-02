@@ -8,7 +8,7 @@ namespace Dal;
 static internal class DataSource
 {
 
-    static readonly System.Random _random;
+    //static readonly System.Random _random;
     internal static class Config
     {
         static internal int _orderId = 0;
@@ -19,14 +19,15 @@ static internal class DataSource
         static public int RandProductId()
         {
             Random r = new Random();
-            r.Next(100000, 1000000);
+            int tempRand= r.Next(100000, 1000000);
             for (int i = 0; i < _productNum; i++)
-                if (Convert.ToInt32(r) == _products[i].ID)
+                if (tempRand == _products[i].ID)
                 {
-                    r.Next(100000, 1000000);
+                    tempRand =r.Next(100000, 1000000);
                     i = 0;
                 }
-            return Convert.ToInt32(r);
+            //Console.WriteLine(tempRand);
+            return tempRand;
         }
         static public int ProductId
         {
@@ -61,7 +62,7 @@ static internal class DataSource
     static private void s_Initialize()
     {
         //מערך מוצרים הכולל:שם מוצר,קטגוריית מוצר,כמות במלאי
-
+        Console.WriteLine("h");
         (DO.Categories, string, int)[] namesOfProducts = {
             ( DO.Categories.babygrows, "babygrow Polo", 0 ),
             ( DO.Categories.shirts,"shirt Polo",88),
@@ -126,12 +127,13 @@ static internal class DataSource
         {
             //לקיחת פרטי המוצר
             tempProduct.ID = Config.ProductId;
-            r.Next(0, 10);
-            tempProduct.Category = namesOfProducts[Convert.ToInt32(r)].Item1;
-            tempProduct.Name = namesOfProducts[Convert.ToInt32(r)].Item2;
-            tempProduct.InStock = namesOfProducts[Convert.ToInt32(r)].Item3;
-            r.Next(20, 150);
-            tempProduct.Price = Convert.ToInt32(r);
+            Console.WriteLine(tempProduct.ID);
+            int tempRand= r.Next(0, 10);
+            tempProduct.Category = namesOfProducts[tempRand].Item1;
+            tempProduct.Name = namesOfProducts[tempRand].Item2;
+            tempProduct.InStock = namesOfProducts[tempRand].Item3;
+            tempRand= r.Next(20, 150);
+            tempProduct.Price = tempRand;
             AddProduct(tempProduct);
         }
 
@@ -139,24 +141,24 @@ static internal class DataSource
         DO.Order tempOrder = new DO.Order();
         for (int i = 0; i < 20; i++)
         {
-            r.Next(1, 20);
+            int tempRand= r.Next(1, 20);
             tempOrder.ID = Config.OrderId;
-            tempOrder.CustomerName = Orders[Convert.ToInt32(r)].Item1;
-            tempOrder.CustomerEmail = Orders[Convert.ToInt32(r)].Item2;
-            tempOrder.CustomerAdress = Orders[Convert.ToInt32(r)].Item3;
+            tempOrder.CustomerName = Orders[tempRand].Item1;
+            tempOrder.CustomerEmail = Orders[tempRand].Item2;
+            tempOrder.CustomerAdress = Orders[tempRand].Item3;
             tempOrder.OrderDate = DateTime.Now;
             if (i < 8)
             {
-                r.Next(2, 5);
-                TimeSpan ShippingDate = new TimeSpan(Convert.ToInt32(r), 0, 0, 0);
+                tempRand= r.Next(2, 5);
+                TimeSpan ShippingDate = new TimeSpan(tempRand, 0, 0, 0);
                 tempOrder.ShipDate = tempOrder.OrderDate.Add(ShippingDate);
             }
             else
                 tempOrder.ShipDate = DateTime.MinValue;
             if (i < 5)
             {
-                r.Next(4, 10);
-                TimeSpan DeliveryDate = new TimeSpan(Convert.ToInt32(r), 0, 0, 0);
+                tempRand= r.Next(4, 10);
+                TimeSpan DeliveryDate = new TimeSpan(tempRand, 0, 0, 0);
                 tempOrder.DeliveryDate = tempOrder.OrderDate.Add(DeliveryDate);
             }
             else
@@ -168,21 +170,21 @@ static internal class DataSource
         for (int i = 0; i < 40; i++)
         {
             tempOrderItem.ID = Config.OrderItemId;
-            r.Next(0, 20);
-            tempOrderItem.OrderId = Convert.ToInt32(r);
-            if (numOfItemPerOrder[Convert.ToInt32(r)].Item2 < 4)
+            int tempRand= r.Next(0, 20);
+            tempOrderItem.OrderId = tempRand;
+            if (numOfItemPerOrder[tempRand].Item2 < 4)
             {
-                numOfItemPerOrder[Convert.ToInt32(r)].Item2++;
+                numOfItemPerOrder[tempRand].Item2++;
             }
             else
             {
                 throw new Exception("The number of order details is limited to 4.");
             }
-            r.Next(0, 10);
-            tempOrderItem.ProductId = _products[Convert.ToInt32(r)].ID;
-            tempOrderItem.Price = _products[Convert.ToInt32(r)].Price;
-            r.Next(1, 5);
-            tempOrderItem.Amount = Convert.ToInt32(r);
+            tempRand= r.Next(0, 10);
+            tempOrderItem.ProductId = _products[tempRand].ID;
+            tempOrderItem.Price = _products[tempRand].Price;
+            tempRand= r.Next(1, 5);
+            tempOrderItem.Amount = tempRand;
 
             AddOrederItem(tempOrderItem);
         }
