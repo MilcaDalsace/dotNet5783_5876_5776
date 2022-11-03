@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalList", "DalList\DalList.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalTest", "DalTest\DalTest.csproj", "{212B0946-B889-4E55-8883-98D5092E38C8}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Stege1", "Stege1", "{E667E011-3597-4FC5-AB03-F7D06C632D44}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Stage1", "Stage1", "{E667E011-3597-4FC5-AB03-F7D06C632D44}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
