@@ -24,14 +24,17 @@ namespace Dal
             while(userChoice != 0) { 
             if (userChoice == 0)
                 return;
-            string userChoiceClass = userChoice == 1 ? "Product" : userChoice == 2 ? "Orders" : userChoice == 3 ? "OrderItem" : "Exit";
+            string userChoiceClass = userChoice == 1 ? "Product" : userChoice == 2 ? "Order" : userChoice == 3 ? "OrderItem" : "Exit";
             Console.WriteLine("enter 1 to add a " + userChoiceClass + "\n" +
                       "enter 2 to  show  " + userChoiceClass + " by id \n" +
                       "enter 3 to show all " + userChoiceClass + "\n" +
                       "enter 4 to update " + userChoiceClass + " \n" +
                       "enter 5 to delete a " + userChoiceClass + " \n");
-
-            int chooseMethod = int.Parse(Console.ReadLine());
+            if(userChoiceClass == "OrderItem")
+                    Console.WriteLine("enter 6 to show all order item by order id \n" +
+                 "enter 7 to  show order item by id of orderItem n ");
+                
+                int chooseMethod = int.Parse(Console.ReadLine());
           
             switch (userChoice)
             {
@@ -76,11 +79,11 @@ namespace Dal
                     prudoctToCreate.Category=(DO.Categories) int.Parse(Console.ReadLine());
                     try
                     {
-                     product.Create(prudoctToCreate);
+                     Console.WriteLine(" Id of the new product is:"+ product.Create(prudoctToCreate));
                     }
                     catch(Exception ex)
                     {
-                        Console.WriteLine(ex);
+                        Console.WriteLine(ex.Message);
                     }
                     
                     break;
@@ -92,21 +95,20 @@ namespace Dal
                     }
                     catch(Exception ex)
                     {
-                        Console.WriteLine(ex);
+                        Console.WriteLine(ex.Message);
                     }
                     break;
                 case 3:
-                    DO.Product[] productToPrint =product.ReadAll(); 
-                    //new DO.Product[];
-                    for(int i=0;i< productToPrint.Length; i++)
+                    DO.Product[] productToPrint =product.ReadAll();
+                    foreach (DO.Product i in productToPrint)
+
                     {
-                        if (productToPrint[i].ID == 0)
-                            i= productToPrint.Length;
+                        if (i.ID == 0)
+                           return;
                         else
-                            Console.WriteLine(productToPrint[i]);
+                            Console.WriteLine(i);
 
                     }
-                    
                     break;
                 case 4:
                     Console.WriteLine("enter id of prudoct to update");
@@ -117,7 +119,7 @@ namespace Dal
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine(ex);
+                        Console.WriteLine(ex.Message);
                     }
                     Console.WriteLine("enter new name price and amount inStock");
                     string tempName = Console.ReadLine();
@@ -152,11 +154,11 @@ namespace Dal
                     orderToCreate.DeliveryDate = DateTime.Parse(Console.ReadLine());
                     try
                     {
-                        order.Create(orderToCreate);
+                    Console.WriteLine("The new order id is:"+order.Create(orderToCreate));
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine(ex);
+                        Console.WriteLine(ex.Message);
                     }
 
                     break;
@@ -168,22 +170,32 @@ namespace Dal
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine(ex);
+                        Console.WriteLine(ex.Message);
                     }
                     break;
                 case 3:
-                    product.ReadAll();
+                    DO.Order[] orderToPrint = order.ReadAll();
+                    foreach (DO.Order i in orderToPrint)
+
+                    {
+                        if (i.ID == 0)
+                            return;
+                        else
+                            Console.WriteLine(i);
+
+                    }
                     break;
                 case 4:
-                    Console.WriteLine("enter id of prudoct to update");
+                    Console.WriteLine("enter id of order to update");
                     int idToUpdate = int.Parse(Console.ReadLine());
+                    DO.Order lastOrder =order.Read(idToUpdate);
                     try
                     {
-                        Console.WriteLine(order.Read(idToUpdate));
+                        Console.WriteLine(lastOrder);
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine(ex);
+                        Console.WriteLine(ex.Message);
                     }
                     Console.WriteLine("enter new customer name customer email customer adress order date ship date and delivery date");
                     orderToCreate.ID = idToUpdate;
@@ -193,12 +205,12 @@ namespace Dal
                     DateTime tempOrderDate = DateTime.Parse(Console.ReadLine());
                     DateTime tempShipDate = DateTime.Parse(Console.ReadLine());
                     DateTime tempDeliveryDate = DateTime.Parse(Console.ReadLine());
-                    orderToCreate.CustomerName = tempName == "" ? orderToCreate.CustomerName : tempName;
-                    orderToCreate.CustomerEmail = tempEmail == null ? orderToCreate.CustomerEmail : tempEmail;
-                    orderToCreate.CustomerAdress = tempAdress == null ? orderToCreate.CustomerAdress : tempAdress;
-                    orderToCreate.OrderDate = tempOrderDate == null ? orderToCreate.OrderDate : tempOrderDate;
-                    orderToCreate.ShipDate = tempShipDate == null ? orderToCreate.ShipDate : tempShipDate;
-                    orderToCreate.DeliveryDate = tempDeliveryDate == null ? orderToCreate.DeliveryDate : tempDeliveryDate;
+                    orderToCreate.CustomerName =( (tempName == null) ? lastOrder.CustomerName : tempName);
+                    orderToCreate.CustomerEmail = ((tempEmail == null) ? lastOrder.CustomerEmail : tempEmail);
+                    orderToCreate.CustomerAdress = ((tempAdress == null) ? lastOrder.CustomerAdress : tempAdress);
+                    orderToCreate.OrderDate =tempOrderDate;
+                    orderToCreate.ShipDate = tempShipDate  ;
+                    orderToCreate.DeliveryDate =tempDeliveryDate ;
                     order.Update(orderToCreate);
                     break;
                 case 5:
@@ -216,59 +228,79 @@ namespace Dal
             {
                 case 1:
                     Console.WriteLine("enter order id prudoct id price and amount");
-                    orderItemToCreate.OrderId = int.Parse( Console.ReadLine());
+                    orderItemToCreate.OrderId = int.Parse(Console.ReadLine());
                     orderItemToCreate.ProductId = int.Parse(Console.ReadLine());
                     orderItemToCreate.Price = int.Parse(Console.ReadLine());
                     orderItemToCreate.Amount = int.Parse(Console.ReadLine());
-                    
                     try
                     {
                         orderItem.Create(orderItemToCreate);
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine(ex);
+                        Console.WriteLine(ex.Message);
                     }
 
                     break;
                 case 2:
-                    Console.WriteLine("enter id of orderitem to show");
+                    Console.WriteLine("enter id of order and id of item to show");
                     try
                     {
-                        Console.WriteLine(orderItem.Read(int.Parse(Console.ReadLine())));
+                        Console.WriteLine(orderItem.Read(int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine())));
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine(ex);
+                        Console.WriteLine(ex.Message);
                     }
                     break;
                 case 3:
-                    product.ReadAll();
+                    DO.OrderItem[] orderItemToPrint = orderItem.ReadAll();
+                    foreach (DO.OrderItem i in orderItemToPrint)
+                    {
+                        if (i.ID == 0)
+                            return;
+                        else
+                            Console.WriteLine(i);
+
+                    }
                     break;
                 case 4:
-                    Console.WriteLine("enter id of orderItem to update");
-                    int idToUpdate = int.Parse(Console.ReadLine());
+                    Console.WriteLine("enter id of order and id of product to update");
+                    int idOderToUpdate = int.Parse(Console.ReadLine());
+                    int productIdToUpdate = int.Parse(Console.ReadLine());
                     try
                     {
-                        Console.WriteLine(orderItem.Read(idToUpdate));
+                        DO.OrderItem orderIdToUpdate = new DO.OrderItem();
+                        orderIdToUpdate= orderItem.Read(idOderToUpdate, productIdToUpdate);    
+                        Console.WriteLine(orderIdToUpdate);
+                        Console.WriteLine("enter order id, prudoct id, price and amount");
+                        orderItemToCreate.ID= orderIdToUpdate.ID;
+                        double tempPrice = double.Parse(Console.ReadLine());
+                        int tempAmount = int.Parse(Console.ReadLine());
+                        orderItemToCreate.OrderId = idOderToUpdate;
+                        orderItemToCreate.ProductId = productIdToUpdate;
+                        orderItemToCreate.Price = tempPrice == null ? orderIdToUpdate.Price : tempPrice;
+                        orderItemToCreate.Amount = tempAmount == null ? orderIdToUpdate.Amount : tempAmount;
+                        orderItem.Update(orderItemToCreate);
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine(ex);
+                        Console.WriteLine(ex.Message);
+break;
                     }
-                    Console.WriteLine("enter order id, prudoct id, price and amount");
-                    orderItemToCreate.ID= idToUpdate;
-                    int tempOrderId = int.Parse(Console.ReadLine());
-                    int tempProductId = int.Parse(Console.ReadLine());
-                    double tempPrice = double.Parse(Console.ReadLine());
-                    int tempAmount = int.Parse(Console.ReadLine());
-                    orderItemToCreate.OrderId = tempOrderId == null ? orderItemToCreate.OrderId : tempOrderId;
-                    orderItemToCreate.ProductId = tempProductId == null ? orderItemToCreate.ProductId : tempProductId;
-                    orderItemToCreate.Price = tempPrice == null ? orderItemToCreate.Price : tempPrice;
-                    orderItemToCreate.Amount = tempAmount == null ? orderItemToCreate.Amount : tempAmount;
-                    orderItem.Update(orderItemToCreate);
+                   
                     break;
                 case 5:
+                    Console.WriteLine("enter id of oorderItem to delete");
+                    orderItem.Delete(int.Parse(Console.ReadLine()));
+                    break;
+                case 6:
+                    //למילכה המאלללפת!
+                    //לשנות כאן לזימון 2 פונקציות שיצרתי בdalorderitem
+                    Console.WriteLine("enter id of oorderItem to delete");
+                    orderItem.Delete(int.Parse(Console.ReadLine()));
+                    break;
+                case 7:
                     Console.WriteLine("enter id of oorderItem to delete");
                     orderItem.Delete(int.Parse(Console.ReadLine()));
                     break;

@@ -36,8 +36,10 @@ public class DalOrders
     public void Update(DO.Order OrderToUpdate)
     {
         for (int i = 0; i < DataSource._orders.Length; i++)
-            if (DataSource._orders[i].ID == OrderToUpdate.ID)
+            if (DataSource._orders[i].ID == OrderToUpdate.ID) { 
                 DataSource._orders[i] = OrderToUpdate;
+                return;
+            }  
         throw new Exception("order to update not found");
     }
     public void Delete(int Id)

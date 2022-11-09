@@ -7,9 +7,6 @@ namespace Dal
     {
         public int Create(DO.Product newPrudoct)
         {
-            //  sizeof(DataSource._products)
-           // Console.Write(DataSource._products);
-            Console.Write(DataSource._products.Length);
             if (DataSource.Config._productNum == DataSource._products.Length) 
             {
                 throw new Exception("the array is full");

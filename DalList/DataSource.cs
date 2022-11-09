@@ -11,8 +11,8 @@ static internal class DataSource
     //static readonly System.Random _random;
     internal static class Config
     {
-        static internal int _orderId = 0;
-        static internal int _orderItemId = 0;
+        static internal int _orderId = 1;
+        static internal int _orderItemId = 1;
         static internal int _orderNum = 0;
         static internal int _orderItemNum = 0;
         static internal int _productNum = 0;
@@ -26,7 +26,6 @@ static internal class DataSource
                     tempRand =r.Next(100000, 1000000);
                     i = 0;
                 }
-            //Console.WriteLine(tempRand);
             return tempRand;
         }
         static public int ProductId
@@ -62,7 +61,7 @@ static internal class DataSource
     static private void s_Initialize()
     {
         //מערך מוצרים הכולל:שם מוצר,קטגוריית מוצר,כמות במלאי
-        Console.WriteLine("h");
+       
         (DO.Categories, string, int)[] namesOfProducts = {
             ( DO.Categories.babygrows, "babygrow Polo", 0 ),
             ( DO.Categories.shirts,"shirt Polo",88),
@@ -96,7 +95,26 @@ static internal class DataSource
             (17, 0 ),
             (18, 0 ),
             (19, 0 ),
-            (20, 0 )
+            (20, 0 ),
+            (21, 0 ),
+            (22, 0 ),
+            (23, 0 ),
+            (24, 0 ),
+            (25, 0 ),
+            (26, 0 ),
+            (27, 0 ),
+            (28, 0 ),
+            (29, 0 ),
+            (30, 0 ),
+            (31, 0 ),
+            (32, 0 ),
+            (33, 0 ),
+            (34, 0 ),
+            (35, 0 ),
+            (36, 0 ),
+            (37, 0 ),
+            (38, 0 ),
+            (39, 0 )
         };
         (string, string, string)[] Orders = {
             ( "orit", "orit@gmail.com", "brand"),
@@ -123,11 +141,10 @@ static internal class DataSource
 
         Random r = new Random();
         DO.Product tempProduct = new DO.Product();
+        //לקיחת פרטי המוצר
         for (int i = 0; i < 10; i++)
         {
-            //לקיחת פרטי המוצר
             tempProduct.ID = Config.ProductId;
-            Console.WriteLine(tempProduct.ID);
             int tempRand= r.Next(0, 10);
             tempProduct.Category = namesOfProducts[tempRand].Item1;
             tempProduct.Name = namesOfProducts[tempRand].Item2;
@@ -137,7 +154,7 @@ static internal class DataSource
             AddProduct(tempProduct);
         }
 
-
+        //לקיחת פרטי הזמנה
         DO.Order tempOrder = new DO.Order();
         for (int i = 0; i < 20; i++)
         {
@@ -166,11 +183,12 @@ static internal class DataSource
             AddOrder(tempOrder);
         }
 
+        //לקיחת פרטי מוצר להזמנה
         DO.OrderItem tempOrderItem = new DO.OrderItem();
         for (int i = 0; i < 40; i++)
         {
             tempOrderItem.ID = Config.OrderItemId;
-            int tempRand= r.Next(0, 20);
+            int tempRand= r.Next(0, 40);
             tempOrderItem.OrderId = tempRand;
             if (numOfItemPerOrder[tempRand].Item2 < 4)
             {
@@ -178,9 +196,11 @@ static internal class DataSource
             }
             else
             {
+                //לאן הוא זורק את השגיאה?
+                Console.WriteLine("The number of order details is limited to 4.");
                 throw new Exception("The number of order details is limited to 4.");
             }
-            tempRand= r.Next(0, 10);
+            tempRand = r.Next(0, 10);
             tempOrderItem.ProductId = _products[tempRand].ID;
             tempOrderItem.Price = _products[tempRand].Price;
             tempRand= r.Next(1, 5);
