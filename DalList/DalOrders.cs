@@ -40,7 +40,6 @@ public class DalOrders
                 DataSource._orders[i] = OrderToUpdate;
                 return;
             }  
-        throw new Exception("order to update not found");
     }
     public void Delete(int Id)
     {
