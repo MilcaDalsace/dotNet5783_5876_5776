@@ -54,6 +54,8 @@ namespace Dal
             for (int i = 0; i < DataSource._orderItems.Length; i++)
                 if (DataSource._orderItems[i].OrderId == orderId)
                     arrayOfOrderItem[placeInNewArray++] = DataSource._orderItems[i];
+            if (arrayOfOrderItem[0].Amount == null)
+                return null;
             return arrayOfOrderItem;
         }
         public void Update(DO.OrderItem orderItemsToUpdate)

@@ -75,7 +75,6 @@ namespace Dal
                         "enter 4 to pants\n" +
                         "enter 5 to dresses\n" +
                         "enter 6 to tShirt\n");
-                   // int CategoryChoose=int.Parse(Console.ReadLine());
                     prudoctToCreate.Category=(DO.Categories) int.Parse(Console.ReadLine());
                     try
                     {
@@ -302,8 +301,11 @@ break;
                     DO.OrderItem []orderToShow= orderItem.ReadByOrderId(int.Parse(Console.ReadLine()));
                     if (orderToShow != null)
                         Console.WriteLine("order not found or your order is empty");
-                    foreach (DO.OrderItem item in orderToShow)
-                        Console.Write(item);
+                    foreach (DO.OrderItem item in orderToShow) { 
+                        if(item.OrderId==0)
+                            return;
+                        Console.Write(item); }
+                       
                       
                     break;
                 case 7:
