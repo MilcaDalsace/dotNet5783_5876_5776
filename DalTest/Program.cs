@@ -182,13 +182,11 @@ namespace Dal
                             return;
                         else
                             Console.WriteLine(i);
-
                     }
                     break;
                 case 4:
                     Console.WriteLine("enter id of order to update");
                     int idToUpdate = int.Parse(Console.ReadLine());
-                    
                     try
                     {
                         DO.Order lastOrder =order.Read(idToUpdate);
