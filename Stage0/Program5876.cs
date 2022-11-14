@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Stage0
 {
-    internal class Program5876
+    partial class Program
     {
-        static void Main(string[] args)
+        static partial void wellcome5876()
         {
             Console.WriteLine("ll")  ; 
             Console.ReadKey();
