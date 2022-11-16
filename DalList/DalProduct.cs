@@ -1,65 +1,66 @@
 ﻿
 using DO;
 using Dal;
+using DalApi;
 namespace Dal
 {
-    public class DalProduct
+    public class DalProduct:IProduct
     {
-        public int Create(DO.Product newPrudoct)
+        public int Create(DO.Product item)
         {
-            if (DataSource.Config._productNum == DataSource._products.Length) 
+            if (DataSource.SIZEOFARRAYPRUDOCT == DataSource._products.Count) 
             {
-                throw new Exception("the array is full");
+                throw new  TheArrayIsFull();
             }
             else
             {
-                int tempPrudoctNum = DataSource.Config._productNum++;
                 int newPrudoctId = DataSource.Config.ProductId;
-                newPrudoct.ID = newPrudoctId;
-                DataSource._products[tempPrudoctNum] = newPrudoct;
+                item.ID = newPrudoctId;
+                DataSource._products.Add(item);
                 return newPrudoctId;
             }
         }
-        public DO.Product[] ReadAll()
+        public IEnumerable<Product> GetAll()
         {
-            DO.Product[] tempProducts = new DO.Product[DataSource._products.Length];
-            for (int i = 0; i < tempProducts.Length; i++)
+            List<Product> tempProducts = new List<Product>();
+            //DO.Product[] tempProducts = new DO.Product[DataSource._products.Count];
+            for (int i = 0; i < DataSource._products.Count; i++)
             {
                 if (DataSource._products[i].ID == 0)
-                    i= tempProducts.Length;
+                    i= DataSource._products.Count;
                 else
-                tempProducts[i] = DataSource._products[i];
+                tempProducts.Add(DataSource._products[i]);
             }
             return tempProducts;
         }
-        public DO.Product Read(int productToReadId)
+        public DO.Product Read(int id)
         {
-            for (int i = 0; i < DataSource._products.Length; i++)
-                if (DataSource._products[i].ID == productToReadId)
+            for (int i = 0; i < DataSource._products.Count; i++)
+                if (DataSource._products[i].ID == id)
                     return DataSource._products[i];
-            throw new Exception("product not found");
+            throw new ObjectNotFoundException();
         }
-        public void Update(DO.Product ProductToUpdate)
+        public void Update(DO.Product item)
         {
-            for (int i = 0; i < DataSource._products.Length; i++)
-                if (DataSource._products[i].ID == ProductToUpdate.ID)
+            for (int i = 0; i < DataSource._products.Count; i++)
+                if (DataSource._products[i].ID == item.ID)
                 {
-                    DataSource._products[i] = ProductToUpdate;
+                    DataSource._products[i] = item;
                     return;
                 }
-            throw new Exception("Id of product not found.");
+            throw new ObjectNotFoundException();
         }
         public void Delete(int id)
         {
-            for (int i = 0; i < DataSource._products.Length; i++)
+            for (int i = 0; i < DataSource._products.Count; i++)
             {
                 if (DataSource._products[i].ID == id)
                 {
-                    DataSource._products[i] = DataSource._products[DataSource.Config._productNum--];
+                    DataSource._products.RemoveAt(i);
                     return;
                 }
             }
-            throw new Exception("Product not found.");
+            throw new ObjectNotFoundException();
         }
 
     }

@@ -1,7 +1,7 @@
 ﻿namespace DO;
 public enum Categories
 {
-    babygrows,
+    babygrows=1,
     shirts,
     skirts,
     pants,

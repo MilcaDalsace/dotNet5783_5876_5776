@@ -6,12 +6,17 @@ using System.Threading.Tasks;
 
 namespace DalApi
 {
-    internal class ObjectNotFoundException : Exception  // מחלקה שמתארת שגיאה
+    public class  ObjectNotFoundException : Exception  // מחלקה שמתארת שגיאה
     {
         public override string Message => "object not found";
 
     }
-    internal class ObjectAlreadyExist : Exception  // מחלקה שמתארת שגיאה
+    public class TheArrayIsFull : Exception  // מחלקה שמתארת שגיאה
+    {
+        public override string Message => "The array is full";
+
+    }
+    public class ObjectAlreadyExist : Exception  // execption of full list
     {
         public override string Message => "object already exist";
 

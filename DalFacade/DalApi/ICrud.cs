@@ -8,10 +8,10 @@ namespace DalApi
 {
     public interface ICrud<T>
     {
-        internal int Add(T item);
-        internal IEnumerable<T> GetAll();
-        internal T Read(int id);
-        internal void Delete();
-        internal void Update(T item);
+        public int Create(T item);
+        public IEnumerable<T> GetAll();
+        public T Read(int id);
+        public void Delete(int id);
+        public void Update(T item);
     }
 }

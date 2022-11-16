@@ -1,76 +1,80 @@
 ﻿using DO;
 using static Dal.DataSource;
+using DalApi;
 namespace Dal
 {
-    public class DalOrderItem
+    internal class DalOrderItem :IOrderItem
     {
-        public int Create(DO.OrderItem newOrderItem)
+         public int Create(DO.OrderItem item)
         {
-            if (DataSource.Config._orderItemNum == DataSource._orderItems.Length)
-                throw new Exception("the array is full");
+            if (DataSource.SIZEOFARRAYPRUDOCT == DataSource._orderItems.Count)
+                throw new TheArrayIsFull() ;
             else
             {
-               for (int i = 0; i < DataSource._orderItems.Length; i++)
+               for (int i = 0; i < DataSource._orderItems.Count; i++)
                 {
-                    if (DataSource._orderItems[i].ProductId== newOrderItem.ProductId&& DataSource._orderItems[i].OrderId == newOrderItem.OrderId)
+                    if (DataSource._orderItems[i].ProductId== item.ProductId&& DataSource._orderItems[i].OrderId == item.OrderId)
                     {
-                    DataSource._orderItems[i].Amount += newOrderItem.Amount;
-                    return DataSource._orderItems[i].ID;
+                        OrderItem orederItemTemp = DataSource._orderItems[i];
+                        orederItemTemp.Amount += item.Amount;
+                        DataSource._orderItems[i] = orederItemTemp;
+                        return DataSource._orderItems[i].ID;
                     } 
                }
-                int tempOrderItemNum = DataSource.Config._orderItemNum++;
                 int tempOrderItemId = DataSource.Config.OrderItemId;
-                newOrderItem.ID = tempOrderItemId;
-                DataSource._orderItems[tempOrderItemNum] = newOrderItem;
+                item.ID = tempOrderItemId;
+                DataSource._orderItems.Add(item);
                 return tempOrderItemId;
             }
         }
-        public DO.OrderItem[] ReadAll()
+        public IEnumerable<OrderItem> GetAll()
         {
-            DO.OrderItem[] tempOrderItemArray = new DO.OrderItem[DataSource._orderItems.Length];
-            for (int i = 0; i < tempOrderItemArray.Length; i++)
-                tempOrderItemArray[i] = DataSource._orderItems[i];
+            List<OrderItem> tempOrderItemArray = new List<OrderItem> { };
+            
+            for (int i = 0; i < DataSource._orderItems.Count; i++)
+                tempOrderItemArray.Add(DataSource._orderItems[i]);
             return tempOrderItemArray;
         }
-        public DO.OrderItem Read(int orderId,int productId)
+        public DO.OrderItem ReadByOrderitemId(int orderId,int productId)
         {
-            for (int i = 0; i < DataSource._orderItems.Length; i++)
+            for (int i = 0; i < DataSource._orderItems.Count; i++)
                 if (DataSource._orderItems[i].ProductId == productId&& DataSource._orderItems[i].OrderId == orderId)
                     return DataSource._orderItems[i];
-            throw new Exception("The item is not on order");
+            throw new ObjectNotFoundException();
         }
         //2 פונקציות שהוספתי!!
-        public DO.OrderItem ReadByOrderitemId(int orderItemId)
+       public  DO.OrderItem Read(int id)
         {
-            for (int i = 0; i < DataSource._orderItems.Length; i++)
-                if (DataSource._orderItems[i].ID == orderItemId)
+            for (int i = 0; i < DataSource._orderItems.Count; i++)
+                if (DataSource._orderItems[i].ID == id)
                     return DataSource._orderItems[i];
-            throw new Exception("The item is not on order");
+            throw new ObjectNotFoundException();
         }
-        public DO.OrderItem[] ReadByOrderId(int orderId)
+        public IEnumerable<OrderItem> ReadByOrderId(int orderId)
         {
             int placeInNewArray = 0;
-            DO.OrderItem[] arrayOfOrderItem = new DO.OrderItem[DataSource._orderItems.Length];
-            for (int i = 0; i < DataSource._orderItems.Length; i++)
+            List<OrderItem> arrayOfOrderItem = new List<OrderItem> { };
+            //DO.OrderItem[] arrayOfOrderItem = new DO.OrderItem[DataSource._orderItems.Count];
+            for (int i = 0; i < DataSource._orderItems.Count; i++)
                 if (DataSource._orderItems[i].OrderId == orderId)
-                    arrayOfOrderItem[placeInNewArray++] = DataSource._orderItems[i];
-            if (arrayOfOrderItem[0].Amount == null)
+                    arrayOfOrderItem.Add(DataSource._orderItems[i]) ;
+            if (arrayOfOrderItem[0].ID == 0)
                 return null;
             return arrayOfOrderItem;
         }
-        public void Update(DO.OrderItem orderItemsToUpdate)
+        public void Update(DO.OrderItem item)
         {
-            for (int i = 0; i < DataSource._orderItems.Length; i++)
-                if (DataSource._orderItems[i].ID == orderItemsToUpdate.ID)
-                    DataSource._orderItems[i] = orderItemsToUpdate;
+            for (int i = 0; i < DataSource._orderItems.Count; i++)
+                if (DataSource._orderItems[i].ID == item.ID)
+                    DataSource._orderItems[i] = item;
         }
         public void Delete(int Id)
         {
-            for (int i = 0; i < DataSource._orderItems.Length; i++)
+            for (int i = 0; i < DataSource._orderItems.Count; i++)
             {
                 if (DataSource._orderItems[i].ID == Id)
                 {
-                    DataSource._orderItems[i] = DataSource._orderItems[DataSource.Config._orderNum--];
+                    DataSource._orderItems.RemoveAt(i);
                     return;
                 }
             }
