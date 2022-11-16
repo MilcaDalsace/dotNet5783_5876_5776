@@ -40,18 +40,6 @@ static internal class DataSource
         {
             get { return _orderItemId++; }
         }
-        //static public int OrderNum
-        //{
-        //    get { return _orderNum++; }
-        //}
-        //static public int OrderItemNum
-        //{
-        //    get { return _orderItemNum++; }
-        //}
-        //static public int ProductNum
-        //{
-        //    get { return _productNum++; }
-        //}
     }
 
     static DataSource()
@@ -61,9 +49,9 @@ static internal class DataSource
     static private void s_Initialize()
     {
         //מערך מוצרים הכולל:שם מוצר,קטגוריית מוצר,כמות במלאי
-       
-        (DO.Categories, string, int)[] namesOfProducts = {
-            ( DO.Categories.babygrows, "babygrow Polo", 0 ),
+        List<(DO.Categories, string, int)> namesOfProducts =
+                new List<(DO.Categories, string, int)> {
+                    ( DO.Categories.babygrows, "babygrow Polo", 0 ),
             ( DO.Categories.shirts,"shirt Polo",88),
             ( DO.Categories.skirts, "skirt Polo",87),
             ( DO.Categories.pants,"pant Polo",24),
@@ -73,9 +61,22 @@ static internal class DataSource
             ( DO.Categories.shirts, "shirt Ralph",90),
             ( DO.Categories.skirts, "skirt Ralph",50),
             ( DO.Categories.pants,"pant Ralph",40)
-        };
-        (int, int)[] numOfItemPerOrder = {
-            (0, 0 ),
+                };
+        //(DO.Categories, string, int)[] namesOfProducts = {
+        //    ( DO.Categories.babygrows, "babygrow Polo", 0 ),
+        //    ( DO.Categories.shirts,"shirt Polo",88),
+        //    ( DO.Categories.skirts, "skirt Polo",87),
+        //    ( DO.Categories.pants,"pant Polo",24),
+        //    ( DO.Categories.dresses,"dress Polo",24),
+        //    ( DO.Categories.tShirt, "tShirt Polo",30),
+        //    ( DO.Categories.babygrows,"babygrow Ralph",60),
+        //    ( DO.Categories.shirts, "shirt Ralph",90),
+        //    ( DO.Categories.skirts, "skirt Ralph",50),
+        //    ( DO.Categories.pants,"pant Ralph",40)
+        //};
+        List< (int, int)> numOfItemPerOrder =
+               new List<(int, int)> {
+                    (0, 0 ),
             (1, 0 ),
             (2, 0 ),
             (3, 0 ),
@@ -115,9 +116,52 @@ static internal class DataSource
             (37, 0 ),
             (38, 0 ),
             (39, 0 )
-        };
-        (string, string, string)[] Orders = {
-            ( "orit", "orit@gmail.com", "brand"),
+               };
+        //(int, int)[] numOfItemPerOrder = {
+        //    (0, 0 ),
+        //    (1, 0 ),
+        //    (2, 0 ),
+        //    (3, 0 ),
+        //    (4, 0 ),
+        //    (5, 0 ),
+        //    (6, 0 ),
+        //    (7, 0 ),
+        //    (8, 0 ),
+        //    (9, 0 ),
+        //    (10, 0 ),
+        //    (11, 0 ),
+        //    (12, 0 ),
+        //    (13, 0 ),
+        //    (14, 0 ),
+        //    (15, 0 ),
+        //    (16, 0 ),
+        //    (17, 0 ),
+        //    (18, 0 ),
+        //    (19, 0 ),
+        //    (20, 0 ),
+        //    (21, 0 ),
+        //    (22, 0 ),
+        //    (23, 0 ),
+        //    (24, 0 ),
+        //    (25, 0 ),
+        //    (26, 0 ),
+        //    (27, 0 ),
+        //    (28, 0 ),
+        //    (29, 0 ),
+        //    (30, 0 ),
+        //    (31, 0 ),
+        //    (32, 0 ),
+        //    (33, 0 ),
+        //    (34, 0 ),
+        //    (35, 0 ),
+        //    (36, 0 ),
+        //    (37, 0 ),
+        //    (38, 0 ),
+        //    (39, 0 )
+        //};
+        List<(string, string, string)> Orders =
+                new List<(string, string, string)> {
+                   ( "orit", "orit@gmail.com", "brand"),
             ( "orit1", "orit1@gmail.com", "brand1"),
             ( "orit2", "orit2@gmail.com", "brand2"),
             ( "orit3", "orit3@gmail.com", "brand3"),
@@ -137,7 +181,29 @@ static internal class DataSource
             ( "orit17", "orit17@gmail.com", "brand17"),
             ( "orit18", "orit18@gmail.com", "brand18"),
             ( "orit19", "orit19@gmail.com", "brand19")
-        };
+                };
+        //(string, string, string)[] Orders = {
+        //    ( "orit", "orit@gmail.com", "brand"),
+        //    ( "orit1", "orit1@gmail.com", "brand1"),
+        //    ( "orit2", "orit2@gmail.com", "brand2"),
+        //    ( "orit3", "orit3@gmail.com", "brand3"),
+        //    ( "orit4", "orit4@gmail.com", "brand4"),
+        //    ( "orit5", "orit5@gmail.com", "brand5"),
+        //    ( "orit6", "orit6@gmail.com", "brand6"),
+        //    ( "orit7", "orit7@gmail.com", "brand7"),
+        //    ( "orit8", "orit8@gmail.com", "brand8"),
+        //    ( "orit9", "orit9@gmail.com", "brand9"),
+        //    ( "orit10", "orit10@gmail.com", "brand10"),
+        //    ( "orit11", "orit11@gmail.com", "brand11"),
+        //    ( "orit12", "orit12@gmail.com", "brand12"),
+        //    ( "orit13", "orit13@gmail.com", "brand13"),
+        //    ( "orit14", "orit14@gmail.com", "brand14"),
+        //    ( "orit15", "orit15@gmail.com", "brand15"),
+        //    ( "orit16", "orit16@gmail.com", "brand16"),
+        //    ( "orit17", "orit17@gmail.com", "brand17"),
+        //    ( "orit18", "orit18@gmail.com", "brand18"),
+        //    ( "orit19", "orit19@gmail.com", "brand19")
+        //};
 
         Random r = new Random();
         DO.Product tempProduct = new DO.Product();
@@ -212,20 +278,26 @@ static internal class DataSource
     const int SIZEOFARRAYPRUDOCT = 50;
     const int SIZEOFARRAYORDER = 100;
     const int SIZEOFARRAYORDERITEM = 200;
-    static internal DO.Order[] _orders = new DO.Order[SIZEOFARRAYORDER];
-    static internal DO.OrderItem[] _orderItems = new DO.OrderItem[SIZEOFARRAYORDERITEM];
-    static internal DO.Product[] _products = new DO.Product[SIZEOFARRAYPRUDOCT];
+    //static internal DO.Order[] _orders = new DO.Order[SIZEOFARRAYORDER];
+    //static internal DO.OrderItem[] _orderItems = new DO.OrderItem[SIZEOFARRAYORDERITEM];
+    //static internal DO.Product[] _products = new DO.Product[SIZEOFARRAYPRUDOCT];
 
+   static internal List<DO.Order> _orders =new List<DO.Order> { };
+    static internal List<DO.OrderItem> _orderItems = new List<DO.OrderItem> { };
+    static internal List<DO.Product> _products = new List<DO.Product> { };
     static void AddOrder(DO.Order newOrder)
     {
-        _orders[Config._orderNum++] = newOrder;
+        _orders.Add(newOrder);
+       // _orders[Config._orderNum++] = newOrder;
     }
     static void AddOrederItem(DO.OrderItem newOrderItem)
     {
-        _orderItems[Config._orderItemNum++] = newOrderItem;
+        _orderItems.Add(newOrderItem);
+        //_orderItems[Config._orderItemNum++] = newOrderItem;
     }
     static void AddProduct(DO.Product newProduct)
     {
-        _products[Config._productNum++] = newProduct;
+        _products.Add(newProduct);
+        //_products[Config._productNum++] = newProduct;
     }
 }
