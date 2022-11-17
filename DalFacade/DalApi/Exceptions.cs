@@ -8,7 +8,7 @@ namespace DalApi
 {
     public class  ObjectNotFoundException : Exception  // מחלקה שמתארת שגיאה
     {
-        public override string Message => "object not found";
+        public override string Message => "Object not found";
 
     }
     public class TheArrayIsFull : Exception  // מחלקה שמתארת שגיאה
@@ -18,7 +18,7 @@ namespace DalApi
     }
     public class ObjectAlreadyExist : Exception  // execption of full list
     {
-        public override string Message => "object already exist";
+        public override string Message => "Object already exist";
 
     }
 }

@@ -1,0 +1,36 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BO
+{
+    public class Order
+    {
+        public int ID { get; set; }
+        public string CustomerName { get; set; }
+        public string CustomerEmail { get; set; }
+        public string CustomerAdress { get; set; }
+        public Status OrderStatus { get; set; }
+        public List<OrderItem> OrderItemList { get; set; }
+        public float FinalPrice { get; set; }
+        public DateTime OrderDate { get; set; }
+        public DateTime ShipDate { get; set; }
+
+        public DateTime DeliveryDate { get; set; }
+
+        public override string ToString() => $@"
+        order ID: {ID}, 
+        customerName: {CustomerName}
+    	customerEmail: {CustomerEmail}
+    	custmerAdress: {CustomerAdress}
+        orderStatus: {OrderStatus}
+    	orderItemList: {OrderItemList}
+    	finalPrice: {FinalPrice}
+        orderDate: {OrderDate}
+        shipDate: {ShipDate}
+        deliveryDate: {DeliveryDate}
+";
+    }
+}

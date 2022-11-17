@@ -13,9 +13,6 @@ static internal class DataSource
     {
         static internal int _orderId = 1;
         static internal int _orderItemId = 1;
-        //static internal int _orderNum = 0;
-        //static internal int _orderItemNum = 0;
-       // static internal int _productNum = 0;
         static public int RandProductId()
         {
             Random r = new Random();

@@ -91,7 +91,7 @@ namespace Dal
                     Console.WriteLine("enter id of product to show");
                     try
                     {
-                    Console.WriteLine( dalList. product.Read(int.Parse(Console.ReadLine())));
+                    Console.WriteLine( dalList.product.Read(int.Parse(Console.ReadLine())));
                     }
                     catch(Exception ex)
                     {
