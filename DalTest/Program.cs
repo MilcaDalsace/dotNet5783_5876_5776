@@ -4,12 +4,12 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using DalApi;
 namespace Dal
 {
     internal class Program
     {
-        static private DalList dalList=new DalList();
+        static private IDal dalList=new DalList();
         //static private DalOrders order=new  DalOrders();
         //static private DalProduct product = new DalProduct();
         //static private DalOrderItem orderItem = new DalOrderItem();

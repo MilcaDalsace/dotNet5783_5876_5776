@@ -11,7 +11,7 @@ namespace BO
         public int ID { get; set; }
         public string ProductName { get; set; }
         public double Price { get; set; }
-        public DO.Categories Category { get; set; }
+        public BO.Categories Category { get; set; }
        
         public override string ToString() => $@"
         Product ID: {ID}
