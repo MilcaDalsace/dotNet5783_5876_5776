@@ -27,12 +27,21 @@ namespace BO
     }
     public class OutOfStock : Exception  //
     {
+        public OutOfStock(OutOfStock ex) : base("Oout of stock", ex) { }
+        public OutOfStock() { }
         public override string Message => "Out of stock";
 
     }
     public class TheArrayIsFullException : Exception  //
     {
+        public TheArrayIsFullException(TheArrayIsFull ex) : base("the array is full", ex) { }
+        public TheArrayIsFullException() { }
         public override string Message => "The array is full exception";
+
+    }
+    public class ProductInOrder : Exception  //
+    {
+        public override string Message => "Product in order";
 
     }
 }

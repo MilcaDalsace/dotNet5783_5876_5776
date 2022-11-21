@@ -39,6 +39,7 @@ namespace BlImplementation
                 {
                     BO.OrderItem orderItemToAdd = new BO.OrderItem()
                     {
+                        Id = Config.OrderItemId,
                         ProductId = product,
                         Price = ProductToAdd.Price,
                         FinalPrice = ProductToAdd.Price,
@@ -69,12 +70,14 @@ namespace BlImplementation
                 {
                     if (Curr.Amount > amount)
                     {
+                        Curr.Amount = amount;
                         difAmount = Curr.Amount - amount;
                         Curr.FinalPrice -= difAmount * Curr.Price;
                         CurrCart.FinalPrice -= difAmount * Curr.Price;
                     }
                     if (Curr.Amount < amount)
                     {
+                        Curr.Amount = amount;
                         difAmount = amount - Curr.Amount;
                         Curr.FinalPrice += difAmount * Curr.Price;
                         CurrCart.FinalPrice += difAmount * Curr.Price;
@@ -91,34 +94,22 @@ namespace BlImplementation
         }
         public void SaveCart(BO.Cart CurrCart)
         {
+            //chek name
             try
             {
                 if (CurrCart.CustomerEmail != null)
                 {
                     MailAddress m = new MailAddress(CurrCart.CustomerEmail);
                 }
-
             }
             catch { throw new BO.OneFieldsInCorrect(); }
             if (CurrCart.Name == null || CurrCart.CustomerAdress == null)
                 throw new BO.OneFieldsInCorrect();
 
-            DO.Order OrderToAdd = new DO.Order()
-            {
-                OrderDate = DateTime.Now,
-                CustomerName = CurrCart.Name,
-                CustomerEmail = CurrCart.CustomerEmail,
-                CustomerAdress = CurrCart.CustomerAdress,
-                ShipDate = DateTime.MinValue,
-                DeliveryDate = DateTime.MinValue
-            };
-            //try chek error to put all in try
-            try {  int orderId = CDal.Order.Create(OrderToAdd);}
-            catch {throw new BO.TheArrayIsFullException(); }
-
-            DO.Product ProductToAdd;
+            //try to add
             try
             {
+                DO.Product ProductToAdd;
                 foreach (BO.OrderItem Curr in CurrCart.ItemOrderList)
                 {
                     ProductToAdd = CDal.product.Read(Curr.ProductId);
@@ -127,27 +118,36 @@ namespace BlImplementation
                     if (Curr.Amount < 0)
                         throw new BO.OneFieldsInCorrect();
                 }
-            }
-            catch (ObjectNotFoundException  ex) { 
-                throw new BO.NoSuchObjectExcption(ex);
-            }
-          ;
-            foreach (BO.OrderItem Curr in CurrCart.ItemOrderList)
-            {
-                ProductToAdd = CDal.product.Read(Curr.ProductId);
-                DO.OrderItem OrderItemToAdd = new DO.OrderItem()
+                DO.Order OrderToAdd = new DO.Order()
                 {
-                    Amount = Curr.Amount,
-                    OrderId = orderId,
-                    Price = ProductToAdd.Price,
-                    ProductId = ProductToAdd.ID
+                    OrderDate = DateTime.Now,
+                    CustomerName = CurrCart.Name,
+                    CustomerEmail = CurrCart.CustomerEmail,
+                    CustomerAdress = CurrCart.CustomerAdress,
+                    ShipDate = DateTime.MinValue,
+                    DeliveryDate = DateTime.MinValue
                 };
-                //try
+                int orderId = CDal.Order.Create(OrderToAdd);
+                foreach (BO.OrderItem Curr in CurrCart.ItemOrderList)
+                {
+                    ProductToAdd = CDal.product.Read(Curr.ProductId);
+                    DO.OrderItem OrderItemToAdd = new DO.OrderItem()
+                    {
+                        Amount = Curr.Amount,
+                        OrderId = orderId,
+                        Price = ProductToAdd.Price,
+                        ProductId = ProductToAdd.ID
+                    };
                     CDal.orderItem.Create(OrderItemToAdd);
                     ProductToAdd.InStock -= Curr.Amount;
-                    CDal.product.Update(ProductToAdd); 
-            }
+                    CDal.product.Update(ProductToAdd);
+                }
 
+            }
+            catch (TheArrayIsFull ex) { throw new BO.TheArrayIsFullException(); }
+
+            catch (ObjectNotFoundException ex) {   throw new BO.NoSuchObjectExcption(ex); };
+           
         }
     }
 }

@@ -9,16 +9,16 @@ namespace BlImplementation
   
     internal static class Config
     {
-        static internal int _productId = 1;
-        static internal int _orderId = 1;
+        static internal int _productForList = 1;
+        static internal int _productItem = 1;
         static internal int _orderItemId = 1;
-        static public int ProductId
+        static public int ProductForList
         {
-            get { return _productId++; }
+            get { return _productForList++; }
         }
-        static public int OrderId
+        static public int ProductItem
         {
-            get { return _orderId++; }
+            get { return _productItem++; }
         }
         static public int OrderItemId
         {
