@@ -41,7 +41,7 @@ internal class DalOrders:IOrder
                 DataSource._orders[i] = OrderToUpdate;
                 return;}
             }
-        throw new ObjectAlreadyExist();
+        throw new ObjectNotFoundException();
     }
    public void Delete(int Id)
     {
