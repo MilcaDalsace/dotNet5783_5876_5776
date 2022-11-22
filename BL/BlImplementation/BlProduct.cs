@@ -8,7 +8,7 @@ using DalApi;
 
 namespace BlImplementation
 {
-    internal class BlProduct : IProduct
+    internal class BlProduct : BLApi.IProduct
     {
 
         IDal CDal = new Dal.DalList();
@@ -102,8 +102,24 @@ namespace BlImplementation
         }
         public void UpdateProduct(BO.Product productToUpdate)
         {
-
-
+            if (productToUpdate.ID < 0 || productToUpdate.Name == "" || productToUpdate.Price < 0 || productToUpdate.InStock < 0)
+                throw new BO.OneFieldsInCorrect();
+            DO.Product productToAdd = new DO.Product()
+            {
+                InStock = productToUpdate.InStock,
+                ID = productToUpdate.ID,
+                Name = productToUpdate.Name,
+                Price = productToUpdate.Price,
+                Category = (DO.Categories)productToUpdate.Category
+            };
+            try
+            {
+                CDal.product.Update(productToAdd);
+            }
+            catch (ObjectNotFoundException ex)
+            {
+                throw new BO.NoSuchObjectExcption(ex);
+            }
         }
     }
 }
