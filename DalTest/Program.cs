@@ -10,9 +10,7 @@ namespace Dal
     internal class Program
     {
         static private IDal dalList=new DalList();
-        //static private DalOrders order=new  DalOrders();
-        //static private DalProduct product = new DalProduct();
-        //static private DalOrderItem orderItem = new DalOrderItem();
+       
          public static void Main(String[] args)
         {
             Console.WriteLine(

@@ -13,6 +13,11 @@ namespace BO
         public override string Message => "Out of stock";
 
     }
+    public class OrderAlreadyDelivery : Exception
+    {
+        public override string Message => "Order already delivery";
+
+    }
     public class NoSuchObjectExcption : Exception
     {
         public NoSuchObjectExcption(ObjectNotFoundException ex) : base("Object not found exception", ex) { }

@@ -9,7 +9,7 @@ using DalApi;
 
 namespace BlImplementation
 {
-    internal class BlOrder : IOrder
+    internal class BlOrder : BLApi. IOrder
     {
         IDal CDal = new Dal.DalList();
         public IEnumerable<BO.OrderForList> GetListOrder()
@@ -24,7 +24,7 @@ namespace BlImplementation
                     IEnumerable<DO.OrderItem> orderItems = CDal.orderItem.ReadByOrderId(order.ID);
                     foreach (DO.OrderItem item in orderItems)
                         sum += item.Price * item.Amount;
-                   BO. OrderForList orderForList = new BO.OrderForList()
+                    BO.OrderForList orderForList = new BO.OrderForList()
                     {
                         ID = order.ID,
                         FinalPrice = sum,
@@ -101,35 +101,47 @@ namespace BlImplementation
                 throw new BO.NoSuchObjectExcption(ex);
             }
         }
-        public BO.Order UpdateOrderSupply(int idOrder);
-        public BO.Order UpdateOrder(int idOrder,BO. Order newrder);
+        public BO.Order UpdateOrderSupply(int idOrder)
+        {
+            try
+            {
+                DO.Order order = CDal.Order.Read(idOrder);
+                if (orderStatus(order) == BO.Status.sent)
+                {
+                    order.DeliveryDate = DateTime.Now;
+                }
+                else
+                {
+                    throw new BO.OrderAlreadyDelivery();
+                }
+                CDal.Order.Update(order);
+                return GetOrderDetails(idOrder);
+            }
+            catch (ObjectNotFoundException ex)
+            {
+                throw new BO.NoSuchObjectExcption(ex);
+            }
+        }
+      //  public BO.Order UpdateOrder(int idOrder, BO.Order newrder);
     }
 }
-//    IEnumerable<DO.OrderItem> orderItems = CDal.orderItem.ReadByOrderId(idOrder);
-//    IEnumerable<BO.OrderItem> orderItemBO = new List<BO.OrderItem>();
-//                foreach(DO.OrderItem item in orderItems)
-//                {
-//                    BO.OrderItem itemToUpdate = new BO.OrderItem()
-//                    {
-//                        Id = item.OrderId,
-//                        ProductId = item.ProductId,
-//                        FinalPrice = item.Price * item.Amount,
-//                        Amount = item.Amount,
-//                        ProductName = item.
-//                    };
-//    sum+=item.Amount* item.Price;
-//}
-//BO.Order orderToReturn = new BO.Order()
+//try
 //{
-//    FinalPrice = sum,
-//    OrderItemList = orderItems,
-//    ShipDate = orderToUpdate.ShipDate,
-//    OrderStatus = orderStatus(orderToUpdate),
-//    CustomerAdress = orderToUpdate.CustomerAdress,
-//    DeliveryDate = orderToUpdate.DeliveryDate,
-//    CustomerEmail = orderToUpdate.CustomerEmail,
-//    CustomerName = orderToUpdate.CustomerName,
-//    ID = orderToUpdate.ID,
-//    OrderDate = orderToUpdate.OrderDate,
+//    DO.Order order = CDal.Order.Read(idOrder);
+//    BO.OrderTracking orderTracking = new BO.OrderTracking()
+//    {
+//        ID = order.ID,
+//        OrderStatus = orderStatus(order),
+//        DateAndStatus = new List<(DateTime, BO.Status)>()
+//                    {
+//                       ( order.OrderDate, BO.Status.received),
+//                       ( order.ShipDate, BO.Status.sent),
+//                       ( order.DeliveryDate, BO.Status.arrived)
+//                    }
+//    };
+//    return orderTracking;
 //}
+//catch (ObjectNotFoundException ex)
+//{
+//    throw new BO.NoSuchObjectExcption(ex);
 //}
