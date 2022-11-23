@@ -5,6 +5,8 @@ using BlImplementation;
 using System.Diagnostics;
 using BL;
 using BO;
+using System.IO;
+
 namespace BLTest
 {
     internal class Program
@@ -81,13 +83,40 @@ namespace BLTest
                     {
                         Console.WriteLine(ex.Message);
                     }
-                    catch (BO.NoSuchObjectExcption ex) {
+                    catch (BO.NoSuchObjectExcption ex)
+                    {
                         Console.WriteLine(ex.Message, ex.InnerException.Message);
                     }
                     break;
                 case 4:
-                   // add
-                   Console.WriteLine("");
+                    // add
+                    Console.WriteLine("enter name,price,inStock");
+                    BO.Product ProductToAdd = new BO.Product()
+                    {
+                        Name = Console.ReadLine(),
+                        Price = int.Parse(Console.ReadLine()),
+                        InStock = int.Parse(Console.ReadLine())
+                    };
+                    Console.WriteLine("choose category:" +
+                      "1 to babygrows" +
+                      "2 to shirts" +
+                      "3 toskirts" +
+                      "4 to pants" +
+                      "5 to dresses" +
+                      "6 to tShirt");
+                    ProductToAdd.Category = (BO.Categories)int.Parse(Console.ReadLine());
+                    try
+                    {
+                        ibl.Product.AddProduct(ProductToAdd);
+                    }
+                    catch (TheArrayIsFull ex)
+                    {
+                        Console.WriteLine(ex.Message, ex.InnerException.Message);
+                    }
+                    catch (OneFieldsInCorrect ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
                     break;
                 case 5:
                     //delete
