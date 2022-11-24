@@ -15,7 +15,8 @@ namespace BlImplementation
         public IEnumerable<BO.ProductForList> GetProductList()
         {
             IEnumerable<DO.Product> ListOfProduct = CDal.product.GetAll();
-            IEnumerable<BO.ProductForList> ProductListToReturn = new List<BO.ProductForList>();
+            List<BO.ProductForList> ProductListToReturn = new List<BO.ProductForList>();
+            //IEnumerable<BO.ProductForList> ProductListToReturn = new List<BO.ProductForList>();
             foreach (DO.Product Product in ListOfProduct)
             {
                 BO.ProductForList productForList = new BO.ProductForList()
@@ -25,14 +26,14 @@ namespace BlImplementation
                     Price = Product.Price,
                     Category = (BO.Categories)Product.Category
                 };
-                ProductListToReturn.ToList().Add(productForList);
+                ProductListToReturn.Add(productForList);
             }
             return ProductListToReturn;
         }
         public IEnumerable<BO.ProductItem> GetCatalog()
         {
             IEnumerable<DO.Product> ListOfProduct = CDal.product.GetAll();
-            IEnumerable<BO.ProductItem> ProductListToReturn = new List<BO.ProductItem>();
+            List<BO.ProductItem> ProductListToReturn = new List<BO.ProductItem>();
             foreach (DO.Product Product in ListOfProduct)
             {
                 //ID
@@ -46,7 +47,7 @@ namespace BlImplementation
                     //אין קונה לבנתיים לכן 0
                     AmountInCart = 0
                 };
-                ProductListToReturn.ToList().Add(productForList);
+                ProductListToReturn.Add(productForList);
             }
             return ProductListToReturn;
         }

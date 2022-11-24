@@ -1,7 +1,6 @@
 ﻿
-using DO;
-using Dal;
 using DalApi;
+using DO;
 namespace Dal
 {
     public class DalProduct:IProduct

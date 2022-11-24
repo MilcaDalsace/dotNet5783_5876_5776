@@ -15,7 +15,7 @@ namespace BlImplementation
         public IEnumerable<BO.OrderForList> GetListOrder()
         {
             float sum = 0;
-            IEnumerable<BO.OrderForList> listToReturn = new List<BO.OrderForList>();
+            List<BO.OrderForList> listToReturn = new List<BO.OrderForList>();
             IEnumerable<DO.Order> list = CDal.Order.GetAll();
             try
             {
@@ -24,6 +24,7 @@ namespace BlImplementation
                     IEnumerable<DO.OrderItem> orderItems = CDal.orderItem.ReadByOrderId(order.ID);
                     foreach (DO.OrderItem item in orderItems)
                         sum += item.Price * item.Amount;
+                   
                     BO.OrderForList orderForList = new BO.OrderForList()
                     {
                         ID = order.ID,
@@ -32,7 +33,8 @@ namespace BlImplementation
                         OrderSatus = orderStatus(order),
                         CustomerName = order.CustomerName
                     };
-                    listToReturn.ToList<BO.OrderForList>().Add(orderForList);
+                    sum = 0;
+                    listToReturn.Add(orderForList);
                 }
             }
             catch (ObjectNotFoundException ex)
@@ -43,9 +45,9 @@ namespace BlImplementation
         }
         public BO.Status orderStatus(DO.Order orderToChek)
         {
-            if (DateTime.Compare(orderToChek.DeliveryDate, DateTime.Today) < 0)
+            if (DateTime.Compare(orderToChek.DeliveryDate, DateTime.Today) > 0)
                 return BO.Status.arrived;
-            if (DateTime.Compare(orderToChek.ShipDate, DateTime.Today) < 0)
+            if (DateTime.Compare(orderToChek.ShipDate, DateTime.Today) > 0)
                 return BO.Status.sent;
             return BO.Status.received;
         }
@@ -53,7 +55,7 @@ namespace BlImplementation
         {
             float sum = 0;
             DO.Order currOrder = new DO.Order();
-            IEnumerable<DO.OrderItem> orderItems = new List<DO.OrderItem>();
+            List<DO.OrderItem> orderItems = new List<DO.OrderItem>();
             if (idOrder > 0)
             {
                 try
@@ -94,6 +96,10 @@ namespace BlImplementation
                     orderToUpdate.ShipDate = DateTime.Now;
                     CDal.Order.Update(orderToUpdate);
                 }
+                else
+                {
+                    throw new BO.OrderAlreadyUpdate();
+                }
                 return GetOrderDetails(idOrder);
             }
             catch (ObjectNotFoundException ex)
@@ -112,7 +118,7 @@ namespace BlImplementation
                 }
                 else
                 {
-                    throw new BO.OrderAlreadyDelivery();
+                    throw new BO.OrderAlreadyUpdate();
                 }
                 CDal.Order.Update(order);
                 return GetOrderDetails(idOrder);

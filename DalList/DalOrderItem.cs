@@ -58,8 +58,8 @@ namespace Dal
             for (int i = 0; i < DataSource._orderItems.Count; i++)
                 if (DataSource._orderItems[i].OrderId == orderId)
                     arrayOfOrderItem.Add(DataSource._orderItems[i]) ;
-            if (arrayOfOrderItem[0].ID == 0)
-                return null;
+            //if (arrayOfOrderItem[0].ID == 0)
+            //    return null;
             return arrayOfOrderItem;
         }
         public void Update(DO.OrderItem item)
