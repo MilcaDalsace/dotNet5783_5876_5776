@@ -12,6 +12,10 @@ namespace BlImplementation
     internal class BlOrder : BLApi. IOrder
     {
         IDal CDal = new Dal.DalList();
+        /// <summary>
+        /// A function that returns a list of orders
+        /// I don't get anything
+        /// </summary>
         public IEnumerable<BO.OrderForList> GetListOrder()
         {
             float sum = 0;
@@ -43,6 +47,9 @@ namespace BlImplementation
             }
             return listToReturn;
         }
+        /// <summary>
+        /// A function that accepts an order and checks its status
+        /// </summary>
         public BO.Status orderStatus(DO.Order orderToChek)
         {
             if (DateTime.Compare(orderToChek.DeliveryDate, DateTime.Today) > 0)
@@ -51,6 +58,9 @@ namespace BlImplementation
                 return BO.Status.sent;
             return BO.Status.received;
         }
+        /// <summary>
+        /// A function that receives an order code and returns its details
+        /// </summary>
         public BO.Order GetOrderDetails(int idOrder)
         {
             float sum = 0;
@@ -84,6 +94,9 @@ namespace BlImplementation
             }
             throw new BO.OneFieldsInCorrect();
         }
+        /// <summary>
+        ///A function that receives an order code and updates an order shipment 
+        /// </summary>
         public BO.Order UpdateOrderSent(int idOrder)
         {
             //גם בישות הלוגית לעדכן?? לא יודעת מה זה...
@@ -107,6 +120,9 @@ namespace BlImplementation
                 throw new BO.NoSuchObjectExcption(ex);
             }
         }
+        /// <summary>
+        /// A function that receives an order code and updates an order supply
+        /// </summary>
         public BO.Order UpdateOrderSupply(int idOrder)
         {
             try
@@ -131,23 +147,3 @@ namespace BlImplementation
       //  public BO.Order UpdateOrder(int idOrder, BO.Order newrder);
     }
 }
-//try
-//{
-//    DO.Order order = CDal.Order.Read(idOrder);
-//    BO.OrderTracking orderTracking = new BO.OrderTracking()
-//    {
-//        ID = order.ID,
-//        OrderStatus = orderStatus(order),
-//        DateAndStatus = new List<(DateTime, BO.Status)>()
-//                    {
-//                       ( order.OrderDate, BO.Status.received),
-//                       ( order.ShipDate, BO.Status.sent),
-//                       ( order.DeliveryDate, BO.Status.arrived)
-//                    }
-//    };
-//    return orderTracking;
-//}
-//catch (ObjectNotFoundException ex)
-//{
-//    throw new BO.NoSuchObjectExcption(ex);
-//}

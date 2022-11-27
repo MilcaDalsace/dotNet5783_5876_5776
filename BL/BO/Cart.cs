@@ -13,12 +13,13 @@ namespace BO
         public string CustomerAdress { get; set; }
         public List<OrderItem> ItemOrderList { get; set; }
         public float FinalPrice { get; set; }
-        public override string ToString() => $@"
-        name: {Name} 
-        customerEmail: {CustomerEmail}
-    	customerAdress: {CustomerAdress}
-    	itemOrderList: {ItemOrderList}
-        finalPrice: {FinalPrice}
-";
+          
+            public override string ToString() 
+        {
+          string tostring = "name" + Name + "\n mail" + CustomerEmail + "\n adress" + CustomerAdress;
+            for (int i = 0; i < ItemOrderList.Count; i++)
+                tostring += "\n item" + (i + 1) + ":" + ItemOrderList[i]+"\n";
+            return tostring;    
+            }
     }
-}
+} 

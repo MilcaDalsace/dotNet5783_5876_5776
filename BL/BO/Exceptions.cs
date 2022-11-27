@@ -30,13 +30,13 @@ namespace BO
         public override string Message => "One fields inCorrect";
 
     }
-    public class OutOfStock : Exception  //
-    {
-        public OutOfStock(OutOfStock ex) : base("Oout of stock", ex) { }
-        public OutOfStock() { }
-        public override string Message => "Out of stock";
+    //public class OutOfStock : Exception  //
+    //{
+    //    public OutOfStock(OutOfStock ex) : base("Oout of stock", ex) { }
+    //    public OutOfStock() { }
+    //    public override string Message => "Out of stock";
 
-    }
+    //}
     public class TheArrayIsFullException : Exception  //
     {
         public TheArrayIsFullException(TheArrayIsFull ex) : base("the array is full", ex) { }

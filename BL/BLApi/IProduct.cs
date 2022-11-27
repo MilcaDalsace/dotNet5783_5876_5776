@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace BLApi
 {
+    /// <summary>
+    /// Interface for displaying a product
+    /// </summary>
     public interface IProduct
     {
         public IEnumerable<ProductForList> GetProductList();

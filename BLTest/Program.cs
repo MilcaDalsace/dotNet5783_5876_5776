@@ -6,15 +6,19 @@ using System.Diagnostics;
 using BL;
 using BO;
 using System.IO;
+using DO;
 
 namespace BLTest
 {
     internal class Program
     {
         static private IBl ibl = new Bl();
+       
         static void Main(string[] args)
-        {
-            BO.Cart UserCart = new BO.Cart() { };
+        { 
+            BO.Cart UserCart = new BO.Cart();
+            UserCart.ItemOrderList = new List<BO.OrderItem>();
+
             Console.WriteLine("Hello, World!");
             Console.WriteLine(
                 "enter 0 to exit \n" +
@@ -24,12 +28,21 @@ namespace BLTest
                 );
             int userChoice = int.Parse(Console.ReadLine());
             int chooseMethod;
+            ///<summary>
+            ///A loop that works as long as the user's choice is not an exit
+            /// If the user chooses 1 sends it to the product
+            ///If 2 sends it to orders
+            ///and 3 sends to the basket
+            ///</summary>
             while (userChoice != 0)
             {
                 if (userChoice == 0)
                     return;
                 switch (userChoice)
                 {
+                    ///<summary>
+                    ///read the customer ch
+                    ///</summary>
                     case 1:
                         Console.WriteLine("enter 1 to get product list \n" +
                            "enter 2 to get catalog \n" +
@@ -42,7 +55,7 @@ namespace BLTest
                         Product(chooseMethod);
                         break;
                     case 2:
-                        Console.WriteLine("enter 1 to get product list \n" +
+                        Console.WriteLine("enter 1 to get order list \n" +
                            "enter 2 to get order details \n" +
                            "enter 3 to update order sent \n" +
                            "enter 4 to update order supply \n");
@@ -54,7 +67,7 @@ namespace BLTest
                             "enter 2 to update amount \n" +
                             "enter 3 to save cart \n");
                         chooseMethod = int.Parse(Console.ReadLine());
-                        Cart(chooseMethod);
+                       UserCart= Cart(chooseMethod, UserCart);
                         break;
                     default:
                         break;
@@ -63,7 +76,7 @@ namespace BLTest
                    "enter 0 to exit \n" +
                    "enter 1 to Products \n" +
                    "enter 2 to  orders\n" +
-                   "enter 3 to orderItems \n"
+                   "enter 3 to cart \n"
                    );
                 userChoice = int.Parse(Console.ReadLine());
             }
@@ -87,7 +100,7 @@ namespace BLTest
                     int idProduct = int.Parse(Console.ReadLine());
                     try
                     {
-                        Product productDetails = ibl.Product.GetProductDetails(idProduct);
+                        BO.Product productDetails = ibl.Product.GetProductDetails(idProduct);
                         Console.WriteLine(productDetails);
                     }
                     catch (BO.OneFieldsInCorrect ex)
@@ -190,7 +203,7 @@ namespace BLTest
                     int idorder = int.Parse(Console.ReadLine());
                     try
                     {
-                        Order orderDetails = ibl.Order.GetOrderDetails(idorder);
+                        BO.Order orderDetails = ibl.Order.GetOrderDetails(idorder);
                         Console.WriteLine(orderDetails);
                     }
                     catch (BO.OneFieldsInCorrect ex)
@@ -238,44 +251,81 @@ namespace BLTest
                     break;
             }
         }
-        private static void Cart(int userChoiceMethod)
+        private static BO.Cart Cart(int userChoiceMethod,BO.Cart userCart)
         {
             switch (userChoiceMethod)
             {
                 case 1:
-                    Console.WriteLine("enter ");
-
+                    Console.WriteLine("enter id of product to add");
+                    try {
+                        userCart = ibl.Cart.Add(userCart, int.Parse(Console.ReadLine()));
+                        Console.WriteLine(userCart);
+                        return userCart;
+                    }
+                    catch(BO.OutOfStockExcption ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                        return userCart;
+                    }
+                   catch (BO.NoSuchObjectExcption ex){
+                        Console.WriteLine(ex.Message, ex.InnerException.Message);
+                        return userCart;
+                    }
                     break;
                 case 2:
-
+                    Console.WriteLine("enter id of product and update amount");
+                    try
+                    {
+                        int id = int.Parse(Console.ReadLine());
+                        int amount=int.Parse(Console.ReadLine());
+                        userCart = ibl.Cart.UpdateAmount(userCart,id,amount);
+                        Console.WriteLine(userCart);
+                        return userCart;
+                    }
+                    catch (BO.OutOfStockExcption ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                        return userCart;
+                    }
+                    catch (BO.NoSuchObjectExcption ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                        return userCart;
+                    }
                     break;
                 case 3:
-
+                    Console.WriteLine("enter user name,adress,email");
+                    userCart.Name = Console.ReadLine();
+                    userCart.CustomerAdress = Console.ReadLine();
+                    userCart.CustomerEmail = Console.ReadLine();
+                    try
+                    {
+                        ibl.Cart.SaveCart(userCart);
+                        Console.WriteLine(userCart);
+                    }
+                    catch(BO.OneFieldsInCorrect ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                    catch (BO.TheArrayIsFullException ex)
+                    {
+                        Console.WriteLine(ex.Message, ex.InnerException.Message);
+                    }
+                    catch (BO.NoSuchObjectExcption ex)
+                    {
+                        Console.WriteLine(ex.Message, ex.InnerException.Message);
+                    }
+                    catch (BO.OutOfStockExcption ex)
+                    {
+                        Console.WriteLine(ex.Message, ex.InnerException.Message);
+                    }
+                    return userCart;
                     break;
                 default:
                     break;
             }
+            return userCart;
         }
     }
 
 }
-//switch (userChoiceMethod)
-//{
-//            case 1:
-
-
-//                break;
-//            case 2:
-
-//                break;
-//            case 3:
-
-//                break;
-//            case 4:
-
-//                break;
-//            case 5:
-//                 break;
-//    default:
-//                break;
-//}

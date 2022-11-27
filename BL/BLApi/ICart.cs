@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace BLApi
 {
+    /// <summary>
+    /// Interface for displaying a basket
+    /// </summary>
     public interface ICart
     {
         public Cart Add(Cart CurrCart,int product);

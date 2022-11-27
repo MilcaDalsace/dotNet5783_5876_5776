@@ -12,6 +12,9 @@ namespace BlImplementation
     {
 
         IDal CDal = new Dal.DalList();
+        /// <summary>
+        /// A function that returns a list of products
+        /// </summary>
         public IEnumerable<BO.ProductForList> GetProductList()
         {
             IEnumerable<DO.Product> ListOfProduct = CDal.product.GetAll();
@@ -21,7 +24,7 @@ namespace BlImplementation
             {
                 BO.ProductForList productForList = new BO.ProductForList()
                 {
-                    ID = Config.ProductForList,
+                    ID = 0,
                     ProductName = Product.Name,
                     Price = Product.Price,
                     Category = (BO.Categories)Product.Category
@@ -30,6 +33,9 @@ namespace BlImplementation
             }
             return ProductListToReturn;
         }
+        /// <summary>
+        /// A function that returns a product catalog
+        /// </summary>
         public IEnumerable<BO.ProductItem> GetCatalog()
         {
             IEnumerable<DO.Product> ListOfProduct = CDal.product.GetAll();
@@ -39,7 +45,7 @@ namespace BlImplementation
                 //ID
                 BO.ProductItem productForList = new BO.ProductItem()
                 {
-                    ID = Config.ProductForList,
+                    ID = 0,
                     ProductName = Product.Name,
                     Price = Product.Price,
                     Category = (BO.Categories)Product.Category,
@@ -51,6 +57,9 @@ namespace BlImplementation
             }
             return ProductListToReturn;
         }
+        /// <summary>
+        /// A function that receives a product code and returns its details
+        /// </summary>
         public BO.Product GetProductDetails(int idProduct)
         {
             if (idProduct > 0)
@@ -73,6 +82,9 @@ namespace BlImplementation
             else
                 throw new BO.OneFieldsInCorrect();
         }
+        /// <summary>
+        /// A function that receives a product and adds it to the list of products
+        /// </summary>
         public void AddProduct(BO.Product ProductToAdd)
         {
             if (ProductToAdd.ID < 0 || ProductToAdd.Name == "" || ProductToAdd.Price < 0 || ProductToAdd.InStock < 0)
@@ -88,6 +100,9 @@ namespace BlImplementation
             catch (TheArrayIsFull ex)
             { throw new BO.TheArrayIsFullException(ex); };
         }
+        /// <summary>
+        /// A function that receives a product and deletes it from the list of products
+        /// </summary>
         public void DeleteProduct(int idProduct)
         {
             IEnumerable<DO.OrderItem> allOrderItems = CDal.orderItem.GetAll();
@@ -101,6 +116,10 @@ namespace BlImplementation
             try { CDal.product.Delete(idProduct); }
             catch (ObjectNotFoundException ex) { throw new BO.NoSuchObjectExcption(ex); };
         }
+        /// <summary>
+        /// A function that receives a product and updates it in the product list
+        /// </summary>
+        
         public void UpdateProduct(BO.Product productToUpdate)
         {
             if (productToUpdate.ID < 0 || productToUpdate.Name == "" || productToUpdate.Price < 0 || productToUpdate.InStock < 0)

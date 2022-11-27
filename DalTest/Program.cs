@@ -66,7 +66,7 @@ namespace Dal
                 case 1:
                     Console.WriteLine("enter nameProduct priceProduct and amountInStock");
                     prudoctToCreate.Name=Console.ReadLine();
-                    prudoctToCreate.Price= double.Parse(Console.ReadLine());
+                    prudoctToCreate.Price= float.Parse(Console.ReadLine());
                     prudoctToCreate.InStock = int.Parse(Console.ReadLine());
                     Console.WriteLine("enter 1 to babygrows\n" +
                         "enter 2 to shirts\n" +
@@ -117,7 +117,7 @@ namespace Dal
                         Console.WriteLine(orderTemp);
                         Console.WriteLine("enter new name price and amount inStock");
                     string tempName = Console.ReadLine();
-                    double tempPrice=double.Parse(Console.ReadLine());
+                    float tempPrice=float.Parse(Console.ReadLine());
                     int tempInStock = int.Parse(Console.ReadLine());
                         prudoctToCreate.Category = orderTemp.Category;
                     prudoctToCreate.ID = idToUpdate;
@@ -276,7 +276,7 @@ namespace Dal
                         Console.WriteLine(orderIdToUpdate);
                         Console.WriteLine("enter order id, prudoct id, price and amount");
                         orderItemToCreate.ID= orderIdToUpdate.ID;
-                        double tempPrice = double.Parse(Console.ReadLine());
+                        float tempPrice = float.Parse(Console.ReadLine());
                         int tempAmount = int.Parse(Console.ReadLine());
                         orderItemToCreate.OrderId = idOderToUpdate;
                         orderItemToCreate.ProductId = productIdToUpdate;

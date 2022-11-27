@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using BO;
 namespace BLApi
 {
+    /// <summary>
+    /// Interface for displaying a order
+    /// </summary>
     public interface IOrder
     {
         public IEnumerable<OrderForList> GetListOrder();

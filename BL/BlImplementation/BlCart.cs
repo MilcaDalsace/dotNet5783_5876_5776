@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
@@ -11,6 +12,12 @@ namespace BlImplementation
     internal class BlCart : ICart
     {
         IDal CDal = new Dal.DalList();
+        /// <summary>
+        /// A function that adds an item to the cart
+        ///provided that: the item exists
+        ///There is enough in stock
+        ///You get a previous basket and the item code to add
+        /// </summary>
         public BO.Cart Add(BO.Cart CurrCart, int product)
         {
             try
@@ -39,7 +46,7 @@ namespace BlImplementation
                 {
                     BO.OrderItem orderItemToAdd = new BO.OrderItem()
                     {
-                        Id = Config.OrderItemId,
+                        Id = 0,
                         ProductId = product,
                         Price = ProductToAdd.Price,
                         FinalPrice = ProductToAdd.Price,
@@ -60,6 +67,14 @@ namespace BlImplementation
             return CurrCart;
 
         }
+        /// <summary>
+        /// A function that updates the quantity of an item in the basket
+        /// Provided that the product is indeed in the basket
+        ///There is a quantity in stock
+        ///I get a basket first
+        ///item code
+        ///and the updated quantity
+        /// </summary>
         public BO.Cart UpdateAmount(BO.Cart CurrCart, int product, int amount)
         {
             int difAmount;
@@ -77,6 +92,8 @@ namespace BlImplementation
                     }
                     if (Curr.Amount < amount)
                     {
+                        if(amount- Curr.Amount>CDal.product.Read(product).InStock)
+                            throw new BO.OutOfStockExcption();
                         Curr.Amount = amount;
                         difAmount = amount - Curr.Amount;
                         Curr.FinalPrice += difAmount * Curr.Price;
@@ -87,11 +104,20 @@ namespace BlImplementation
                         CurrCart.FinalPrice -= Curr.Amount * Curr.Price;
                         CurrCart.ItemOrderList.Remove(Curr);
                     }
+                    return CurrCart;
                 }
             }
             // If it doesn't find such a product, it throws an error
             throw new BO.NoSuchObjectExcption();
         }
+        /// <summary>
+        /// A function that confirms an order
+        ///Provided that:
+        ///All fields are correct
+        ///The products are found
+        ///and an incomplete order set
+        ///Receiving basket for confirmation
+        /// </summary>
         public void SaveCart(BO.Cart CurrCart)
         {
             //chek name
@@ -114,7 +140,7 @@ namespace BlImplementation
                 {
                     ProductToAdd = CDal.product.Read(Curr.ProductId);
                     if (ProductToAdd.InStock - Curr.Amount <= 0)
-                        throw new BO.OutOfStock();
+                        throw new BO.OutOfStockExcption();
                     if (Curr.Amount < 0)
                         throw new BO.OneFieldsInCorrect();
                 }
