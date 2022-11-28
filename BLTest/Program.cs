@@ -246,6 +246,10 @@ namespace BLTest
                     {
                         Console.WriteLine(ex.Message);
                     }
+                    catch (BO.OrderDidnotsentAlready ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
                     break;
                 default:
                     break;

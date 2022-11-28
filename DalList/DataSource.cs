@@ -1,4 +1,5 @@
-﻿using DO;
+﻿using DalApi;
+using DO;
 using System;
 using System.IO;
 
@@ -177,7 +178,7 @@ static internal class DataSource
             tempOrderItem.ID = Config.OrderItemId;
             int tempRand= r.Next(0, 40);
             tempOrderItem.OrderId = tempRand;
-            if (numOfItemPerOrder[tempRand].Item2 < 4)
+            if (Convert.ToInt32(numOfItemPerOrder[tempRand].Item2) < 4)
             {
                 (int, int) TempNumOfItemPerOrder = numOfItemPerOrder[tempRand];
                 TempNumOfItemPerOrder.Item2++;
@@ -185,9 +186,7 @@ static internal class DataSource
             }
             else
             {
-                //לאן הוא זורק את השגיאה?
-                Console.WriteLine("The number of order details is limited to 4.");
-                throw new Exception("The number of order details is limited to 4.");
+                throw new LimitTo4Items();
             }
             tempRand = r.Next(0, 10);
             tempOrderItem.ProductId = _products[tempRand].ID;

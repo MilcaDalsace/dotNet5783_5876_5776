@@ -20,6 +20,7 @@ namespace BlImplementation
         /// </summary>
         public BO.Cart Add(BO.Cart CurrCart, int product)
         {
+            bool flag = false;
             try
             {
                 //get the product from the list
@@ -30,6 +31,7 @@ namespace BlImplementation
                 {
                     if (Curr.ProductId == product)
                     {
+                        flag = true;
                         if (ProductToAdd.InStock >= 1)
                         {
                             Curr.Amount++;
@@ -42,22 +44,26 @@ namespace BlImplementation
                 }
                 //If the product does not exist, create a product
                 //in a new basket and add it to the basket
-                if (ProductToAdd.InStock >= 1)
+                if (!flag)
                 {
-                    BO.OrderItem orderItemToAdd = new BO.OrderItem()
+                    if (ProductToAdd.InStock >= 1)
                     {
-                        Id = 0,
-                        ProductId = product,
-                        Price = ProductToAdd.Price,
-                        FinalPrice = ProductToAdd.Price,
-                        ProductName = ProductToAdd.Name,
-                        Amount = 1
-                    };
-                    CurrCart.FinalPrice += orderItemToAdd.Price;
-                    CurrCart.ItemOrderList.Add(orderItemToAdd);
+                        BO.OrderItem orderItemToAdd = new BO.OrderItem()
+                        {
+                            Id = 0,
+                            ProductId = product,
+                            Price = ProductToAdd.Price,
+                            FinalPrice = ProductToAdd.Price,
+                            ProductName = ProductToAdd.Name,
+                            Amount = 1
+                        };
+                        CurrCart.FinalPrice += orderItemToAdd.Price;
+                        CurrCart.ItemOrderList.Add(orderItemToAdd);
+                    }
+                    else
+                        throw new BO.OutOfStockExcption();
                 }
-                else
-                    throw new BO.OutOfStockExcption();
+
             }
             catch (ObjectNotFoundException ex)
             {
@@ -92,7 +98,7 @@ namespace BlImplementation
                     }
                     if (Curr.Amount < amount)
                     {
-                        if(amount- Curr.Amount>CDal.product.Read(product).InStock)
+                        if (amount - Curr.Amount > CDal.product.Read(product).InStock)
                             throw new BO.OutOfStockExcption();
                         Curr.Amount = amount;
                         difAmount = amount - Curr.Amount;
@@ -172,8 +178,8 @@ namespace BlImplementation
             }
             catch (TheArrayIsFull ex) { throw new BO.TheArrayIsFullException(); }
 
-            catch (ObjectNotFoundException ex) {   throw new BO.NoSuchObjectExcption(ex); };
-           
+            catch (ObjectNotFoundException ex) { throw new BO.NoSuchObjectExcption(ex); };
+
         }
     }
 }

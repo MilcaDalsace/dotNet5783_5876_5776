@@ -95,6 +95,7 @@ namespace BlImplementation
                 Name = ProductToAdd.Name,
                 InStock = ProductToAdd.InStock,
                 Price = ProductToAdd.Price,
+                Category= (DO.Categories)ProductToAdd.Category
             };
             try { CDal.product.Create(productToAdd); }
             catch (TheArrayIsFull ex)

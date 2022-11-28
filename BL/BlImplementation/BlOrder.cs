@@ -134,6 +134,9 @@ namespace BlImplementation
                 }
                 else
                 {
+                    if (orderStatus(order) == BO.Status.received)
+                        throw new BO.OrderDidnotsentAlready();
+                    else
                     throw new BO.OrderAlreadyUpdate();
                 }
                 CDal.Order.Update(order);
@@ -144,6 +147,11 @@ namespace BlImplementation
                 throw new BO.NoSuchObjectExcption(ex);
             }
         }
-      //  public BO.Order UpdateOrder(int idOrder, BO.Order newrder);
+       //public void UpdateOrder(int idOrder, BO.Order newrder)
+       // {
+       //     if ()//הזמנה לא נשלחה
+       //     {
+       //     }
+       // }
     }
 }

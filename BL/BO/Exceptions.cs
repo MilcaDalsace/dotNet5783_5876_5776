@@ -13,6 +13,12 @@ namespace BO
         public override string Message => "Out of stock";
 
     }
+    public class OrderDidnotsentAlready : Exception
+    {
+        public override string Message => "OrderDidnotsentAlready";
+
+    }
+    
     public class OrderAlreadyUpdate : Exception
     {
         public override string Message => "Order already delivery";

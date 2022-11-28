@@ -21,4 +21,10 @@ namespace DalApi
         public override string Message => "Object already exist";
 
     }
+    public class LimitTo4Items : Exception  // Limit to 4 items of the same type per order
+    {
+        public override string Message => "The number of order details is limited to 4";
+
+    }
+
 }

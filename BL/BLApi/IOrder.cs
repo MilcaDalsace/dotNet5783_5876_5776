@@ -15,6 +15,6 @@ namespace BLApi
         public Order GetOrderDetails(int idOrder);
         public Order UpdateOrderSent(int idOrder);
         public Order UpdateOrderSupply(int idOrder);
-       // public Order UpdateOrder(int idOrder,Order newrder);
+       //public Order UpdateOrder(int idOrder,Order newOrder);
     }
 }
