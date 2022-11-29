@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BLApi;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,9 +26,10 @@ namespace PL
             InitializeComponent();
         }
 
+        IBl bl = new BlImplementation.Bl();
         private void BtnProduct_Click(object sender, RoutedEventArgs e)
         {
-            new ProductListWindow().Show();
+            new ProductListWindow(bl).Show();
         }
     }
 }

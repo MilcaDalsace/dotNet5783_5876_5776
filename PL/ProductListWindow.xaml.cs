@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BLApi;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BL;
 
 namespace PL
 {
@@ -19,9 +21,11 @@ namespace PL
     /// </summary>
     public partial class ProductListWindow : Window
     {
-        public ProductListWindow()
+        
+        public ProductListWindow(IBl bl)
         {
             InitializeComponent();
+            ProductsListview.ItemsSource = bl.Product.GetProductList();
         }
     }
 }

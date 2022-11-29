@@ -13,8 +13,8 @@ namespace BLApi
     {
         public IEnumerable<OrderForList> GetListOrder();
         public Order GetOrderDetails(int idOrder);
-        public Order UpdateOrderSent(int idOrder);
-        public Order UpdateOrderSupply(int idOrder);
+        public Order UpdateOrderSent(int idOrder);//עדכון שההזמנה נשלחה
+        public Order UpdateOrderSupply(int idOrder);//עדכון שההזמנה הגיעה
         public void UpdateOrder(int idOrder, int idProduct, int CurAmount, int action);
     }
 }
