@@ -58,7 +58,8 @@ namespace BLTest
                         Console.WriteLine("enter 1 to get order list \n" +
                            "enter 2 to get order details \n" +
                            "enter 3 to update order sent \n" +
-                           "enter 4 to update order supply \n");
+                           "enter 4 to update order supply \n"+
+                            "enter 4 to update order  \n");
                         chooseMethod = int.Parse(Console.ReadLine());
                         Order(chooseMethod);
                         break;
@@ -249,6 +250,25 @@ namespace BLTest
                     catch (BO.OrderDidnotsentAlready ex)
                     {
                         Console.WriteLine(ex.Message);
+                    }
+                    break ;
+                    case 5:
+                    Console.WriteLine("enter 1 to delete item" +
+                        "2 to add item" +
+                        "3 to update item");
+                    int action=int.Parse(Console.ReadLine());
+                    Console.WriteLine("enter order id ,product id");
+                    int idOrderToUpdate = int.Parse(Console.ReadLine());
+                    int itemId=int.Parse(Console.ReadLine());
+                    if(action!=1)
+                    {
+                        Console.WriteLine("enter new amount");
+                        int newAmount=int.Parse(Console.ReadLine());
+                        ibl.Order.UpdateOrder(idOrderToUpdate, itemId, newAmount,action );
+                    }
+                    else
+                    {
+                        ibl.Order.UpdateOrder(idOrderToUpdate, itemId, 0, action);
                     }
                     break;
                 default:

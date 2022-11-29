@@ -65,13 +65,25 @@ namespace BlImplementation
         {
             float sum = 0;
             DO.Order currOrder = new DO.Order();
-            List<DO.OrderItem> orderItems = new List<DO.OrderItem>();
+            IEnumerable<DO.OrderItem> orderItemsIenum = CDal.orderItem.GetAll();
+            List<BO.OrderItem> orderItems = new List<BO.OrderItem>();
+            foreach (DO.OrderItem orderItem in orderItemsIenum)
+                if (orderItem.OrderId == idOrder)
+                    orderItems.Add(new BO.OrderItem()
+                    {
+                        Amount = orderItem.Amount,
+                        Id = orderItem.ID,
+                        Price=orderItem.Price,
+                        FinalPrice= orderItem.Amount* orderItem.Price,
+                        ProductId = orderItem.ProductId,
+                        ProductName=CDal.product.Read(orderItem.ProductId).Name
+                    }) ;
             if (idOrder > 0)
             {
                 try
                 {
                     currOrder = CDal.Order.Read(idOrder);
-                    foreach (DO.OrderItem item in orderItems)
+                    foreach (BO.OrderItem item in orderItems)
                         sum += item.Price;
                 }
                 catch (ObjectNotFoundException ex)
@@ -89,6 +101,7 @@ namespace BlImplementation
                     DeliveryDate = currOrder.DeliveryDate,
                     OrderDate = currOrder.OrderDate,
                     ShipDate = currOrder.ShipDate,
+                    OrderItemList= orderItems
                 };
                 return orderToReturn;
             }
@@ -147,11 +160,79 @@ namespace BlImplementation
                 throw new BO.NoSuchObjectExcption(ex);
             }
         }
-       //public void UpdateOrder(int idOrder, BO.Order newrder)
-       // {
-       //     if ()//הזמנה לא נשלחה
-       //     {
-       //     }
-       // }
+        public void UpdateOrder(int idOrder, int idProduct, int CurAmount, int action)
+        {//price
+            try { 
+            switch (action)
+            {
+                case 1:
+                    DO.OrderItem baseItem = CDal.orderItem.ReadByOrderitemId(idOrder, idProduct);
+                    CDal.orderItem.Delete(baseItem.ID);
+                    break;
+                case 2:
+                    DO.OrderItem newOrder = new DO.OrderItem() {
+                        Amount = CurAmount,
+                        OrderId = idOrder,
+                        ProductId = idProduct,
+                        //Price=?
+                    };
+                    CDal.orderItem.Create(newOrder);
+                    break;
+                case 3:
+                    float price = CDal.product.Read(idProduct).Price;
+                    DO.OrderItem baseItemForUpdate = CDal.orderItem.ReadByOrderitemId(idOrder, idProduct);
+                    baseItemForUpdate.Amount = CurAmount;
+                    baseItemForUpdate.Price = price * CurAmount;
+                    CDal.orderItem.Update(baseItemForUpdate);
+                    break;
+            } 
+            }catch (ObjectNotFoundException ex)
+            {
+                throw new BO.NoSuchObjectExcption(ex);
+
+            }
+            //DO.Order order = CDal.Order.Read(idOrder);
+                    //int baseAmount=baseItemForUpdate.Amount;
+            //try
+            //{
+            //    float newFinalPrice=0;
+            //    List<DO.OrderItem> listOfProducts = new List<DO.OrderItem>();
+            //    DO.Order myOrder = CDal.Order.Read(idOrder);
+            //    try {
+            //    DO.OrderItem baseItem = CDal.orderItem.ReadByOrderitemId(idOrder,idProduct);
+            //    }
+            //    catch
+            //    {
+
+            //    }
+            //    if(baseItem.Amount< CurAmount)
+            //    //foreach (DO.OrderItem item in allItems)
+            //    //{
+            //    //    if (item.OrderId == idOrder) {
+            //    //        newFinalPrice += item.Amount * item.Price;
+            //    //        listOfProducts.Add(item);
+            //    //    }
+            //    //}
+            //    int diff; 
+                //foreach (BO.OrderItem itemUpdate in newrder)
+                //    for (int i=0;i< listOfProducts.Count;i++)
+                //    {
+                //        if (listOfProducts[i].ProductId == itemUpdate.ProductId) 
+                //        {
+                //            if (listOfProducts[i].Amount < itemUpdate.Amount)
+                //            {
+                //                diff = itemUpdate.Amount - listOfProducts[i].Amount;
+                //                DO.OrderItem temp = listOfProducts[i];
+                //                temp.Amount = itemUpdate.Amount;
+                //                listOfProducts[i] = temp;
+                //                //temp.FinalPrice = itemUpdate.Amount * itemUpdate.Price;
+                //                newFinalPrice +=diff* itemUpdate.Price;
+                //            }
+                           
+                //        }
+                //    }
+            }
+            
+        }
     }
-}
+
