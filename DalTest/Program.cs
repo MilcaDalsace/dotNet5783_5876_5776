@@ -153,18 +153,18 @@ namespace Dal
                     
                     //orderToCreate.OrderDate = DateTime.Parse( Console.ReadLine());
                     string? orderDate = Console.ReadLine();
-                    DateTime.TryParse(orderDate, out DateTime result);
-                    orderToCreate.OrderDate = result;
+                    DateTime.TryParse(orderDate, out DateTime orderDateResult);
+                    orderToCreate.OrderDate = orderDateResult;
 
                     //orderToCreate.ShipDate = DateTime.Parse(Console.ReadLine());
                     string? shipDate = Console.ReadLine();
-                    DateTime.TryParse(shipDate, out result);
-                    orderToCreate.ShipDate = result;
+                    DateTime.TryParse(shipDate, out DateTime shipDateResult);
+                    orderToCreate.ShipDate = shipDateResult;
 
                     //orderToCreate.DeliveryDate = DateTime.Parse(Console.ReadLine());
                     string? deliveryDate = Console.ReadLine();
-                    DateTime.TryParse(deliveryDate, out result);
-                    orderToCreate.DeliveryDate = result;
+                    DateTime.TryParse(deliveryDate, out DateTime deliveryDateResult);
+                    orderToCreate.DeliveryDate = deliveryDateResult;
                     try
                     {
                     Console.WriteLine("The new order id is:"+dalList.Order.Create(orderToCreate));
@@ -209,15 +209,22 @@ namespace Dal
                     string tempName = Console.ReadLine();
                     string tempEmail = Console.ReadLine();
                     string tempAdress = Console.ReadLine();
-                    DateTime tempOrderDate = DateTime.Parse(Console.ReadLine());
-                    DateTime tempShipDate = DateTime.Parse(Console.ReadLine());
-                    DateTime tempDeliveryDate = DateTime.Parse(Console.ReadLine());
-                    orderToCreate.CustomerName =( (tempName == null) ? lastOrder.CustomerName : tempName);
+
+                    //DateTime tempOrderDate = DateTime.Parse(Console.ReadLine());
+                     string? tempOrderDate = Console.ReadLine();
+                     DateTime.TryParse(tempOrderDate, out DateTime tempOrderDateResult);
+                     //DateTime tempShipDate = DateTime.Parse(Console.ReadLine());
+                        string? tempShipDate = Console.ReadLine();
+                        DateTime.TryParse(tempShipDate, out DateTime tempShipDateResult);
+                    //DateTime tempDeliveryDate = DateTime.Parse(Console.ReadLine());
+                        string? tempDeliveryDate = Console.ReadLine();
+                        DateTime.TryParse(tempDeliveryDate, out DateTime tempDeliveryDateResult);
+                        orderToCreate.CustomerName =( (tempName == null) ? lastOrder.CustomerName : tempName);
                     orderToCreate.CustomerEmail = ((tempEmail == null) ? lastOrder.CustomerEmail : tempEmail);
                     orderToCreate.CustomerAdress = ((tempAdress == null) ? lastOrder.CustomerAdress : tempAdress);
-                    orderToCreate.OrderDate =tempOrderDate;
-                    orderToCreate.ShipDate = tempShipDate  ;
-                    orderToCreate.DeliveryDate =tempDeliveryDate ;
+                    orderToCreate.OrderDate = tempOrderDateResult;
+                    orderToCreate.ShipDate = tempShipDateResult;
+                    orderToCreate.DeliveryDate = tempDeliveryDateResult;
                     dalList.Order.Update(orderToCreate);
                     }
                     catch (Exception ex)

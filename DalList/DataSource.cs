@@ -178,7 +178,7 @@ static internal class DataSource
             tempOrderItem.ID = Config.OrderItemId;
             int tempRand= r.Next(0, 40);
             tempOrderItem.OrderId = tempRand;
-            if (Convert.ToInt32(numOfItemPerOrder[tempRand].Item2) < 4)
+            if (numOfItemPerOrder[tempRand].Item2 < 4)
             {
                 (int, int) TempNumOfItemPerOrder = numOfItemPerOrder[tempRand];
                 TempNumOfItemPerOrder.Item2++;
