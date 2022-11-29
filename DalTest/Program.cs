@@ -150,18 +150,19 @@ namespace Dal
                     orderToCreate.CustomerName = Console.ReadLine();
                     orderToCreate.CustomerEmail = Console.ReadLine();
                     orderToCreate.CustomerAdress = Console.ReadLine();
+                    
                     //orderToCreate.OrderDate = DateTime.Parse( Console.ReadLine());
-                    string orderDate = Console.ReadLine();
+                    string? orderDate = Console.ReadLine();
                     DateTime.TryParse(orderDate, out DateTime result);
                     orderToCreate.OrderDate = result;
 
                     //orderToCreate.ShipDate = DateTime.Parse(Console.ReadLine());
-                    string shipDate = Console.ReadLine();
+                    string? shipDate = Console.ReadLine();
                     DateTime.TryParse(shipDate, out result);
                     orderToCreate.ShipDate = result;
 
                     //orderToCreate.DeliveryDate = DateTime.Parse(Console.ReadLine());
-                    string deliveryDate = Console.ReadLine();
+                    string? deliveryDate = Console.ReadLine();
                     DateTime.TryParse(deliveryDate, out result);
                     orderToCreate.DeliveryDate = result;
                     try
