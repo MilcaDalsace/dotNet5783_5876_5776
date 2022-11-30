@@ -12,13 +12,6 @@
             <RowDefinition Height="50*"/>
             <RowDefinition Height="50*"/>
         </Grid.RowDefinitions>
-        <ListView x:Name="ProductsListview" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" Visibility="Hidden">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>
         <Grid x:Name="SubGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -26,6 +19,15 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
+            <ComboBox x:Name="AttributeSelector" Grid.Column="1" Margin="40,56,40,0" VerticalAlignment="Top" SelectionChanged="AttributeSelector_SelectionChanged"/>
+            <Label Content="Label"  HorizontalAlignment="Left" Grid.Column="0" Margin="448,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.056,2.452"/>
         </Grid>
+        <ListView x:Name="ProductsListview" Grid.Row="1" d:ItemsSource="{d:SampleData  ItemCount=100}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>

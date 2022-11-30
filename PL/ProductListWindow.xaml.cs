@@ -21,11 +21,19 @@ namespace PL
     /// </summary>
     public partial class ProductListWindow : Window
     {
-        
         public ProductListWindow(IBl bl)
         {
+
             InitializeComponent();
+            AttributeSelector.ItemsSource = Enum.GetValues(typeof(BO.Categories));
+            //AttributeSelector.Items.Add('1');
             ProductsListview.ItemsSource = bl.Product.GetProductList();
+            //ProductsListview.ItemsSource.ItemCount = bl.Product.GetProductList().Count;
+        }
+
+        private void AttributeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
