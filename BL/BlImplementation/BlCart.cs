@@ -59,6 +59,7 @@ namespace BlImplementation
                         };
                         CurrCart.FinalPrice += orderItemToAdd.Price;
                         CurrCart.ItemOrderList.Add(orderItemToAdd);
+
                     }
                     else
                         throw new BO.OutOfStockExcption();
@@ -91,8 +92,8 @@ namespace BlImplementation
                 {
                     if (Curr.Amount > amount)
                     {
-                        Curr.Amount = amount;
                         difAmount = Curr.Amount - amount;
+                        Curr.Amount = amount;
                         Curr.FinalPrice -= difAmount * Curr.Price;
                         CurrCart.FinalPrice -= difAmount * Curr.Price;
                     }
@@ -100,8 +101,8 @@ namespace BlImplementation
                     {
                         if (amount - Curr.Amount > CDal.product.Read(product).InStock)
                             throw new BO.OutOfStockExcption();
-                        Curr.Amount = amount;
                         difAmount = amount - Curr.Amount;
+                        Curr.Amount = amount;
                         Curr.FinalPrice += difAmount * Curr.Price;
                         CurrCart.FinalPrice += difAmount * Curr.Price;
                     }
@@ -145,7 +146,7 @@ namespace BlImplementation
                 foreach (BO.OrderItem Curr in CurrCart.ItemOrderList)
                 {
                     ProductToAdd = CDal.product.Read(Curr.ProductId);
-                    if (ProductToAdd.InStock - Curr.Amount <= 0)
+                    if (ProductToAdd.InStock - Curr.Amount < 0)
                         throw new BO.OutOfStockExcption();
                     if (Curr.Amount < 0)
                         throw new BO.OneFieldsInCorrect();
@@ -159,9 +160,11 @@ namespace BlImplementation
                     ShipDate = DateTime.MinValue,
                     DeliveryDate = DateTime.MinValue
                 };
+                float finalPriceCart = 0;
                 int orderId = CDal.Order.Create(OrderToAdd);
                 foreach (BO.OrderItem Curr in CurrCart.ItemOrderList)
                 {
+                    
                     ProductToAdd = CDal.product.Read(Curr.ProductId);
                     DO.OrderItem OrderItemToAdd = new DO.OrderItem()
                     {
@@ -173,6 +176,7 @@ namespace BlImplementation
                     CDal.orderItem.Create(OrderItemToAdd);
                     ProductToAdd.InStock -= Curr.Amount;
                     CDal.product.Update(ProductToAdd);
+                    finalPriceCart += Curr.Amount * ProductToAdd.Price;
                 }
 
             }

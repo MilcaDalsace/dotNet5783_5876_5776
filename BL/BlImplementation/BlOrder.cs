@@ -84,7 +84,7 @@ namespace BlImplementation
                 {
                     currOrder = CDal.Order.Read(idOrder);
                     foreach (BO.OrderItem item in orderItems)
-                        sum += item.Price;
+                        sum += item.Price*item.Amount;
                 }
                 catch (ObjectNotFoundException ex)
                 {
@@ -176,6 +176,7 @@ namespace BlImplementation
                         ProductId = idProduct,
                         //Price=?
                     };
+                        //add try
                     CDal.orderItem.Create(newOrder);
                     break;
                 case 3:

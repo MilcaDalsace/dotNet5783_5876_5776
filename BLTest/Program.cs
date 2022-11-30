@@ -59,7 +59,7 @@ namespace BLTest
                            "enter 2 to get order details \n" +
                            "enter 3 to update order sent \n" +
                            "enter 4 to update order supply \n"+
-                            "enter 4 to update order  \n");
+                            "enter 5 to update order  \n");
                         chooseMethod = int.Parse(Console.ReadLine());
                         Order(chooseMethod);
                         break;
@@ -326,6 +326,8 @@ namespace BLTest
                     {
                         ibl.Cart.SaveCart(userCart);
                         Console.WriteLine(userCart);
+                        userCart = new Cart();
+                        userCart.ItemOrderList = new List<BO.OrderItem>();
                     }
                     catch(BO.OneFieldsInCorrect ex)
                     {
@@ -341,7 +343,7 @@ namespace BLTest
                     }
                     catch (BO.OutOfStockExcption ex)
                     {
-                        Console.WriteLine(ex.Message, ex.InnerException.Message);
+                        Console.WriteLine(ex.Message);
                     }
                     return userCart;
                     break;

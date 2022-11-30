@@ -37,13 +37,13 @@ namespace BO
 
         public override string ToString()
         {
-            string tostring = "order ID" + ID + "\n customerName" + CustomerName + "\n customerEmail" + CustomerEmail + "\n custmerAdress" + CustomerAdress
-                    + "\n orderStatus" + OrderStatus + "\n finalPrice" + FinalPrice
-                    + "\n orderDate" + OrderDate
-                    + "\n shipDate" + ShipDate + "\n deliveryDate" + DeliveryDate
+            string tostring = "order ID: " + ID + "\n customerName: " + CustomerName + "\n customerEmail: " + CustomerEmail + "\n custmerAdress: " + CustomerAdress
+                    + "\n orderStatus: " + OrderStatus + "\n finalPrice: " + FinalPrice
+                    + "\n orderDate: " + OrderDate
+                    + "\n shipDate: " + ShipDate + "\n deliveryDate: " + DeliveryDate
                     ;
             for (int i = 0; i < OrderItemList.Count; i++)
-                tostring += "\n item" + (i + 1) + ":" + OrderItemList[i] + "\n";
+                tostring += "\n item" + (i + 1) + ": " + OrderItemList[i] + "\n";
             return tostring;
         }
     }

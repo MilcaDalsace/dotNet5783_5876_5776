@@ -16,7 +16,7 @@ namespace BO
           
             public override string ToString() 
         {
-          string tostring = "name" + Name + "\n mail" + CustomerEmail + "\n adress" + CustomerAdress;
+          string tostring = "name: " + Name + "\n mail: " + CustomerEmail + "\n adress: " + CustomerAdress;
             for (int i = 0; i < ItemOrderList.Count; i++)
                 tostring += "\n item" + (i + 1) + ":" + ItemOrderList[i]+"\n";
             return tostring;    

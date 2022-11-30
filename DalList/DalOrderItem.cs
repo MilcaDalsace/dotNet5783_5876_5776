@@ -7,6 +7,7 @@ namespace Dal
     {
          public int Create(DO.OrderItem item)
         {
+            //add 
             if (DataSource.SIZEOFARRAYPRUDOCT == DataSource._orderItems.Count)
                 throw new TheArrayIsFull() ;
             else
@@ -21,6 +22,7 @@ namespace Dal
                         return DataSource._orderItems[i].ID;
                     } 
                }
+               //if
                 int tempOrderItemId = DataSource.Config.OrderItemId;
                 item.ID = tempOrderItemId;
                 DataSource._orderItems.Add(item);

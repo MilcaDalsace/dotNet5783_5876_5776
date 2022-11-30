@@ -11,12 +11,12 @@ namespace DalApi
         public override string Message => "Object not found";
 
     }
-    public class TheArrayIsFull : Exception  // מחלקה שמתארת שגיאה
+    public class TheArrayIsFull : Exception  // execption of full list
     {
         public override string Message => "The array is full";
 
     }
-    public class ObjectAlreadyExist : Exception  // execption of full list
+    public class ObjectAlreadyExist : Exception  // מחלקה שמתארת שגיאה
     {
         public override string Message => "Object already exist";
 

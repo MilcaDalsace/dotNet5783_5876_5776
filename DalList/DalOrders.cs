@@ -19,6 +19,12 @@ internal class DalOrders:IOrder
     }
     public IEnumerable<Order> GetAll()
     {
+        for (int i = 0; i < DataSource._orderItems.Count; i++)
+        {
+            Console.WriteLine(DataSource._orderItems[i]);
+            
+        }
+        
         List<Order> tempOrderArray = new List<Order>();
        // DO.Order[] tempOrderArray = new DO.Order[DataSource._orders.Count];
         for (int i = 0; i < DataSource._orders.Count; i++)
