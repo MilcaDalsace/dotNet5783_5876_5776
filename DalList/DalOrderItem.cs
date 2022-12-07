@@ -1,6 +1,8 @@
 ﻿using DO;
 using static Dal.DataSource;
 using DalApi;
+using System.Linq;
+
 namespace Dal
 {
     internal class DalOrderItem :IOrderItem
@@ -29,13 +31,15 @@ namespace Dal
                 return tempOrderItemId;
             }
         }
-        public IEnumerable<OrderItem> GetAll()
+        public OrderItem ReadByFunc(Func<OrderItem, bool> func)
         {
-            List<OrderItem> tempOrderItemArray = new List<OrderItem> { };
-            
-            for (int i = 0; i < DataSource._orderItems.Count; i++)
-                tempOrderItemArray.Add(DataSource._orderItems[i]);
-            return tempOrderItemArray;
+            return DataSource._orderItems.Where<OrderItem>(func).FirstOrDefault();
+           // return DataSource._orderItems.Where<OrderItem>(func).;
+            //return DataSource._orderItems.Where<OrderItem>(func).;
+        }
+        public IEnumerable<OrderItem> GetAll(Func<OrderItem, bool>? func = null)
+        {
+            return (func == null)? DataSource._orderItems:DataSource._orderItems.Where<OrderItem>(func);
         }
         public DO.OrderItem ReadByOrderitemId(int orderId,int productId)
         {

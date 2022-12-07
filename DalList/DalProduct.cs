@@ -1,6 +1,8 @@
 ﻿
 using DalApi;
 using DO;
+using System.Linq;
+
 namespace Dal
 {
     public class DalProduct:IProduct
@@ -19,18 +21,9 @@ namespace Dal
                 return newPrudoctId;
             }
         }
-        public IEnumerable<Product> GetAll()
+        public IEnumerable<Product> GetAll(Func<Product, bool>? func = null)
         {
-            List<Product> tempProducts = new List<Product>();
-            //DO.Product[] tempProducts = new DO.Product[DataSource._products.Count];
-            for (int i = 0; i < DataSource._products.Count; i++)
-            {
-                if (DataSource._products[i].ID == 0)
-                    i= DataSource._products.Count;
-                else
-                tempProducts.Add(DataSource._products[i]);
-            }
-            return tempProducts;
+            return (func == null) ? DataSource._products : DataSource._products.Where<Product>(func);
         }
         public DO.Product Read(int id)
         {
@@ -38,6 +31,10 @@ namespace Dal
                 if (DataSource._products[i].ID == id)
                     return DataSource._products[i];
             throw new ObjectNotFoundException();
+        }
+        public Product ReadByFunc(Func<Product, bool> func)
+        {
+            return DataSource._products.Where<Product>(func).FirstOrDefault();
         }
         public void Update(DO.Product item)
         {

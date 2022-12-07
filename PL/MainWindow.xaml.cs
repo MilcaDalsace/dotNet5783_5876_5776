@@ -1,4 +1,5 @@
 ﻿using BLApi;
+using PL.Order;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,11 @@ namespace PL
         private void BtnProduct_Click(object sender, RoutedEventArgs e)
         {
             new ProductListWindow(bl).Show();
+        }
+
+        private void BtnOrder_Click(object sender, RoutedEventArgs e)
+        {
+            new OrderListWindow(bl).Show();
         }
     }
 }

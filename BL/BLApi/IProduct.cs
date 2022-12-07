@@ -12,7 +12,7 @@ namespace BLApi
     /// </summary>
     public interface IProduct
     {
-        public IEnumerable<ProductForList> GetProductList();
+        public IEnumerable<ProductForList> GetProductList(Func<DO.Product, bool>? func = null);
         public IEnumerable<ProductItem> GetCatalog();
         public Product GetProductDetails(int idProduct);
         public void AddProduct(Product ProductToAdd);

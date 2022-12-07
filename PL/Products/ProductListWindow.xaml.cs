@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BL;
+using BlImplementation;
+using BO;
 
 namespace PL
 {
@@ -21,19 +23,29 @@ namespace PL
     /// </summary>
     public partial class ProductListWindow : Window
     {
+        //blapi.ibl bl = new BlImplementation.Bl;
+        private IBl tempBl;
         public ProductListWindow(IBl bl)
         {
-
             InitializeComponent();
+            tempBl = bl;
             AttributeSelector.ItemsSource = Enum.GetValues(typeof(BO.Categories));
-            //AttributeSelector.Items.Add('1');
+            //AttributeSelector.Items.Add("All product");
             ProductsListview.ItemsSource = bl.Product.GetProductList();
             //ProductsListview.ItemsSource.ItemCount = bl.Product.GetProductList().Count;
         }
+        //static public bool GetBy(ProductForList p,BO.Categories curCat) =>p.Category==curCat;
 
         private void AttributeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //ProductsListview.ItemsSource = tempBl.Product.GetProductList((item=>item.Category == (DO.Categories)AttributeSelector.SelectedItem));
+            bool GetBy(DO.Product p) => p.Category == (DO.Categories)AttributeSelector.SelectedItem;
+            ProductsListview.ItemsSource = tempBl.Product.GetProductList(GetBy);
+        }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            new ProductWindow(tempBl);
         }
     }
 }

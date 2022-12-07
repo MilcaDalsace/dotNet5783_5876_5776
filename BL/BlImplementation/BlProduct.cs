@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BLApi;
+using BO;
 using DalApi;
 
 namespace BlImplementation
@@ -15,11 +16,10 @@ namespace BlImplementation
         /// <summary>
         /// A function that returns a list of products
         /// </summary>
-        public IEnumerable<BO.ProductForList> GetProductList()
+        public IEnumerable<BO.ProductForList> GetProductList(Func<DO.Product, bool>? func = null)
         {
-            IEnumerable<DO.Product> ListOfProduct = CDal.product.GetAll();
+            IEnumerable<DO.Product> ListOfProduct = CDal.product.GetAll(func);
             List<BO.ProductForList> ProductListToReturn = new List<BO.ProductForList>();
-            //IEnumerable<BO.ProductForList> ProductListToReturn = new List<BO.ProductForList>();
             foreach (DO.Product Product in ListOfProduct)
             {
                 BO.ProductForList productForList = new BO.ProductForList()

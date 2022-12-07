@@ -11,17 +11,20 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BL;
+using BLApi;
 
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for Cart.xaml
+    /// Interaction logic for Product.xaml
     /// </summary>
-    public partial class Cart : Window
+    public partial class ProductWindow : Window
     {
-        public Cart()
+        public ProductWindow(IBl bl)
         {
             InitializeComponent();
         }
+
     }
 }

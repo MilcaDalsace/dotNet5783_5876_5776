@@ -58,7 +58,7 @@ static internal class DataSource
             ( DO.Categories.babygrows,"babygrow Ralph",60),
             ( DO.Categories.shirts, "shirt Ralph",90),
             ( DO.Categories.skirts, "skirt Ralph",50),
-            ( DO.Categories.pants,"pant Ralph",40)
+            ( DO.Categories.dresses,"dresses Ralph",40)
                 };
         List< (int, int)> numOfItemPerOrder =
                new List<(int, int)> {

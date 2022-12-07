@@ -1,6 +1,8 @@
 ﻿using DO;
 using static Dal.DataSource;
 using DalApi;
+using System.Linq;
+
 namespace Dal;
 
 internal class DalOrders:IOrder
@@ -17,23 +19,15 @@ internal class DalOrders:IOrder
             return newOrderId;
         }
     }
-    public IEnumerable<Order> GetAll()
+    public IEnumerable<Order> GetAll(Func<Order, bool>? func = null)
     {
-        for (int i = 0; i < DataSource._orderItems.Count; i++)
-        {
-            Console.WriteLine(DataSource._orderItems[i]);
-            
-        }
-        
-        List<Order> tempOrderArray = new List<Order>();
-       // DO.Order[] tempOrderArray = new DO.Order[DataSource._orders.Count];
-        for (int i = 0; i < DataSource._orders.Count; i++)
-        {
-            tempOrderArray.Add( DataSource._orders[i]);
-        }
-        return tempOrderArray;
+        return (func == null) ? DataSource._orders : DataSource._orders.Where<Order>(func);
     }
-  public Order Read(int id)
+    public Order ReadByFunc(Func<Order, bool> func)
+    {
+        return DataSource._orders.Where<Order>(func).FirstOrDefault();
+    }
+    public Order Read(int id)
     {
         for (int i = 0; i < DataSource._orders.Count; i++)
             if (DataSource._orders[i].ID == id)
