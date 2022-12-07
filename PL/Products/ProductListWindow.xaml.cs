@@ -43,9 +43,9 @@ namespace PL
             ProductsListview.ItemsSource = tempBl.Product.GetProductList(GetBy);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void AddProductBtn_Click(object sender, RoutedEventArgs e)
         {
-            new ProductWindow(tempBl);
+            new ProductWindow(tempBl).Show();
         }
     }
 }

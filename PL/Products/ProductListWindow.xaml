@@ -29,6 +29,6 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Add product" HorizontalAlignment="Left" Margin="97,63,0,0" Grid.Row="2" VerticalAlignment="Top" Click="Button_Click"/>
+        <Button x:Name="AddProductBtn" Content="Add product" HorizontalAlignment="Left" Margin="97,63,0,0" Grid.Row="2" VerticalAlignment="Top" Click="AddProductBtn_Click"/>
     </Grid>
 </Window>
