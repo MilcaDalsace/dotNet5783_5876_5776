@@ -47,5 +47,6 @@ namespace PL
         {
             new ProductWindow(tempBl).Show();
         }
+
     }
 }

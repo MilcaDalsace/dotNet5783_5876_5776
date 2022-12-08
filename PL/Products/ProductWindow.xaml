@@ -7,25 +7,18 @@
         mc:Ignorable="d"
         Title="Product" Height="450" Width="800">
     <Grid Name="MainGrid">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50*"/>
-            <RowDefinition Height="50*"/>
-            <RowDefinition Height="50*"/>
-        </Grid.RowDefinitions>
-        <ListView x:Name="ProductsListview" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" Visibility="Hidden">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <Grid x:Name="SubGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions >
-        </Grid>
+
+
+        <Label x:Name="prodNameLbl" Content="enter product name" HorizontalAlignment="Left" Margin="8,70,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.41,-1.78"/>
+
+        <Label x:Name="prodPriceLbl" Content="enter product price" HorizontalAlignment="Left" Margin="8,70,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="proAmountLbl" Content="enter product amount" HorizontalAlignment="Left" Margin="0,161,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="prodCategoryLbl" Content="enter product Category" HorizontalAlignment="Left" Margin="8,70,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.41,-1.78"/>
+
+        <TextBox x:Name="ProNameTxtBox" HorizontalAlignment="Left" Margin="8,47,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="ProPriceTxtBox" HorizontalAlignment="Left" Margin="10,138,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="ProAmountTxtBox" HorizontalAlignment="Left" Margin="4,217,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="ProAmountTxtBox_TextChanged"/>
+        <ComboBox HorizontalAlignment="Left" Margin="510,312,0,0" VerticalAlignment="Top" Width="120"/>
+
     </Grid>
 </Window>

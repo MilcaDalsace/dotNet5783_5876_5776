@@ -21,9 +21,14 @@ namespace PL
     /// </summary>
     public partial class ProductWindow : Window
     {
-        public ProductWindow(IBl bl)
+        public ProductWindow(IBl bl,string str,int id)
         {
             InitializeComponent();
+            if (str == "update")
+            {
+
+            }
+            
         }
 
     }
