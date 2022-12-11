@@ -45,7 +45,7 @@ namespace PL
 
         private void AddProductBtn_Click(object sender, RoutedEventArgs e)
         {
-            new ProductWindow(tempBl).Show();
+            new ProductWindow(tempBl,null).Show();
         }
 
     }

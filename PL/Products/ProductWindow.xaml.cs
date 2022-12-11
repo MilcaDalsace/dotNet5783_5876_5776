@@ -21,15 +21,37 @@ namespace PL
     /// </summary>
     public partial class ProductWindow : Window
     {
-        public ProductWindow(IBl bl,string str,int id)
+        private IBl tempBl;
+        private BO.Product tempProduct;
+        int? tempId;
+        public ProductWindow(IBl bl,int? id)
         {
             InitializeComponent();
-            if (str == "update")
-            {
-
-            }
-            
+            tempBl = bl;
+            proCategoryCB.ItemsSource = Enum.GetValues(typeof(BO.Categories));
+            tempProduct = new BO.Product();
+            tempId = id;
         }
 
+
+        private void submitBtn_Click(object sender, RoutedEventArgs e)
+        {
+            tempProduct.Name = Convert.ToString(proNameTxtB.GetValue);
+            float.TryParse(Convert.ToString(proPriceTxtB.GetValue), out float result);
+            tempProduct.Price = (float)(DO.Categories)result;
+            tempProduct.Category = (BO.Categories)Convert.ToInt32(proCategoryCB.SelectedIndex);
+            tempProduct.InStock = Convert.ToInt32(proAmountTxtB.GetValue);
+            //לזרוק שגיאה אם לא קיבל ערך
+            if (tempId==null)
+            {
+                tempBl.Product.AddProduct(tempProduct);
+            }
+            else
+            {
+                tempBl.Product.UpdateProduct(tempProduct);
+            }
+        }
+
+       
     }
 }
