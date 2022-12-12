@@ -32,9 +32,9 @@ namespace Dal
                     return DataSource._products[i];
             throw new ObjectNotFoundException();
         }
-        public Product ReadByFunc(Func<Product, bool> func)
+        public Product ReadByFunc(Predicate<Product> func)
         {
-            return DataSource._products.Where<Product>(func).FirstOrDefault();
+            return DataSource._products.Find(func);
         }
         public void Update(DO.Product item)
         {

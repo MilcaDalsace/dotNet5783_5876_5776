@@ -24,7 +24,7 @@ namespace BlImplementation
             {
                 BO.ProductForList productForList = new BO.ProductForList()
                 {
-                    ID = 0,
+                    ID = Product.ID,
                     ProductName = Product.Name,
                     Price = Product.Price,
                     Category = (BO.Categories)Product.Category

@@ -15,10 +15,10 @@
         <Label x:Name="proAmountLbl" Content="enter product amount:" HorizontalAlignment="Left" Margin="10,186,0,0" VerticalAlignment="Top"/>
         <Label x:Name="proCategoryLbl" Content="enter product Category:" HorizontalAlignment="Left" Margin="10,281,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.41,-1.78"/>
 
-        <TextBox x:Name="proNameTxtB" HorizontalAlignment="Left" Margin="10,52,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="proPriceTxtB" HorizontalAlignment="Left" Margin="10,138,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" />
-        <TextBox x:Name="proAmountTxtB" HorizontalAlignment="Left" Margin="10,217,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" />
-        <ComboBox x:Name="proCategoryCB" HorizontalAlignment="Left" Margin="10,312,0,0" VerticalAlignment="Top" Width="120" />
+        <TextBox x:Name="proNameTxtB" HorizontalAlignment="Left" Margin="10,52,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="proNameTxtB_TextChanged"/>
+        <TextBox x:Name="proPriceTxtB" HorizontalAlignment="Left" Margin="10,138,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="proPriceTxtB_TextChanged" />
+        <TextBox x:Name="proAmountTxtB" HorizontalAlignment="Left" Margin="10,217,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="proAmountTxtB_TextChanged" />
+        <ComboBox x:Name="proCategoryCB" HorizontalAlignment="Left" Margin="10,312,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="proCategoryCB_SelectionChanged" />
         <Button x:Name="submitBtn" Content="submit" HorizontalAlignment="Left" Height="19" Margin="16,368,0,0" VerticalAlignment="Top" Width="114" Click="submitBtn_Click"/>
 
     </Grid>

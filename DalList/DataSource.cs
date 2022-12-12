@@ -178,16 +178,16 @@ static internal class DataSource
             tempOrderItem.ID = Config.OrderItemId;
             int tempRand= r.Next(0, 40);//20
             tempOrderItem.OrderId = tempRand;
-            if (numOfItemPerOrder[tempRand].Item2 < 4)//i
-            {
+            //if (numOfItemPerOrder[tempRand].Item2 < 4)//i
+            //{
                 (int, int) TempNumOfItemPerOrder = numOfItemPerOrder[tempRand];//i
                 TempNumOfItemPerOrder.Item2++;
                 numOfItemPerOrder[tempRand] = TempNumOfItemPerOrder;
-            }
-            else
-            {
-                throw new LimitTo4Items();//
-            }
+            //}
+            //else
+            //{
+            //    throw new LimitTo4Items();//
+            //}
             tempRand = r.Next(0, 10);
             tempOrderItem.ProductId = _products[tempRand].ID;
             tempOrderItem.Price = _products[tempRand].Price;

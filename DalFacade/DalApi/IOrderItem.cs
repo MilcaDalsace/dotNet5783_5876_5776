@@ -9,7 +9,7 @@ namespace DalApi
 {
     public interface IOrderItem:ICrud<OrderItem>
     {
-        public OrderItem ReadByOrderitemId(int orderId, int productId);
-        public IEnumerable<OrderItem> ReadByOrderId(int orderId);
+        //public OrderItem ReadByOrderitemId(int orderId, int productId);
+     //   public IEnumerable<OrderItem> ReadByOrderId(int orderId);
     }
 }

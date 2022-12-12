@@ -22,7 +22,7 @@
             <ComboBox x:Name="AttributeSelector" Grid.Column="1" Margin="40,56,40,0" VerticalAlignment="Top" SelectionChanged="AttributeSelector_SelectionChanged"/>
             <Label Content="Label"  HorizontalAlignment="Left" Grid.Column="0" Margin="448,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.056,2.452"/>
         </Grid>
-        <ListView x:Name="ProductsListview" Grid.Row="1" d:ItemsSource="{d:SampleData  ItemCount=100}">
+        <ListView x:Name="ProductsListview" d:ItemsSource="{d:SampleData  ItemCount=100}" MouseDoubleClick="ProductsListview_MouseDoubleClick" HorizontalAlignment="Left" Margin="0,208,0,0" Grid.RowSpan="2" Width="800" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
@@ -30,6 +30,6 @@
             </ListView.View>
         </ListView>
         <Button x:Name="AddProductBtn" Content="Add new Product" Grid.Row="2" HorizontalAlignment="Right" Margin="5" Padding="5" Click="AddProductBtn_Click"/>
- 
+
     </Grid>
 </Window>

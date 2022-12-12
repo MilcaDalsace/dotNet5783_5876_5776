@@ -23,9 +23,9 @@ internal class DalOrders:IOrder
     {
         return (func == null) ? DataSource._orders : DataSource._orders.Where<Order>(func);
     }
-    public Order ReadByFunc(Func<Order, bool> func)
+    public Order ReadByFunc(Predicate<Order> func)
     {
-        return DataSource._orders.Where<Order>(func).FirstOrDefault();
+        return DataSource._orders.Find(func);
     }
     public Order Read(int id)
     {

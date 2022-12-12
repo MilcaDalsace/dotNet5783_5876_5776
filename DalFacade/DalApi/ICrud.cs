@@ -14,7 +14,7 @@ namespace DalApi
         //public  GetAll();
         public IEnumerable<T> GetAll(Func<T, bool>? func=null);
         public T Read(int id);
-        public T ReadByFunc(Func<T, bool> func);
+        public T ReadByFunc(Predicate<T> func);
 
         public void Delete(int id);
         public void Update(T item);

@@ -45,8 +45,13 @@ namespace PL
 
         private void AddProductBtn_Click(object sender, RoutedEventArgs e)
         {
-            new ProductWindow(tempBl,null).Show();
+            new ProductWindow(tempBl,0).Show();
         }
 
+        private void ProductsListview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            BO.ProductForList product = (BO.ProductForList)(sender as ListView).SelectedItem;
+            new ProductWindow(tempBl, product.ID).Show(); 
+        }
     }
 }

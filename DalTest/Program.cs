@@ -317,7 +317,8 @@ break;
                     break;
                 case 6:
                     Console.WriteLine("enter order id");
-                    IEnumerable<DO.OrderItem> orderToShow= dalList.orderItem.ReadByOrderId(int.Parse(Console.ReadLine()));
+                    int id1 = int.Parse(Console.ReadLine());
+                    IEnumerable<DO.OrderItem> orderToShow= dalList.orderItem.GetAll(item=>item.ID==id1);
                     if (orderToShow == null)
                         Console.WriteLine("order not found or your order is empty");
                     foreach (DO.OrderItem item in orderToShow) { 

@@ -31,23 +31,21 @@ namespace Dal
                 return tempOrderItemId;
             }
         }
-        public OrderItem ReadByFunc(Func<OrderItem, bool> func)
+        public OrderItem ReadByFunc(Predicate<OrderItem> func)
         {
-            return DataSource._orderItems.Where<OrderItem>(func).FirstOrDefault();
-           // return DataSource._orderItems.Where<OrderItem>(func).;
-            //return DataSource._orderItems.Where<OrderItem>(func).;
+            return DataSource._orderItems.Find(func);
         }
         public IEnumerable<OrderItem> GetAll(Func<OrderItem, bool>? func = null)
         {
             return (func == null)? DataSource._orderItems:DataSource._orderItems.Where<OrderItem>(func);
         }
-        public DO.OrderItem ReadByOrderitemId(int orderId,int productId)
-        {
-            for (int i = 0; i < DataSource._orderItems.Count; i++)
-                if (DataSource._orderItems[i].ProductId == productId&& DataSource._orderItems[i].OrderId == orderId)
-                    return DataSource._orderItems[i];
-            throw new ObjectNotFoundException();
-        }
+        //public DO.OrderItem ReadByOrderitemId(int orderId,int productId)
+        //{
+        //    for (int i = 0; i < DataSource._orderItems.Count; i++)
+        //        if (DataSource._orderItems[i].ProductId == productId&& DataSource._orderItems[i].OrderId == orderId)
+        //            return DataSource._orderItems[i];
+        //    throw new ObjectNotFoundException();
+        //}
         //2 פונקציות שהוספתי!!
        public  DO.OrderItem Read(int id)
         {
@@ -56,18 +54,18 @@ namespace Dal
                     return DataSource._orderItems[i];
             throw new ObjectNotFoundException();
         }
-        public IEnumerable<OrderItem> ReadByOrderId(int orderId)
-        {
-            int placeInNewArray = 0;
-            List<OrderItem> arrayOfOrderItem = new List<OrderItem> { };
-            //DO.OrderItem[] arrayOfOrderItem = new DO.OrderItem[DataSource._orderItems.Count];
-            for (int i = 0; i < DataSource._orderItems.Count; i++)
-                if (DataSource._orderItems[i].OrderId == orderId)
-                    arrayOfOrderItem.Add(DataSource._orderItems[i]) ;
-            //if (arrayOfOrderItem[0].ID == 0)
-            //    return null;
-            return arrayOfOrderItem;
-        }
+       // public IEnumerable<OrderItem> ReadByOrderId(int orderId)
+        //{
+        //    int placeInNewArray = 0;
+        //    List<OrderItem> arrayOfOrderItem = new List<OrderItem> { };
+        //    //DO.OrderItem[] arrayOfOrderItem = new DO.OrderItem[DataSource._orderItems.Count];
+        //    for (int i = 0; i < DataSource._orderItems.Count; i++)
+        //        if (DataSource._orderItems[i].OrderId == orderId)
+        //            arrayOfOrderItem.Add(DataSource._orderItems[i]) ;
+        //    //if (arrayOfOrderItem[0].ID == 0)
+        //    //    return null;
+        //    return arrayOfOrderItem;
+        //}
         public void Update(DO.OrderItem item)
         {
             for (int i = 0; i < DataSource._orderItems.Count; i++)

@@ -25,7 +25,7 @@ namespace BlImplementation
             {
                 foreach (DO.Order order in list)
                 {
-                    IEnumerable<DO.OrderItem> orderItems = CDal.orderItem.ReadByOrderId(order.ID);
+                    IEnumerable<DO.OrderItem> orderItems = CDal.orderItem.GetAll(item=>item.OrderId== order.ID);
                     foreach (DO.OrderItem item in orderItems)
                         sum += item.Price * item.Amount;
                    
@@ -166,7 +166,7 @@ namespace BlImplementation
             switch (action)
             {
                 case 1:
-                    DO.OrderItem baseItem = CDal.orderItem.ReadByOrderitemId(idOrder, idProduct);
+                    DO.OrderItem baseItem = CDal.orderItem.ReadByFunc(item=>item.OrderId== idOrder&&item.ProductId==idProduct);
                     CDal.orderItem.Delete(baseItem.ID);
                     break;
                 case 2:
@@ -181,7 +181,7 @@ namespace BlImplementation
                     break;
                 case 3:
                     float price = CDal.product.Read(idProduct).Price;
-                    DO.OrderItem baseItemForUpdate = CDal.orderItem.ReadByOrderitemId(idOrder, idProduct);
+                    DO.OrderItem baseItemForUpdate = CDal.orderItem.ReadByFunc(item => item.OrderId == idOrder && item.ProductId == idProduct);
                     baseItemForUpdate.Amount = CurAmount;
                     baseItemForUpdate.Price = price * CurAmount;
                     CDal.orderItem.Update(baseItemForUpdate);

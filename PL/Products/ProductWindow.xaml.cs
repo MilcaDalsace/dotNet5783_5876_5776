@@ -24,34 +24,66 @@ namespace PL
         private IBl tempBl;
         private BO.Product tempProduct;
         int? tempId;
-        public ProductWindow(IBl bl,int? id)
+        public ProductWindow(IBl bl,int id)
         {
             InitializeComponent();
             tempBl = bl;
             proCategoryCB.ItemsSource = Enum.GetValues(typeof(BO.Categories));
             tempProduct = new BO.Product();
             tempId = id;
+            if (id != 0)
+            {
+                tempProduct= tempBl.Product.GetProductDetails(id); ;
+                proNameTxtB.Text= tempProduct.Name;
+                proAmountTxtB.Text = tempProduct.InStock.ToString();
+                proPriceTxtB.Text = tempProduct.Price.ToString();
+                proCategoryCB.Text = tempProduct.Category.ToString();
+            }
         }
 
 
         private void submitBtn_Click(object sender, RoutedEventArgs e)
         {
-            tempProduct.Name = Convert.ToString(proNameTxtB.GetValue);
-            float.TryParse(Convert.ToString(proPriceTxtB.GetValue), out float result);
-            tempProduct.Price = (float)(DO.Categories)result;
-            tempProduct.Category = (BO.Categories)Convert.ToInt32(proCategoryCB.SelectedIndex);
-            tempProduct.InStock = Convert.ToInt32(proAmountTxtB.GetValue);
-            //לזרוק שגיאה אם לא קיבל ערך
-            if (tempId==null)
+            try { 
+            if (tempId==0)
             {
                 tempBl.Product.AddProduct(tempProduct);
+                Close();
             }
             else
-            {
+            { 
                 tempBl.Product.UpdateProduct(tempProduct);
+                Close();
+            }}
+            catch(BO.TheArrayIsFullException)
+            {
+                MessageBox.Show("cant add product-the array is full");
+            }
+            catch (BO.OneFieldsInCorrect)
+            {
+                MessageBox.Show("one fields incorrect");
             }
         }
 
-       
+        private void proNameTxtB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            tempProduct.Name=proNameTxtB.Text;
+        }
+
+        private void proPriceTxtB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            //tofloat how to do
+            tempProduct.Price = Convert.ToInt32(proPriceTxtB.Text);
+        }
+
+        private void proAmountTxtB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            tempProduct.InStock =Convert.ToInt32(proAmountTxtB.Text);
+        }
+
+        private void proCategoryCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            tempProduct.Category =(BO.Categories)( proCategoryCB.SelectedItem);
+        }
     }
 }
