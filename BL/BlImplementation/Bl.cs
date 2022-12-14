@@ -8,8 +8,9 @@ namespace BlImplementation
 {
     public class Bl:IBl
     {
-        public IOrder Order =>new BlOrder();
-        public ICart Cart=>new BlCart();
-        public IProduct Product=>new BlProduct();
+        //לא ידענו אם לשנות לפי הוראוות שלב 4 4 עמוד 8
+        public IOrder Order => new BlOrder();
+        public ICart Cart=> new BlCart();
+        public IProduct Product=> new BlProduct();
     }
 }

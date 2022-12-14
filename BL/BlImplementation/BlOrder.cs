@@ -11,7 +11,7 @@ namespace BlImplementation
 {
     internal class BlOrder : BLApi. IOrder
     {
-        IDal CDal = new Dal.DalList();
+        IDal CDal = DalApi.Factory.Get();
         /// <summary>
         /// A function that returns a list of orders
         /// I don't get anything

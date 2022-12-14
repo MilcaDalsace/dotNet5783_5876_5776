@@ -24,6 +24,7 @@ namespace PL
         private IBl tempBl;
         private BO.Product tempProduct;
         int? tempId;
+        int debily = 0;
         public ProductWindow(IBl bl,int id)
         {
             InitializeComponent();
@@ -48,6 +49,7 @@ namespace PL
             if (tempId==0)
             {
                 tempBl.Product.AddProduct(tempProduct);
+                debily++;
                 Close();
             }
             else

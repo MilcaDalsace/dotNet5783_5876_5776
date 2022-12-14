@@ -12,11 +12,28 @@ namespace BlImplementation
     internal class BlProduct : BLApi.IProduct
     {
 
-        IDal CDal = new Dal.DalList();
+        IDal CDal = DalApi.Factory.Get();
         /// <summary>
         /// A function that returns a list of products
         /// </summary>
         public IEnumerable<BO.ProductForList> GetProductList(Func<DO.Product, bool>? func = null)
+        {
+            IEnumerable<DO.Product> ListOfProduct = CDal.product.GetAll(func);
+            List<BO.ProductForList> ProductListToReturn = new List<BO.ProductForList>();
+            foreach (DO.Product Product in ListOfProduct)
+            {
+                BO.ProductForList productForList = new BO.ProductForList()
+                {
+                    ID = Product.ID,
+                    ProductName = Product.Name,
+                    Price = Product.Price,
+                    Category = (BO.Categories)Product.Category
+                };
+                ProductListToReturn.Add(productForList);
+            }
+            return ProductListToReturn;
+        }
+        public IEnumerable<BO.ProductForList> GetProductListCustomer(Func<DO.Product, bool>? func = null)
         {
             IEnumerable<DO.Product> ListOfProduct = CDal.product.GetAll(func);
             List<BO.ProductForList> ProductListToReturn = new List<BO.ProductForList>();

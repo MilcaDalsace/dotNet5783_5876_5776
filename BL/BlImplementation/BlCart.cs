@@ -11,7 +11,7 @@ namespace BlImplementation
 {
     internal class BlCart : ICart
     {
-        IDal CDal = new Dal.DalList();
+        IDal CDal = DalApi.Factory.Get();
         /// <summary>
         /// A function that adds an item to the cart
         ///provided that: the item exists

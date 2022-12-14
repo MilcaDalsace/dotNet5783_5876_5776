@@ -6,7 +6,10 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="MainWindow" Height="640" Width="800">
-    <Grid Name="MainGrid">
+    <Grid Name="MainGrid" Opacity="0.995">
+        <Grid.Background>
+            <ImageBrush ImageSource="/background3.jpg" Stretch="Uniform"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="50*"/>
             <RowDefinition Height="50*"/>
@@ -19,10 +22,10 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-            <Button x:Name="BtnAdmin"  Grid.Column="0" Content="Admin" HorizontalAlignment="Center" Margin="25,0,0,0" VerticalAlignment="Center" Height="60" Width="80"/>
-            <Button x:Name="BtnOrder" Grid.Column="1" Content="Order" HorizontalAlignment="Center" Margin="25,0,0,0" VerticalAlignment="Center" Height="60" Width="80" Click="BtnOrder_Click"/>
-            <Button x:Name="BtnProduct" Grid.Column="2" Content="Product" HorizontalAlignment="Center" Margin="55,0,0,0" VerticalAlignment="Center" Height="60" Width="80" Click="BtnProduct_Click"/>
-            <Button x:Name="BtnCart" Grid.Column="3" Content="Cart" HorizontalAlignment="Center" Margin="52,0,0,0" VerticalAlignment="Center" Height="60" Width="80"/>
+            <Button x:Name="BtnAdmin"  Grid.Column="0" Content="Admin" HorizontalAlignment="Center" Margin="25,0,0,0" VerticalAlignment="Top" Height="60" Width="80" Click="BtnAdmin_Click" RenderTransformOrigin="0.383,-0.04"/>
+            <Button x:Name="BtnOrder" Grid.Column="1" Content="Order" HorizontalAlignment="Center" Margin="25,0,0,0" VerticalAlignment="Top" Height="60" Width="80" Click="BtnOrder_Click"/>
+            <Button x:Name="BtnProduct" Grid.Column="2" Content="Product" HorizontalAlignment="Center" Margin="55,0,0,0" VerticalAlignment="Top" Height="60" Width="80" Click="BtnProduct_Click"/>
+            <Button x:Name="BtnCart" Grid.Column="3" Content="Cart" HorizontalAlignment="Center" Margin="52,0,0,0" VerticalAlignment="Top" Height="60" Width="80"/>
         </Grid>
     </Grid>
 </Window>

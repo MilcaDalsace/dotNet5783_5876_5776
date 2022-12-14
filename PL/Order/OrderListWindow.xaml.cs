@@ -25,14 +25,18 @@ namespace PL.Order
         {
             InitializeComponent();
             tempBl = bl;
-            //AttributeSelector.ItemsSource = Enum.GetValues(typeof(BO.Categories));
-            //AttributeSelector.Items.Add("All products");
-            //ProductsListview.ItemsSource = bl.Product.GetProductList();
+            OrderListview.ItemsSource = tempBl.Order.GetListOrder();
         }
 
         private void AttributeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             
+        }
+
+        private void OrderListview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            BO.OrderForList order = (BO.OrderForList)(sender as ListView).SelectedItem;
+           new OrderWindow(tempBl,order.ID).Show();
         }
     }
 }

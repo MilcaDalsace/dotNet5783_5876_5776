@@ -7,8 +7,13 @@ using System.Threading.Tasks;
 using DalApi;
 namespace Dal
 {
-  sealed  public class DalList:IDal
+  sealed  internal class DalList:IDal
     {
+        DalList()
+        {
+                
+        }
+        public static IDal Instance { get; } = new DalList();
         public IOrder Order => new DalOrders();
         public IOrderItem orderItem => new DalOrderItem();
         public IProduct product=>new DalProduct();

@@ -1,4 +1,5 @@
 ﻿using BLApi;
+using PL.Admin;
 using PL.Order;
 using System;
 using System.Collections.Generic;
@@ -27,15 +28,20 @@ namespace PL
             InitializeComponent();
         }
 
-        IBl bl = new BlImplementation.Bl();
+        IBl bl =  BLApi.Factory.Get();
         private void BtnProduct_Click(object sender, RoutedEventArgs e)
         {
-            new ProductListWindow(bl).Show();
+            new ProductListWindow().Show();
         }
 
         private void BtnOrder_Click(object sender, RoutedEventArgs e)
         {
             new OrderListWindow(bl).Show();
+        }
+
+        private void BtnAdmin_Click(object sender, RoutedEventArgs e)
+        {
+            new AdminWindow(bl).Show();
         }
     }
 }
