@@ -50,5 +50,18 @@ namespace PL.Order
             }
         }
 
+        private void ordUpdateDeliveryDateBtn_Click(object sender, RoutedEventArgs e)
+        {
+            //האם SENT וSUPPLY נמצאים בפונקציות הנכונות?
+            //עושה בעיות בפונקציה הפנימית שנשלחה
+            if (order.DeliveryDate >= DateTime.Now)
+                tempBl.Order.UpdateOrderSent(tempId);
+        }
+
+        private void ordUpdateShipDateBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (order.ShipDate >= DateTime.Now)
+                tempBl.Order.UpdateOrderSupply(tempId);
+        }
     }
 }

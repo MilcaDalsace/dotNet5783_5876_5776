@@ -32,8 +32,8 @@
                 </ListView.View>
             </ListView>
         </GroupBox>
-        <Button x:Name="ordUpdateShipDateBtn" Content="update" HorizontalAlignment="Left" Height="19" Margin="202,353,0,0" VerticalAlignment="Top" Width="114"/>
-        <Button x:Name="ordUpdateDeliveryDateBtn" Content="update" HorizontalAlignment="Left" Height="19" Margin="215,329,0,0" VerticalAlignment="Top" Width="114"/>
+        <Button x:Name="ordUpdateShipDateBtn" Content="update" HorizontalAlignment="Left" Height="19" Margin="202,353,0,0" VerticalAlignment="Top" Width="114" Click="ordUpdateShipDateBtn_Click"/>
+        <Button x:Name="ordUpdateDeliveryDateBtn" Content="update" HorizontalAlignment="Left" Height="19" Margin="215,329,0,0" VerticalAlignment="Top" Width="114" Click="ordUpdateDeliveryDateBtn_Click"/>
 
     </Grid>
 </Window>
