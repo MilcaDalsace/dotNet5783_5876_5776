@@ -25,6 +25,7 @@ namespace PL
         private BO.Product tempProduct;
         int? tempId;
         int debily = 0;
+       // BO.Cart userCart = new BO.Cart();
         public ProductWindow(IBl bl,int id,string status)
         {
             InitializeComponent();
@@ -47,7 +48,10 @@ namespace PL
                 proAmountTxtB.IsEnabled = false;
                 proPriceTxtB.IsEnabled = false;
                 proCategoryCB.IsEnabled = false;
+                submitBtn.Visibility = Visibility.Hidden;
             }
+            else
+                AddProToCartBtn.Visibility= Visibility.Hidden;  
             }
 
 
@@ -94,6 +98,11 @@ namespace PL
         private void proCategoryCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             tempProduct.Category =(BO.Categories)( proCategoryCB.SelectedItem);
+        }
+
+        private void AddProToCartBtn_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

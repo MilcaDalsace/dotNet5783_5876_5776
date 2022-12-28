@@ -20,6 +20,7 @@
         <TextBox x:Name="proAmountTxtB" HorizontalAlignment="Left" Margin="10,217,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="proAmountTxtB_TextChanged" />
         <ComboBox x:Name="proCategoryCB" HorizontalAlignment="Left" Margin="10,312,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="proCategoryCB_SelectionChanged" />
         <Button x:Name="submitBtn" Content="submit" HorizontalAlignment="Left" Height="19" Margin="16,368,0,0" VerticalAlignment="Top" Width="114" Click="submitBtn_Click"/>
+        <Button x:Name="AddProToCartBtn" Content="Add to cart" HorizontalAlignment="Left" Margin="215,378,0,0" VerticalAlignment="Top" Click="AddProToCartBtn_Click"/>
 
     </Grid>
 </Window>

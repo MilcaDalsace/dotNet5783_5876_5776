@@ -43,5 +43,10 @@ namespace PL
         {
             new AdminWindow(bl).Show();
         }
+
+        private void newOrderBtn_Click(object sender, RoutedEventArgs e)
+        {
+            new ProductListWindow("user").Show();
+        }
     }
 }

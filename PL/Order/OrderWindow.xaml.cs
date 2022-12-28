@@ -23,7 +23,7 @@ namespace PL.Order
         private IBl tempBl;
         int tempId;
         private BO.Order? order;
-        public OrderWindow(IBl bl,int id)
+        public OrderWindow(IBl bl,int id,string status)
         {
             InitializeComponent();
             tempBl = bl;
@@ -40,14 +40,25 @@ namespace PL.Order
                 ordDeliveryDateTxtB.Text = order.DeliveryDate.ToString();
                 ordShipDateTxtB.Text = order.ShipDate.ToString();
                 orderItemListLV.ItemsSource=order.OrderItemList;
-
-                ordCustomerNameTxtB.IsEnabled=false;
-                ordCustomerEmailTxtB.IsEnabled = false;
-                ordCustomerAdderssLbl.IsEnabled = false;
-                ordStatusTxtB.IsEnabled = false;
-                ordFinalPriceLblTxtB.IsEnabled = false;
-                ordDeliveryDateTxtB.IsEnabled = false;
-                ordShipDateTxtB.IsEnabled = false;
+                if (status != "admin")
+                {
+                    ordUpdateDeliveryDateBtn.Visibility = Visibility.Hidden;
+                    ordUpdateShipDateBtn.Visibility= Visibility.Hidden;
+                   //saveChangesBtn.Visibility = Visibility.Hidden;
+                    ordCustomerNameTxtB.IsEnabled=false;
+                    ordCustomerEmailTxtB.IsEnabled = false;
+                    ordCustomerAdderssLbl.IsEnabled = false;
+                    ordStatusTxtB.IsEnabled = false;
+                    ordFinalPriceLblTxtB.IsEnabled = false;
+                    ordDeliveryDateTxtB.IsEnabled = false;
+                    ordShipDateTxtB.IsEnabled = false;
+                }
+                else
+                {
+                    ordUpdateDeliveryDateBtn.Visibility = Visibility.Visible;
+                    ordUpdateShipDateBtn.Visibility = Visibility.Visible;
+                }
+                    //saveChangesBtn.Visibility=Visibility.Visible;
             }
         }
 
@@ -87,5 +98,7 @@ namespace PL.Order
                 MessageBox.Show("OrderDidnotsentAlready");
             };
         }
+
+       
     }
 }

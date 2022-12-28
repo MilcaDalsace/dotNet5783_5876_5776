@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="OrderListWindow" Height="640" Width="800">
     <Grid Name="MainGrid">
-        <Grid.RowDefinitions>
+        <!--<Grid.RowDefinitions>
             <RowDefinition Height="50*"/>
             <RowDefinition Height="50*"/>
             <RowDefinition Height="50*"/>
@@ -19,10 +19,10 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-            <ComboBox x:Name="AttributeSelector" Grid.Column="1" Margin="40,56,40,0" VerticalAlignment="Top" SelectionChanged="AttributeSelector_SelectionChanged"/>
             <Label Content="Label"  HorizontalAlignment="Left" Grid.Column="0" Margin="448,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.056,2.452"/>
-        </Grid>
-        <ListView x:Name="OrderListview" Grid.Row="1" d:ItemsSource="{d:SampleData  ItemCount=100}" MouseDoubleClick="OrderListview_MouseDoubleClick">
+        </Grid>-->
+        <ListView x:Name="OrderListview"  d:ItemsSource="{d:SampleData  ItemCount=100}" MouseDoubleClick="OrderListview_MouseDoubleClick">
+            <!--Grid.Row="1"-->
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
