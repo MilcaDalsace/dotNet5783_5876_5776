@@ -1,5 +1,4 @@
 ﻿using BLApi;
-using PL.Admin;
 using PL.Order;
 using System;
 using System.Collections.Generic;
@@ -41,12 +40,40 @@ namespace PL
 
         private void BtnAdmin_Click(object sender, RoutedEventArgs e)
         {
-            new AdminWindow(bl).Show();
+            AdminOrdersBtn.Visibility = Visibility.Visible;
+            AdminProdBtn.Visibility = Visibility.Visible;
+            AdminOrdersBtn.IsEnabled = true;
+            AdminProdBtn.IsEnabled = true;
+            SubGrid.IsEnabled = false;
+            SubGrid.Visibility = Visibility.Hidden;
+
         }
 
         private void newOrderBtn_Click(object sender, RoutedEventArgs e)
         {
             new ProductListWindow("user").Show();
+        }
+        private void AdminOrdersBtn_Click(object sender, RoutedEventArgs e)
+        {
+            new OrderListWindow(bl, "admin").ShowDialog();
+            AdminOrdersBtn.Visibility = Visibility.Hidden;
+            AdminProdBtn.Visibility = Visibility.Hidden;
+            AdminOrdersBtn.IsEnabled = false;
+            AdminProdBtn.IsEnabled = false;
+            SubGrid.IsEnabled = true;
+            SubGrid.Visibility = Visibility.Visible;
+
+        }
+
+        private void AdminProdBtn_Click(object sender, RoutedEventArgs e)
+        {
+            new ProductListWindow("admin").ShowDialog();
+            AdminOrdersBtn.Visibility = Visibility.Hidden;
+            AdminProdBtn.Visibility = Visibility.Hidden;
+            AdminOrdersBtn.IsEnabled = false;
+            AdminProdBtn.IsEnabled = false;
+            SubGrid.IsEnabled = true;
+            SubGrid.Visibility = Visibility.Visible;
         }
     }
 }
