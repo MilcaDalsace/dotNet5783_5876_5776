@@ -25,6 +25,7 @@ namespace PL.Order
         public OrderListWindow(IBl bl,string status)
         {
             InitializeComponent();
+            orderStatus = status;
             tempBl = bl;
             OrderListview.ItemsSource = tempBl.Order.GetListOrder();
         }
