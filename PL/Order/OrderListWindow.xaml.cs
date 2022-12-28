@@ -21,9 +21,11 @@ namespace PL.Order
     public partial class OrderListWindow : Window
     {
         private IBl tempBl;
-        public OrderListWindow(IBl bl)
+        string orderStatus;
+        public OrderListWindow(IBl bl,string status)
         {
             InitializeComponent();
+            orderStatus = status;
             tempBl = bl;
             OrderListview.ItemsSource = tempBl.Order.GetListOrder();
         }
