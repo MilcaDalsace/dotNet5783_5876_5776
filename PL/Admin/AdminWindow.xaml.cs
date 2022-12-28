@@ -31,7 +31,7 @@ namespace PL.Admin
 
         private void AdminOrdersBtn_Click(object sender, RoutedEventArgs e)
         {
-            new OrderListWindow(tempBl).Show();
+            new OrderListWindow(tempBl,"admin").Show();
         }
 
         private void AdminProdBtn_Click(object sender, RoutedEventArgs e)

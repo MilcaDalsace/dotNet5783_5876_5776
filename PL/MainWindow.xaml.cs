@@ -36,7 +36,7 @@ namespace PL
 
         private void BtnOrder_Click(object sender, RoutedEventArgs e)
         {
-            new OrderListWindow(bl).Show();
+            new OrderListWindow(bl,"user").Show();
         }
 
         private void BtnAdmin_Click(object sender, RoutedEventArgs e)
