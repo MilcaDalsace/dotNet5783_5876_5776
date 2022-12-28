@@ -27,9 +27,16 @@
             <Button x:Name="BtnProduct" Grid.Column="2" Content="Product" HorizontalAlignment="Center" VerticalAlignment="Top" Height="60" Width="200" Click="BtnProduct_Click" BorderBrush="White" Opacity="0.5" FontFamily="Comic Sans MS" FontWeight="Bold" FontSize="18"/>
             <Button x:Name="BtnCart" Grid.Column="3" Content="Cart" HorizontalAlignment="Center" VerticalAlignment="Top" Height="60" Width="200" FontSize="18" FontFamily="Comic Sans MS" FontWeight="Bold" BorderBrush="White" Opacity="0.5" RenderTransformOrigin="0.17,0.567"/>
             <Button x:Name="newOrderBtn" Content="New Order" Margin="175,104,145,0" VerticalAlignment="Top" Height="60" Grid.ColumnSpan="2" Click="newOrderBtn_Click"/>
+            <Button x:Name="OrderTrackingBtn" Grid.Column="3" Content="Order Tracking" HorizontalAlignment="Left" Height="45" Margin="24,119,0,0" VerticalAlignment="Top" Width="142" Click="OrderTrackingBtn_Click"/>
         </Grid>
 
         <Button x:Name="AdminOrdersBtn" Grid.Column="1" Content="orders info" IsEnabled="False" Visibility="Hidden" HorizontalAlignment="Left" Height="216" Margin="405,208,0,0" VerticalAlignment="Top" Width="385" Click="AdminOrdersBtn_Click" Grid.RowSpan="3" AutomationProperties.ItemStatus="" />
         <Button x:Name="AdminProdBtn" Grid.Column="1" Content="products info" IsEnabled="False" Visibility="Hidden" HorizontalAlignment="Left" Height="206" Margin="0,10,0,0" VerticalAlignment="Top" Width="385" Click="AdminProdBtn_Click" Grid.RowSpan="2" Grid.Row="1"/>
+
+        <StackPanel x:Name="OrderTrackingSP" Grid.Row="1"  IsEnabled="False">
+            <Label x:Name="OrderTrackingLbl" Content="Enter order Id:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox x:Name="OrderTrackingTB" HorizontalAlignment="Left"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" UndoLimit="47"/>
+            <Button x:Name="CheckOrderIdBtn" Content="Submit" HorizontalAlignment="Left" VerticalAlignment="Top" Click="CheckOrderIdBtn_Click"/>
+        </StackPanel>
     </Grid>
 </Window>

@@ -1,4 +1,5 @@
 ﻿using BLApi;
+using BO;
 using PL.Order;
 using System;
 using System.Collections.Generic;
@@ -74,6 +75,21 @@ namespace PL
             AdminProdBtn.IsEnabled = false;
             SubGrid.IsEnabled = true;
             SubGrid.Visibility = Visibility.Visible;
+        }
+
+        private void OrderTrackingBtn_Click(object sender, RoutedEventArgs e)
+        {
+            OrderTrackingSP.IsEnabled = true;
+            OrderTrackingSP.Visibility = Visibility.Visible;
+        }
+
+        private void CheckOrderIdBtn_Click(object sender, RoutedEventArgs e)
+        {
+            //משהו מוזר במימוש!
+            string a = OrderTrackingSP.ToString();
+            int.TryParse(a, out int OrderId);
+            OrderTracking orderTracking = new OrderTracking();
+            //OrderTrackingLbl.GetValue;
         }
     }
 }
