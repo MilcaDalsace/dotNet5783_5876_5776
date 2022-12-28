@@ -31,7 +31,7 @@ namespace PL
         IBl bl =  BLApi.Factory.Get();
         private void BtnProduct_Click(object sender, RoutedEventArgs e)
         {
-            new ProductListWindow().Show();
+            new ProductListWindow("user").Show();
         }
 
         private void BtnOrder_Click(object sender, RoutedEventArgs e)

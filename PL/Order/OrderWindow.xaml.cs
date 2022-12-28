@@ -39,6 +39,7 @@ namespace PL.Order
                 ordFinalPriceLblTxtB.Text = order.FinalPrice.ToString();
                 ordDeliveryDateTxtB.Text = order.DeliveryDate.ToString();
                 ordShipDateTxtB.Text = order.ShipDate.ToString();
+                orderItemListLV.ItemsSource=order.OrderItemList;
 
                 ordCustomerNameTxtB.IsEnabled=false;
                 ordCustomerEmailTxtB.IsEnabled = false;
@@ -54,14 +55,37 @@ namespace PL.Order
         {
             //האם SENT וSUPPLY נמצאים בפונקציות הנכונות?
             //עושה בעיות בפונקציה הפנימית שנשלחה
-            if (order.DeliveryDate >= DateTime.Now)
-                tempBl.Order.UpdateOrderSent(tempId);
+            try { 
+         
+               BO.Order order= tempBl.Order.UpdateOrderSupply(tempId);
+                ordDeliveryDateTxtB.Text = order.DeliveryDate.ToString();
+           
+             }
+            catch (BO.OrderAlreadyUpdate)
+            {
+                MessageBox.Show("OrderAlreadyUpdate");
+            }
+            catch (BO.OrderDidnotsentAlready)
+            {
+                MessageBox.Show("OrderDidnotsentAlready");
+            };
+
         }
 
         private void ordUpdateShipDateBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (order.ShipDate >= DateTime.Now)
-                tempBl.Order.UpdateOrderSupply(tempId);
+            try { 
+                BO.Order order = tempBl.Order.UpdateOrderSent(tempId);
+                ordShipDateTxtB.Text = order.ShipDate.ToString();
+              }
+            catch (BO.OrderAlreadyUpdate)
+            {
+                MessageBox.Show("OrderAlreadyUpdate");
+            }
+            catch(BO.OrderDidnotsentAlready)
+            {
+                MessageBox.Show("OrderDidnotsentAlready");
+            };
         }
     }
 }

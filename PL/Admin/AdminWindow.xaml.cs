@@ -36,7 +36,7 @@ namespace PL.Admin
 
         private void AdminProdBtn_Click(object sender, RoutedEventArgs e)
         {
-            new ProductListWindow().Show();
+            new ProductListWindow("admin").Show();
         }
     }
 }

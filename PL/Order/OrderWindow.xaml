@@ -18,9 +18,9 @@
         <Label x:Name="orderStatusLbl" Content="order status:" HorizontalAlignment="Left" Margin="15,109,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.41,-1.78"/>
         <Label x:Name="ordFinalPriceLbl" Content="final price:" HorizontalAlignment="Left" Margin="15,299,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.41,-1.78"/>
         <Label x:Name="ordShipDateLbl" Content="ship date:" HorizontalAlignment="Left" Margin="15,349,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.41,-1.78"/>
-        <Label x:Name="ordDeliveryDateLbl" Content="delivery date:" HorizontalAlignment="Left" Margin="15,326,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.41,-1.78"/>
+        <Label x:Name="ordDeliveryDateLbl" Content="delivery date:" HorizontalAlignment="Left" Margin="10,380,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.41,-1.78"/>
         <TextBox x:Name="ordStatusTxtB" HorizontalAlignment="Left" Margin="91,113,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="ordDeliveryDateTxtB" HorizontalAlignment="Left" Margin="90,330,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="ordDeliveryDateTxtB" HorizontalAlignment="Left" Margin="96,384,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="ordFinalPriceLblTxtB" HorizontalAlignment="Left" Margin="81,303,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="ordShipDateTxtB" HorizontalAlignment="Left" Margin="77,353,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <GroupBox x:Name="ordItemListGB" Header="order item list:" Margin="15,138,540,144" HorizontalAlignment="Left" Width="200">
@@ -33,7 +33,7 @@
             </ListView>
         </GroupBox>
         <Button x:Name="ordUpdateShipDateBtn" Content="update" HorizontalAlignment="Left" Height="19" Margin="202,353,0,0" VerticalAlignment="Top" Width="114" Click="ordUpdateShipDateBtn_Click"/>
-        <Button x:Name="ordUpdateDeliveryDateBtn" Content="update" HorizontalAlignment="Left" Height="19" Margin="215,329,0,0" VerticalAlignment="Top" Width="114" Click="ordUpdateDeliveryDateBtn_Click"/>
+        <Button x:Name="ordUpdateDeliveryDateBtn" Content="update" HorizontalAlignment="Left" Height="19" Margin="221,380,0,0" VerticalAlignment="Top" Width="114" Click="ordUpdateDeliveryDateBtn_Click"/>
 
     </Grid>
 </Window>

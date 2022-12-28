@@ -25,9 +25,10 @@ namespace PL
         private BO.Product tempProduct;
         int? tempId;
         int debily = 0;
-        public ProductWindow(IBl bl,int id)
+        public ProductWindow(IBl bl,int id,string status)
         {
             InitializeComponent();
+            
             tempBl = bl;
             proCategoryCB.ItemsSource = Enum.GetValues(typeof(BO.Categories));
             tempProduct = new BO.Product();
@@ -40,7 +41,14 @@ namespace PL
                 proPriceTxtB.Text = tempProduct.Price.ToString();
                 proCategoryCB.Text = tempProduct.Category.ToString();
             }
-        }
+            if (status != "admin")
+            {
+                proNameTxtB.IsEnabled = false;
+                proAmountTxtB.IsEnabled = false;
+                proPriceTxtB.IsEnabled = false;
+                proCategoryCB.IsEnabled = false;
+            }
+            }
 
 
         private void submitBtn_Click(object sender, RoutedEventArgs e)
