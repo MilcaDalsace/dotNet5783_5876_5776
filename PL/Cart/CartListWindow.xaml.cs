@@ -24,5 +24,12 @@ namespace PL.Cart
         {
             InitializeComponent();
         }
+        public CartListWindow()
+        {
+            InitializeComponent();
+
+        }
+
+       
     }
 }

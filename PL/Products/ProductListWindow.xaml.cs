@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using BL;
 //using BlImplementation;
 using BO;
+using PL;
+using PL.Cart;
 
 namespace PL
 {
@@ -25,28 +27,37 @@ namespace PL
     {
         int debily=0;
         private IBl tempBl=BLApi.Factory.Get();
-        string status1;
+        string userStatus;
+       public static BO.Cart curCartP=new BO.Cart();  
         public ProductListWindow(string status)
         {
             InitializeComponent();
-            status1 = status;
+            if (status != "admin")
+            {
+                AddProductBtn.Visibility = Visibility.Hidden;
+                ShowCartBtn.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                AddProductBtn.Visibility = Visibility.Visible;
+                ShowCartBtn.Visibility = Visibility.Hidden;
+            }
+               
+            userStatus = status;
             AttributeSelector.ItemsSource = Enum.GetValues(typeof(BO.Categories));
             ProductsListview.ItemsSource = tempBl.Product.GetProductList();
             debily = ProductsListview.Items.Count;
-            //ProductsListview.ItemsSource.ItemCount = bl.Product.GetProductList().Count;
         }
-        //static public bool GetBy(ProductForList p,BO.Categories curCat) =>p.Category==curCat;
 
         private void AttributeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //ProductsListview.ItemsSource = tempBl.Product.GetProductList((item=>item.Category == (DO.Categories)AttributeSelector.SelectedItem));
             bool GetBy(DO.Product p) => p.Category == (DO.Categories)AttributeSelector.SelectedItem;
             ProductsListview.ItemsSource = tempBl.Product.GetProductList(GetBy);
         }
 
         private void AddProductBtn_Click(object sender, RoutedEventArgs e)
         {
-            new ProductWindow(tempBl,0,status1).ShowDialog();
+            new ProductWindow(tempBl,0, userStatus).ShowDialog();
             //change 27/12
             //bool GetBy(DO.Product p) => p.Category == (DO.Categories)AttributeSelector.SelectedItem;
             ProductsListview.ItemsSource = tempBl.Product.GetProductList();
@@ -55,7 +66,12 @@ namespace PL
         private void ProductsListview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             BO.ProductForList product = (BO.ProductForList)(sender as ListView).SelectedItem;
-            new ProductWindow(tempBl, product.ID,status1).Show(); 
+            new ProductWindow(tempBl, product.ID, userStatus).Show(); 
+        }
+
+        private void ShowCartBtn_Click(object sender, RoutedEventArgs e)
+        {
+            new CartListWindow().Show();
         }
     }
 }

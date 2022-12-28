@@ -15,7 +15,7 @@ namespace BO
         public float FinalPrice { get; set; }
 
         public override string ToString() => $@"
-        Product ID: {ID}
+        Order ID: {ID}
         Name: {CustomerName} 
         OrderSatus: {OrderSatus}
     	AmountItems: {AmountItems}

@@ -27,6 +27,7 @@ namespace BlImplementation
                 DO.Product ProductToAdd = CDal.product.Read(product);
                 //Checking if the product is already in the basket and if
                 //so just updating the quantity
+                if (CurrCart.ItemOrderList!=null)
                 foreach (BO.OrderItem Curr in CurrCart.ItemOrderList)
                 {
                     if (Curr.ProductId == product)
@@ -42,6 +43,8 @@ namespace BlImplementation
                             throw new BO.OutOfStockExcption();
                     }
                 }
+                else
+                CurrCart.ItemOrderList=new List<BO.OrderItem>();
                 //If the product does not exist, create a product
                 //in a new basket and add it to the basket
                 if (!flag)

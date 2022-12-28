@@ -30,6 +30,7 @@
             </ListView.View>
         </ListView>
         <Button x:Name="AddProductBtn" Content="Add new Product" Grid.Row="2" HorizontalAlignment="Right" Margin="5" Padding="5" Click="AddProductBtn_Click" FontFamily="Comic Sans MS" FontWeight="Bold" FontSize="18" Opacity="0.5" BorderBrush="White"/>
+        <Button x:Name="ShowCartBtn" Content="Show cart" HorizontalAlignment="Left" Margin="445,63,0,0" Grid.Row="2" VerticalAlignment="Top" Height="105" Width="80" Click="ShowCartBtn_Click"/>
 
     </Grid>
 </Window>

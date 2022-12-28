@@ -25,7 +25,7 @@ namespace PL
         private BO.Product tempProduct;
         int? tempId;
         int debily = 0;
-       // BO.Cart userCart = new BO.Cart();
+     BO.Cart userCartToUpdate = new BO.Cart();
         public ProductWindow(IBl bl,int id,string status)
         {
             InitializeComponent();
@@ -53,8 +53,6 @@ namespace PL
             else
                 AddProToCartBtn.Visibility= Visibility.Hidden;  
             }
-
-
         private void submitBtn_Click(object sender, RoutedEventArgs e)
         {
             try { 
@@ -102,7 +100,31 @@ namespace PL
 
         private void AddProToCartBtn_Click(object sender, RoutedEventArgs e)
         {
-            
+            BO.OrderItem curPro = new BO.OrderItem
+            {
+                Amount = 1,
+                FinalPrice = tempProduct.Price,
+                Price = tempProduct.Price,
+                ProductId = tempProduct.ID,
+                ProductName = tempProduct.Name
+            };
+            try 
+            { 
+                tempBl.Cart.Add(ProductListWindow.curCartP, tempProduct.ID);
+                MessageBox.Show("פריט נוסף בהצלחה");
+                this.Close();
+            }
+            catch (BO.OutOfStockExcption ex)
+            {
+                MessageBox.Show(ex.Message);
+                this.Close();
+            }
+            catch (BO.NoSuchObjectExcption ex)
+            {
+                MessageBox.Show(ex.Message);
+                this.Close();
+            }
+            // ProductListWindow.curCartP.ItemOrderList = userCartToUpdate.ItemOrderList.Add(tempProduct);
         }
     }
 }
