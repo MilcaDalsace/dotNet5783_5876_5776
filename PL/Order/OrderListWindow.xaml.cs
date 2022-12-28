@@ -36,7 +36,7 @@ namespace PL.Order
         private void OrderListview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             BO.OrderForList order = (BO.OrderForList)(sender as ListView).SelectedItem;
-           new OrderWindow(tempBl,order.ID).Show();
+            new OrderWindow(tempBl,order.ID).Show();
         }
     }
 }

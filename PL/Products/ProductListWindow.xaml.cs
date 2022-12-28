@@ -25,9 +25,11 @@ namespace PL
     {
         int debily=0;
         private IBl tempBl=BLApi.Factory.Get();
-        public ProductListWindow()
+        string status1;
+        public ProductListWindow(string status)
         {
             InitializeComponent();
+            status1 = status;
             AttributeSelector.ItemsSource = Enum.GetValues(typeof(BO.Categories));
             ProductsListview.ItemsSource = tempBl.Product.GetProductList();
             debily = ProductsListview.Items.Count;
@@ -44,15 +46,16 @@ namespace PL
 
         private void AddProductBtn_Click(object sender, RoutedEventArgs e)
         {
-            new ProductWindow(tempBl,0).ShowDialog();
-            bool GetBy(DO.Product p) => p.Category == (DO.Categories)AttributeSelector.SelectedItem;
-            ProductsListview.ItemsSource = tempBl.Product.GetProductList(GetBy);
+            new ProductWindow(tempBl,0,status1).ShowDialog();
+            //change 27/12
+            //bool GetBy(DO.Product p) => p.Category == (DO.Categories)AttributeSelector.SelectedItem;
+            ProductsListview.ItemsSource = tempBl.Product.GetProductList();
         }
 
         private void ProductsListview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             BO.ProductForList product = (BO.ProductForList)(sender as ListView).SelectedItem;
-            new ProductWindow(tempBl, product.ID).Show(); 
+            new ProductWindow(tempBl, product.ID,status1).Show(); 
         }
     }
 }
