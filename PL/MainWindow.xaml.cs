@@ -29,6 +29,7 @@ namespace PL
         }
 
         IBl bl =  BLApi.Factory.Get();
+        IBl tempBl;
         private void BtnProduct_Click(object sender, RoutedEventArgs e)
         {
             new ProductListWindow("user").Show();
@@ -85,11 +86,11 @@ namespace PL
 
         private void CheckOrderIdBtn_Click(object sender, RoutedEventArgs e)
         {
-            //משהו מוזר במימוש!
-            string a = OrderTrackingSP.ToString();
-            int.TryParse(a, out int OrderId);
-            OrderTracking orderTracking = new OrderTracking();
-            //OrderTrackingLbl.GetValue;
+            string tempOrderId=Convert.ToString(OrderTrackingTB.Text);
+            int.TryParse(tempOrderId, out int OrderId);
+            tempBl = new BlImplementation.BlOrder();
+            BO.OrderTracking tempOrderTracking= new OrderTracking();
+            tempOrderTracking=tempBl.Order.GetOrderTracking(OrderId);
         }
     }
 }

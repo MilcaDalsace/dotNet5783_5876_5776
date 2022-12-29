@@ -12,7 +12,7 @@ namespace BLTest
 {
     internal class Program
     {
-        static private IBl ibl = new Bl();
+        static private IBl ibl = new BlOrder();
        
         static void Main(string[] args)
         { 

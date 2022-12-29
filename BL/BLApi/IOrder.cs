@@ -16,5 +16,6 @@ namespace BLApi
         public Order UpdateOrderSent(int idOrder);//עדכון שההזמנה נשלחה
         public Order UpdateOrderSupply(int idOrder);//עדכון שההזמנה הגיעה
         public void UpdateOrder(int idOrder, int idProduct, int CurAmount, int action);
+        public BO.OrderTracking GetOrderTracking(int idOrder);
     }
 }

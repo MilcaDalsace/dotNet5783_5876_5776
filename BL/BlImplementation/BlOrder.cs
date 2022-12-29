@@ -5,11 +5,12 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using BLApi;
+using BO;
 using DalApi;
 
 namespace BlImplementation
 {
-    internal class BlOrder : BLApi. IOrder
+    internal class BlOrder : BLApi.IOrder
     {
         IDal CDal = DalApi.Factory.Get();
         /// <summary>
@@ -25,10 +26,10 @@ namespace BlImplementation
             {
                 foreach (DO.Order order in list)
                 {
-                    IEnumerable<DO.OrderItem> orderItems = CDal.orderItem.GetAll(item=>item.OrderId== order.ID);
+                    IEnumerable<DO.OrderItem> orderItems = CDal.orderItem.GetAll(item => item.OrderId == order.ID);
                     foreach (DO.OrderItem item in orderItems)
                         sum += item.Price * item.Amount;
-                   
+
                     BO.OrderForList orderForList = new BO.OrderForList()
                     {
                         ID = order.ID,
@@ -73,18 +74,18 @@ namespace BlImplementation
                     {
                         Amount = orderItem.Amount,
                         Id = orderItem.ID,
-                        Price=orderItem.Price,
-                        FinalPrice= orderItem.Amount* orderItem.Price,
+                        Price = orderItem.Price,
+                        FinalPrice = orderItem.Amount * orderItem.Price,
                         ProductId = orderItem.ProductId,
-                        ProductName=CDal.product.Read(orderItem.ProductId).Name
-                    }) ;
+                        ProductName = CDal.product.Read(orderItem.ProductId).Name
+                    });
             if (idOrder > 0)
             {
                 try
                 {
                     currOrder = CDal.Order.Read(idOrder);
                     foreach (BO.OrderItem item in orderItems)
-                        sum += item.Price*item.Amount;
+                        sum += item.Price * item.Amount;
                 }
                 catch (ObjectNotFoundException ex)
                 {
@@ -101,7 +102,7 @@ namespace BlImplementation
                     DeliveryDate = currOrder.DeliveryDate,
                     OrderDate = currOrder.OrderDate,
                     ShipDate = currOrder.ShipDate,
-                    OrderItemList= orderItems
+                    OrderItemList = orderItems
                 };
                 return orderToReturn;
             }
@@ -150,7 +151,7 @@ namespace BlImplementation
                     if (orderStatus(order) == BO.Status.received)
                         throw new BO.OrderDidnotsentAlready();
                     else
-                    throw new BO.OrderAlreadyUpdate();
+                        throw new BO.OrderAlreadyUpdate();
                 }
                 CDal.Order.Update(order);
                 return GetOrderDetails(idOrder);
@@ -162,38 +163,41 @@ namespace BlImplementation
         }
         public void UpdateOrder(int idOrder, int idProduct, int CurAmount, int action)
         {//price
-            try { 
-            switch (action)
+            try
             {
-                case 1:
-                    DO.OrderItem baseItem = CDal.orderItem.ReadByFunc(item=>item.OrderId== idOrder&&item.ProductId==idProduct);
-                    CDal.orderItem.Delete(baseItem.ID);
-                    break;
-                case 2:
-                    DO.OrderItem newOrder = new DO.OrderItem() {
-                        Amount = CurAmount,
-                        OrderId = idOrder,
-                        ProductId = idProduct,
-                        //Price=?
-                    };
+                switch (action)
+                {
+                    case 1:
+                        DO.OrderItem baseItem = CDal.orderItem.ReadByFunc(item => item.OrderId == idOrder && item.ProductId == idProduct);
+                        CDal.orderItem.Delete(baseItem.ID);
+                        break;
+                    case 2:
+                        DO.OrderItem newOrder = new DO.OrderItem()
+                        {
+                            Amount = CurAmount,
+                            OrderId = idOrder,
+                            ProductId = idProduct,
+                            //Price=?
+                        };
                         //add try
-                    CDal.orderItem.Create(newOrder);
-                    break;
-                case 3:
-                    float price = CDal.product.Read(idProduct).Price;
-                    DO.OrderItem baseItemForUpdate = CDal.orderItem.ReadByFunc(item => item.OrderId == idOrder && item.ProductId == idProduct);
-                    baseItemForUpdate.Amount = CurAmount;
-                    baseItemForUpdate.Price = price * CurAmount;
-                    CDal.orderItem.Update(baseItemForUpdate);
-                    break;
-            } 
-            }catch (ObjectNotFoundException ex)
+                        CDal.orderItem.Create(newOrder);
+                        break;
+                    case 3:
+                        float price = CDal.product.Read(idProduct).Price;
+                        DO.OrderItem baseItemForUpdate = CDal.orderItem.ReadByFunc(item => item.OrderId == idOrder && item.ProductId == idProduct);
+                        baseItemForUpdate.Amount = CurAmount;
+                        baseItemForUpdate.Price = price * CurAmount;
+                        CDal.orderItem.Update(baseItemForUpdate);
+                        break;
+                }
+            }
+            catch (ObjectNotFoundException ex)
             {
                 throw new BO.NoSuchObjectExcption(ex);
 
             }
             //DO.Order order = CDal.Order.Read(idOrder);
-                    //int baseAmount=baseItemForUpdate.Amount;
+            //int baseAmount=baseItemForUpdate.Amount;
             //try
             //{
             //    float newFinalPrice=0;
@@ -215,25 +219,43 @@ namespace BlImplementation
             //    //    }
             //    //}
             //    int diff; 
-                //foreach (BO.OrderItem itemUpdate in newrder)
-                //    for (int i=0;i< listOfProducts.Count;i++)
-                //    {
-                //        if (listOfProducts[i].ProductId == itemUpdate.ProductId) 
-                //        {
-                //            if (listOfProducts[i].Amount < itemUpdate.Amount)
-                //            {
-                //                diff = itemUpdate.Amount - listOfProducts[i].Amount;
-                //                DO.OrderItem temp = listOfProducts[i];
-                //                temp.Amount = itemUpdate.Amount;
-                //                listOfProducts[i] = temp;
-                //                //temp.FinalPrice = itemUpdate.Amount * itemUpdate.Price;
-                //                newFinalPrice +=diff* itemUpdate.Price;
-                //            }
-                           
-                //        }
-                //    }
-            }
-            
+            //foreach (BO.OrderItem itemUpdate in newrder)
+            //    for (int i=0;i< listOfProducts.Count;i++)
+            //    {
+            //        if (listOfProducts[i].ProductId == itemUpdate.ProductId) 
+            //        {
+            //            if (listOfProducts[i].Amount < itemUpdate.Amount)
+            //            {
+            //                diff = itemUpdate.Amount - listOfProducts[i].Amount;
+            //                DO.OrderItem temp = listOfProducts[i];
+            //                temp.Amount = itemUpdate.Amount;
+            //                listOfProducts[i] = temp;
+            //                //temp.FinalPrice = itemUpdate.Amount * itemUpdate.Price;
+            //                newFinalPrice +=diff* itemUpdate.Price;
+            //            }
+
+            //        }
+            //    }
         }
+       
+        public BO.OrderTracking GetOrderTracking(int idOrder)
+        {
+            BO.OrderTracking orderTracking = new BO.OrderTracking();
+            try
+            {
+                BO.Order order = new BO.Order();
+                order = GetOrderDetails(idOrder);
+                orderTracking.ID = order.ID;
+                orderTracking.OrderStatus=order.OrderStatus;
+                orderTracking.DateAndStatus = new List<(DateTime, Status)> { };
+                orderTracking.DateAndStatus.Add((order.OrderDate,order.OrderStatus));
+            }
+            catch (ObjectNotFoundException ex)
+            {
+                throw new BO.NoSuchObjectExcption(ex);
+            }
+            return orderTracking;
+        }
+    }
     }
 
