@@ -29,29 +29,26 @@ internal class DalOrders:IOrder
     }
     public Order Read(int id)
     {
-        for (int i = 0; i < DataSource._orders.Count; i++)
-            if (DataSource._orders[i].ID == id)
-                return DataSource._orders[i];
-        throw new ObjectNotFoundException();
+        Order order=DataSource._orders.Find(item=>item.ID==id);
+        if(order.ID==0)
+            throw new ObjectNotFoundException();
+        return order;
     }
      public void Update(DO.Order OrderToUpdate)
     {
-        for (int i = 0; i < DataSource._orders.Count; i++) { 
-            if (DataSource._orders[i].ID == OrderToUpdate.ID) { 
-                DataSource._orders[i] = OrderToUpdate;
-                return;}
-            }
-        throw new ObjectNotFoundException();
+        Order order = Read(OrderToUpdate.ID);
+       int index= DataSource._orders.IndexOf(order);
+        DataSource._orders[index] = OrderToUpdate;
+        //for (int i = 0; i < DataSource._orders.Count; i++) { 
+        //    if (DataSource._orders[i].ID == OrderToUpdate.ID) { 
+        //        DataSource._orders[i] = OrderToUpdate;
+        //        return;}
+        //    }
+        //throw new ObjectNotFoundException();
     }
    public void Delete(int Id)
     {
-        for (int i = 0; i < DataSource._orders.Count; i++)
-        {
-            if (DataSource._orders[i].ID == Id)
-            {
-                DataSource._orders.RemoveAt(i);
-                return;
-            }
-        }
+        Order order = Read(Id);
+        _orders.Remove(order);
     }
 }

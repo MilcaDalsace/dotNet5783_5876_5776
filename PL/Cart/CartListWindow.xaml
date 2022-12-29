@@ -7,13 +7,14 @@
         mc:Ignorable="d"
         Title="CartListWindow" Height="450" Width="800">
     <Grid>
-        <ListView d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="ListView_SelectionChanged">
+        <ListView x:Name="CartLstview" d:ItemsSource="{d:SampleData ItemCount=5}" MouseDoubleClick="CartLstview_MouseDoubleClick">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
         </ListView>
+        <Button x:Name="submitOrderBtn" Content="submit order" Margin="0,304,530,70" Click="submitOrderBtn_Click"/>
 
     </Grid>
 </Window>
