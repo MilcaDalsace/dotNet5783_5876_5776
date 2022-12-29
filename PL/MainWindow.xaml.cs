@@ -91,6 +91,7 @@ namespace PL
             tempBl = new BlImplementation.BlOrder();
             BO.OrderTracking tempOrderTracking= new OrderTracking();
             tempOrderTracking=tempBl.Order.GetOrderTracking(OrderId);
+            OrderTrackingTB.Text = null;
         }
     }
 }
