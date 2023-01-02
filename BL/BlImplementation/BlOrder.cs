@@ -247,8 +247,10 @@ internal class BlOrder : BLApi.IOrder
             order = GetOrderDetails(idOrder);
             orderTracking.ID = order.ID;
             orderTracking.OrderStatus = order.OrderStatus;
-            orderTracking.DateAndStatus = new List<(DateTime, Status)> { };
-            orderTracking.DateAndStatus.Add((order.OrderDate, order.OrderStatus));
+            orderTracking.DateAndStatus = new List<(DateTime, string)?> { };
+            orderTracking.DateAndStatus.Add((order.OrderDate, "Received"));
+            orderTracking.DateAndStatus.Add((order.DeliveryDate, "Sent"));
+            orderTracking.DateAndStatus.Add((order.ShipDate, "Arrived"));
         }
         catch (ObjectNotFoundException ex)
         {

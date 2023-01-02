@@ -1,0 +1,25 @@
+﻿<Window x:Class="PL.Order.OrderTrackingWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL.Order"
+        mc:Ignorable="d"
+        Title="OrderTrackingWindow" Height="450" Width="800">
+    <Grid>
+        <TextBox x:Name="ShipDateTB" HorizontalAlignment="Left" Margin="275,261,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" Visibility="Hidden"/>
+        <Label x:Name="ShipDateLbl" Content="Ship Date" HorizontalAlignment="Left" Margin="182,257,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.589,0.576" IsEnabled="False" Visibility="Hidden"/>
+        <TextBox x:Name="OrderStatusTB" HorizontalAlignment="Left" Margin="275,168,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+        <Label x:Name="OrderStatusLbl" Content="Order status" HorizontalAlignment="Left" Margin="185,164,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.589,0.576"/>
+        <TextBox x:Name="OrderIdTB" HorizontalAlignment="Left" Margin="275,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+        <Label x:Name="OrderIdLbl" Content="Order Id" HorizontalAlignment="Left" Margin="185,133,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.589,0.576"/>
+        <TextBox x:Name="DeliveryDateTB" HorizontalAlignment="Left" Margin="275,230,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" Visibility="Hidden"/>
+        <Label x:Name="DeliveryDateLbl" Content="Delivery Date" HorizontalAlignment="Left" Margin="182,226,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.589,0.576" IsEnabled="False" Visibility="Hidden"/>
+        <TextBox x:Name="OrderDateTB" HorizontalAlignment="Left" Margin="275,199,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" Visibility="Hidden"/>
+        <Label x:Name="OrderDateLbl" Content="Order Date" HorizontalAlignment="Left" Margin="182,195,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.589,0.576" IsEnabled="False" Visibility="Hidden"/>
+        <TextBox x:Name="ShipDateStatusTB" HorizontalAlignment="Left" Margin="400,261,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" Visibility="Hidden"/>
+        <TextBox x:Name="DeliveryDateStatusTB" HorizontalAlignment="Left" Margin="400,230,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" Visibility="Hidden"/>
+        <TextBox x:Name="OrderDateStatusTB" HorizontalAlignment="Left" Margin="400,199,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" Visibility="Hidden"/>
+
+    </Grid>
+</Window>

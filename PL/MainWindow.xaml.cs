@@ -1,5 +1,6 @@
 ﻿using BLApi;
 using BO;
+using DalApi;
 using PL.Order;
 using System;
 using System.Collections.Generic;
@@ -86,12 +87,25 @@ namespace PL
 
         private void CheckOrderIdBtn_Click(object sender, RoutedEventArgs e)
         {
-            string tempOrderId=Convert.ToString(OrderTrackingTB.Text);
-            int.TryParse(tempOrderId, out int OrderId);
-            tempBl = new BlImplementation.Bl();
-            BO.OrderTracking tempOrderTracking= new OrderTracking();
-            tempOrderTracking=tempBl.Order.GetOrderTracking(OrderId);
-            OrderTrackingTB.Text = null;
+            try
+            {
+                string tempOrderId = Convert.ToString(OrderTrackingTB.Text);
+                int.TryParse(tempOrderId, out int OrderId);
+                tempBl = new BlImplementation.Bl();
+                BO.OrderTracking tempOrderTracking = new OrderTracking();
+                tempOrderTracking = tempBl.Order.GetOrderTracking(OrderId);
+                OrderTrackingTB.Text = null;
+                OrderTrackingSP.IsEnabled = false;
+                OrderTrackingSP.Visibility = Visibility.Hidden;
+                new OrderTrackingWindow(tempOrderTracking).ShowDialog();
+
+            }
+            catch (BO.NoSuchObjectExcption ex)
+            {
+                OrderTrackingSP.IsEnabled = false;
+                OrderTrackingSP.Visibility = Visibility.Hidden;
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

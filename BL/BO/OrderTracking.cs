@@ -10,7 +10,7 @@ namespace BO
     {
         public int ID { get; set; }
         public Status OrderStatus { get; set; }
-        public List<(DateTime,Status)> DateAndStatus { get; set; }
+        public List<(DateTime,string)?> DateAndStatus { get; set; }
 
         public override string ToString() => $@"
         Product ID: {ID}
