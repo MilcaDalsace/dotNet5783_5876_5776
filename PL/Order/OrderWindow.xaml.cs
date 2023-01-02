@@ -40,18 +40,19 @@ namespace PL.Order
                 ordDeliveryDateTxtB.Text = order.DeliveryDate.ToString();
                 ordShipDateTxtB.Text = order.ShipDate.ToString();
                 orderItemListLV.ItemsSource=order.OrderItemList;
+                ordCustomerNameTxtB.IsEnabled=false;
+                ordCustomerEmailTxtB.IsEnabled = false;
+                ordCustomerAdderssLbl.IsEnabled = false;
+                ordStatusTxtB.IsEnabled = false;
+                ordFinalPriceLblTxtB.IsEnabled = false;
+                ordDeliveryDateTxtB.IsEnabled = false;
+                ordShipDateTxtB.IsEnabled = false;
                 if (status != "admin")
                 {
                     ordUpdateDeliveryDateBtn.Visibility = Visibility.Hidden;
                     ordUpdateShipDateBtn.Visibility= Visibility.Hidden;
                    //saveChangesBtn.Visibility = Visibility.Hidden;
-                    ordCustomerNameTxtB.IsEnabled=false;
-                    ordCustomerEmailTxtB.IsEnabled = false;
-                    ordCustomerAdderssLbl.IsEnabled = false;
-                    ordStatusTxtB.IsEnabled = false;
-                    ordFinalPriceLblTxtB.IsEnabled = false;
-                    ordDeliveryDateTxtB.IsEnabled = false;
-                    ordShipDateTxtB.IsEnabled = false;
+                   
                 }
                 else
                 {

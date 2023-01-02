@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BLApi;
 using BO;
 using DalApi;
+using DO;
 
 namespace BlImplementation
 {
@@ -20,34 +21,32 @@ namespace BlImplementation
         {
             IEnumerable<DO.Product> ListOfProduct = CDal.product.GetAll(func);
             List<BO.ProductForList> ProductListToReturn = new List<BO.ProductForList>();
-            foreach (DO.Product Product in ListOfProduct)
+            ListOfProduct.ToList().ForEach(Product =>
             {
-                BO.ProductForList productForList = new BO.ProductForList()
+                ProductListToReturn.Add(new BO.ProductForList()
                 {
                     ID = Product.ID,
                     ProductName = Product.Name,
                     Price = Product.Price,
                     Category = (BO.Categories)Product.Category
-                };
-                ProductListToReturn.Add(productForList);
-            }
+                }); ;
+            });
             return ProductListToReturn;
         }
         public IEnumerable<BO.ProductForList> GetProductListCustomer(Func<DO.Product, bool>? func = null)
         {
             IEnumerable<DO.Product> ListOfProduct = CDal.product.GetAll(func);
             List<BO.ProductForList> ProductListToReturn = new List<BO.ProductForList>();
-            foreach (DO.Product Product in ListOfProduct)
+            ListOfProduct.ToList().ForEach(Product =>
             {
-                BO.ProductForList productForList = new BO.ProductForList()
+                ProductListToReturn.Add(new BO.ProductForList()
                 {
                     ID = Product.ID,
                     ProductName = Product.Name,
                     Price = Product.Price,
                     Category = (BO.Categories)Product.Category
-                };
-                ProductListToReturn.Add(productForList);
-            }
+                }); ;
+            });
             return ProductListToReturn;
         }
         /// <summary>
@@ -57,10 +56,9 @@ namespace BlImplementation
         {
             IEnumerable<DO.Product> ListOfProduct = CDal.product.GetAll();
             List<BO.ProductItem> ProductListToReturn = new List<BO.ProductItem>();
-            foreach (DO.Product Product in ListOfProduct)
+            ListOfProduct.ToList().ForEach(Product =>
             {
-                //ID
-                BO.ProductItem productForList = new BO.ProductItem()
+                ProductListToReturn.Add(new BO.ProductItem()
                 {
                     ID = 0,
                     ProductName = Product.Name,
@@ -69,9 +67,8 @@ namespace BlImplementation
                     Available = Product.InStock > 0 ? true : false,
                     //אין קונה לבנתיים לכן 0
                     AmountInCart = 0
-                };
-                ProductListToReturn.Add(productForList);
-            }
+                }); ;
+            });
             return ProductListToReturn;
         }
         /// <summary>
@@ -124,13 +121,12 @@ namespace BlImplementation
         public void DeleteProduct(int idProduct)
         {
             IEnumerable<DO.OrderItem> allOrderItems = CDal.orderItem.GetAll();
-            foreach (DO.OrderItem orderItem in allOrderItems)
-            {
-                if (orderItem.ProductId == idProduct)
-                {
-                    throw new BO.ProductInOrder();
-                }
-            }
+            //amount = (from item in cart.Items
+            //          where item.ID == id
+            //          select item.AmountsItems).FirstOrDefault();
+          DO.OrderItem? orderItems=(from orderItem in allOrderItems where orderItem.ProductId == idProduct select orderItem).FirstOrDefault();
+            if (orderItems != null)
+                throw new BO.ProductInOrder();
             try { CDal.product.Delete(idProduct); }
             catch (ObjectNotFoundException ex) { throw new BO.NoSuchObjectExcption(ex); };
         }
