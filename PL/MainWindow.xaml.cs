@@ -88,7 +88,7 @@ namespace PL
         {
             string tempOrderId=Convert.ToString(OrderTrackingTB.Text);
             int.TryParse(tempOrderId, out int OrderId);
-            tempBl = new BlImplementation.BlOrder();
+            tempBl = new BlImplementation.Bl();
             BO.OrderTracking tempOrderTracking= new OrderTracking();
             tempOrderTracking=tempBl.Order.GetOrderTracking(OrderId);
             OrderTrackingTB.Text = null;

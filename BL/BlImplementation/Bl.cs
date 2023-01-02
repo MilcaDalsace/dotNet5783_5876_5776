@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using BLApi;
 namespace BlImplementation
 {
-    public class BlOrder:IBl
+    public class Bl:IBl
     {
         //לא ידענו אם לשנות לפי הוראוות שלב 4 4 עמוד 8
         public IOrder Order => new BlOrder();

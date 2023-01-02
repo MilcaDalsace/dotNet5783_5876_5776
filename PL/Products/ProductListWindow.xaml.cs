@@ -66,7 +66,9 @@ namespace PL
         private void ProductsListview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             BO.ProductForList product = (BO.ProductForList)(sender as ListView).SelectedItem;
-            new ProductWindow(tempBl, product.ID, userStatus).Show(); 
+            new ProductWindow(tempBl, product.ID, userStatus).ShowDialog();
+            ProductsListview.ItemsSource = tempBl.Product.GetProductList();
+
         }
 
         private void ShowCartBtn_Click(object sender, RoutedEventArgs e)
