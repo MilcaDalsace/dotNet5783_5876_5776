@@ -8,12 +8,12 @@ namespace Dal
     internal class DalOrderItem :IOrderItem
     {
         public int Create(DO.OrderItem item)
-        {
-            //add 
+        { 
             if (SIZEOFARRAYPRUDOCT == _orderItems.Count)
                 throw new TheArrayIsFull() ;
             else
             {
+                //לא צריך את זה אבל שמרתי ליתר בטחון:
                //for (int i = 0; i < DataSource._orderItems.Count; i++)
                // {
                //     if (DataSource._orderItems[i].ProductId== item.ProductId&& DataSource._orderItems[i].OrderId == item.OrderId)
@@ -40,37 +40,38 @@ namespace Dal
         }
         public  DO.OrderItem Read(int id)
         {
-            OrderItem orderItem = DataSource._orderItems.Find(item => item.ID == id);
+            OrderItem orderItem =(from  item in DataSource._orderItems
+                                  where item.ID == id
+                                  select item).FirstOrDefault();
             if (orderItem.ID == 0)
                 throw new ObjectNotFoundException();
             return orderItem;
-            //for (int i = 0; i < DataSource._orderItems.Count; i++)
-            //    if (DataSource._orderItems[i].ID == id)
-            //        return DataSource._orderItems[i];
-            //throw new ObjectNotFoundException();
         }
         public void Update(DO.OrderItem item)
         {
+            try
+            {
             OrderItem orderItem = Read(item.ID);
             int index = DataSource._orderItems.IndexOf(orderItem);
             DataSource._orderItems[index] = item;
-            // OrderItem curOrderItem = DataSource._orderItems.Find(orderItem => orderItem.ID == item.ID) orderItem == item ;
-            //for (int i = 0; i < DataSource._orderItems.Count; i++)
-            //    if (DataSource._orderItems[i].ID == item.ID)
-            //        DataSource._orderItems[i] = item;
+            }
+            catch (ObjectNotFoundException ex)
+            {
+                throw ex;
+            }
+            
         }
         public void Delete(int Id)
         {
+            try
+            {
             OrderItem orderItem = Read(Id);
             _orderItems.Remove(orderItem);
-            //for (int i = 0; i < DataSource._orderItems.Count; i++)
-            //{
-            //    if (DataSource._orderItems[i].ID == Id)
-            //    {
-            //        DataSource._orderItems.RemoveAt(i);
-            //        return;
-            //    }
-            //}
+            }
+            catch (ObjectNotFoundException ex)
+            {
+                throw ex;
+            }
         }
     }
 }

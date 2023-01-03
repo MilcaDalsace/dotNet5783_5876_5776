@@ -32,10 +32,6 @@ namespace Dal
             if (product.ID == 0)
                 throw new ObjectNotFoundException();
             return product;
-            //for (int i = 0; i < DataSource._products.Count; i++)
-            //    if (DataSource._products[i].ID == id)
-            //        return DataSource._products[i];
-            //throw new ObjectNotFoundException();
         }
         public Product ReadByFunc(Predicate<Product> func)
         {
@@ -43,16 +39,16 @@ namespace Dal
         }
         public void Update(DO.Product item)
         {
+            try
+            {
             Product product = Read(item.ID);
             int index = DataSource._products.IndexOf(product);
             DataSource._products[index] = item;
-            //for (int i = 0; i < DataSource._products.Count; i++)
-            //    if (DataSource._products[i].ID == item.ID)
-            //    {
-            //        DataSource._products[i] = item;
-            //        return;
-            //    }
-            //throw new ObjectNotFoundException();
+            }
+            catch (ObjectNotFoundException ex)
+            {
+                throw ex;
+            }
         }
         public void Delete(int id)
         {
@@ -63,15 +59,6 @@ namespace Dal
             {
                 throw ex;
             }
-            //for (int i = 0; i < DataSource._products.Count; i++)
-            //{
-            //    if (DataSource._products[i].ID == id)
-            //    {
-            //        DataSource._products.RemoveAt(i);
-            //        return;
-            //    }
-            //}
-            //throw new ObjectNotFoundException();
         }
 
     }

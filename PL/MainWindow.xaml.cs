@@ -81,8 +81,9 @@ namespace PL
 
         private void OrderTrackingBtn_Click(object sender, RoutedEventArgs e)
         {
-            OrderTrackingSP.IsEnabled = true;
-            OrderTrackingSP.Visibility = Visibility.Visible;
+            new OrderListWindow(bl,"orderTracking").Show();
+            //OrderTrackingSP.IsEnabled = true;
+            //OrderTrackingSP.Visibility = Visibility.Visible;
         }
 
         private void CheckOrderIdBtn_Click(object sender, RoutedEventArgs e)

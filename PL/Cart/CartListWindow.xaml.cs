@@ -24,22 +24,22 @@ namespace PL.Cart
         public CartListWindow()
         {
             InitializeComponent();
-            CartLstview.ItemsSource = ProductListWindow.curCartP.ItemOrderList;
+            CartLstview.ItemsSource = ICart.curCartP.ItemOrderList;
         }
 
         private void submitOrderBtn_Click(object sender, RoutedEventArgs e)
         {
-            ProductListWindow.curCartP.Name = "orit";
-            ProductListWindow.curCartP.CustomerAdress = "orittt@gmail.com";
-            ProductListWindow.curCartP.CustomerEmail = "orittt@gmail.com";
-            tempBl.Cart.SaveCart(ProductListWindow.curCartP);
+            ICart.curCartP.Name = "orit";
+            ICart.curCartP.CustomerAdress = "orittt@gmail.com";
+            ICart.curCartP.CustomerEmail = "orittt@gmail.com";
+            tempBl.Cart.SaveCart(ICart.curCartP);
         }
 
         private void CartLstview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             BO.OrderItem product = (BO.OrderItem)(sender as ListView).SelectedItem;
             new CartWindow(product).ShowDialog();
-            CartLstview.ItemsSource = ProductListWindow.curCartP.ItemOrderList;
+            CartLstview.ItemsSource = ICart.curCartP.ItemOrderList;
 
         }
     }

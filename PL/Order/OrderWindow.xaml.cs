@@ -51,13 +51,15 @@ namespace PL.Order
                 {
                     ordUpdateDeliveryDateBtn.Visibility = Visibility.Hidden;
                     ordUpdateShipDateBtn.Visibility= Visibility.Hidden;
-                   //saveChangesBtn.Visibility = Visibility.Hidden;
-                   
                 }
                 else
                 {
                     ordUpdateDeliveryDateBtn.Visibility = Visibility.Visible;
                     ordUpdateShipDateBtn.Visibility = Visibility.Visible;
+                }
+                if(status== "orderTracking")
+                {
+
                 }
                     //saveChangesBtn.Visibility=Visibility.Visible;
             }

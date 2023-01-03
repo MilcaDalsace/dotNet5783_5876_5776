@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using BLApi;
 using BO;
 using DalApi;
-using DO;
 
 namespace BlImplementation
 {
@@ -121,10 +120,9 @@ namespace BlImplementation
         public void DeleteProduct(int idProduct)
         {
             IEnumerable<DO.OrderItem> allOrderItems = CDal.orderItem.GetAll();
-            //amount = (from item in cart.Items
-            //          where item.ID == id
-            //          select item.AmountsItems).FirstOrDefault();
-          DO.OrderItem? orderItems=(from orderItem in allOrderItems where orderItem.ProductId == idProduct select orderItem).FirstOrDefault();
+          DO.OrderItem? orderItems=(from orderItem in allOrderItems 
+                                    where orderItem.ProductId == idProduct 
+                                    select orderItem).FirstOrDefault();
             if (orderItems != null)
                 throw new BO.ProductInOrder();
             try { CDal.product.Delete(idProduct); }
@@ -132,8 +130,7 @@ namespace BlImplementation
         }
         /// <summary>
         /// A function that receives a product and updates it in the product list
-        /// </summary>
-        
+        /// </summary> 
         public void UpdateProduct(BO.Product productToUpdate)
         {
             if (productToUpdate.ID < 0 || productToUpdate.Name == "" || productToUpdate.Price < 0 || productToUpdate.InStock < 0)

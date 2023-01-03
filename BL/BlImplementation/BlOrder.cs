@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -24,23 +26,21 @@ internal class BlOrder : BLApi.IOrder
         IEnumerable<DO.Order> list = CDal.Order.GetAll();
         try
         {
-            foreach (DO.Order order in list)
+            list.ToList().ForEach(order =>
             {
                 IEnumerable<DO.OrderItem> orderItems = CDal.orderItem.GetAll(item => item.OrderId == order.ID);
-                foreach (DO.OrderItem item in orderItems)
-                    sum += item.Price * item.Amount;
-
-                BO.OrderForList orderForList = new BO.OrderForList()
+                orderItems.ToList().ForEach(item => sum += item.Price * item.Amount);
+                listToReturn.Add(new BO.OrderForList()
                 {
                     ID = order.ID,
                     FinalPrice = sum,
                     AmountItems = orderItems.Count(),
                     OrderSatus = orderStatus(order),
                     CustomerName = order.CustomerName
-                };
+                });
                 sum = 0;
-                listToReturn.Add(orderForList);
             }
+            );
         }
         catch (ObjectNotFoundException ex)
         {
@@ -62,13 +62,14 @@ internal class BlOrder : BLApi.IOrder
     /// <summary>
     /// A function that receives an order code and returns its details
     /// </summary>
-    public Order GetOrderDetails(int idOrder)
+    public BO.Order GetOrderDetails(int idOrder)
     {
         float sum = 0;
         DO.Order currOrder = new DO.Order();
         IEnumerable<DO.OrderItem> orderItemsIenum = CDal.orderItem.GetAll();
         List<BO.OrderItem> orderItems = new List<BO.OrderItem>();
-        foreach (DO.OrderItem orderItem in orderItemsIenum)
+        orderItemsIenum.ToList().ForEach(orderItem =>
+        {
             if (orderItem.OrderId == idOrder)
                 orderItems.Add(new BO.OrderItem()
                 {
@@ -79,13 +80,13 @@ internal class BlOrder : BLApi.IOrder
                     ProductId = orderItem.ProductId,
                     ProductName = CDal.product.Read(orderItem.ProductId).Name
                 });
+        });
         if (idOrder > 0)
         {
             try
             {
                 currOrder = CDal.Order.Read(idOrder);
-                foreach (BO.OrderItem item in orderItems)
-                    sum += item.Price * item.Amount;
+                orderItems.ToList().ForEach(item=>sum += item.Price * item.Amount);   
             }
             catch (ObjectNotFoundException ex)
             {
@@ -245,12 +246,29 @@ internal class BlOrder : BLApi.IOrder
         {
             BO.Order order = new BO.Order();
             order = GetOrderDetails(idOrder);
+            DO.Order orderDO = new DO.Order
+            { 
+                CustomerAdress = order.CustomerAdress,
+                CustomerEmail = order.CustomerEmail,
+                CustomerName = order.CustomerName,
+                DeliveryDate = order.DeliveryDate,
+                ID = idOrder,
+                OrderDate = order.OrderDate,
+                ShipDate= order.ShipDate
+            };
             orderTracking.ID = order.ID;
             orderTracking.OrderStatus = order.OrderStatus;
             orderTracking.DateAndStatus = new List<(DateTime, string)?> { };
             orderTracking.DateAndStatus.Add((order.OrderDate, "Received"));
-            orderTracking.DateAndStatus.Add((order.DeliveryDate, "Sent"));
-            orderTracking.DateAndStatus.Add((order.ShipDate, "Arrived"));
+            BO.Status a= orderStatus(orderDO);
+            if (orderStatus(orderDO) == BO.Status.arrived)
+            {
+            orderTracking.DateAndStatus.Add((order.ShipDate, "Sent"));
+            orderTracking.DateAndStatus.Add((order.DeliveryDate, "Arrived"));
+            }
+            else
+                if(orderStatus(orderDO) == BO.Status.sent)
+                orderTracking.DateAndStatus.Add((order.ShipDate, "Sent"));
         }
         catch (ObjectNotFoundException ex)
         {

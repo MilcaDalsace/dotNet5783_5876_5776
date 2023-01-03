@@ -110,7 +110,7 @@ namespace PL
             };
             try 
             { 
-                tempBl.Cart.Add(ProductListWindow.curCartP, tempProduct.ID);
+                tempBl.Cart.Add(ICart.curCartP, tempProduct.ID);
                 MessageBox.Show("פריט נוסף בהצלחה");
                 this.Close();
             }

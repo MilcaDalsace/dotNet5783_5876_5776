@@ -17,7 +17,7 @@ using BL;
 using BO;
 using PL;
 using PL.Cart;
-
+using BlImplementation;
 namespace PL
 {
     /// <summary>
@@ -28,7 +28,6 @@ namespace PL
         int debily=0;
         private IBl tempBl=BLApi.Factory.Get();
         string userStatus;
-       public static BO.Cart curCartP=new BO.Cart();  
         public ProductListWindow(string status)
         {
             InitializeComponent();

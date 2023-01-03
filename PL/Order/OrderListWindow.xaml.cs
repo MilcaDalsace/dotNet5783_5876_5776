@@ -27,7 +27,16 @@ namespace PL.Order
             InitializeComponent();
             orderStatus = status;
             tempBl = bl;
-            OrderListview.ItemsSource = tempBl.Order.GetListOrder();
+            List<BO.OrderForList> tempOrderForList = (List<BO.OrderForList>)bl.Order.GetListOrder();
+            List<BO.OrderTracking> tempOrderTracking = new List<BO.OrderTracking>();
+            foreach (BO.OrderForList orderForList in tempOrderForList)
+            {
+                tempOrderTracking.Add(bl.Order.GetOrderTracking(orderForList.ID));
+            }
+            if (orderStatus == "orderTracking")
+                OrderListview.ItemsSource = tempOrderTracking;
+            else
+                OrderListview.ItemsSource =tempOrderForList;
         }
 
         private void AttributeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -36,9 +45,21 @@ namespace PL.Order
         }
 
         private void OrderListview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            BO.OrderForList order = (BO.OrderForList)(sender as ListView).SelectedItem;
-            new OrderWindow(tempBl,order.ID,orderStatus).Show();
+        { 
+            BO.OrderTracking order;
+            BO.OrderForList order1;
+            if (orderStatus== "orderTracking")
+            {
+                order = (BO.OrderTracking)(sender as ListView).SelectedItem;
+                new OrderWindow(tempBl,order.ID,orderStatus).Show();
+            }
+            else
+            {
+                 order1 = (BO.OrderForList)(sender as ListView).SelectedItem;
+                 new OrderWindow(tempBl, order1.ID, orderStatus).Show();
+            }
+               
+           
         }
     }
 }

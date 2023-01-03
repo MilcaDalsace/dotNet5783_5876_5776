@@ -35,7 +35,7 @@ namespace PL.Cart
         private void changeAmountBtn_Click(object sender, RoutedEventArgs e)
         {
             try {
-            tempBl.Cart.UpdateAmount(ProductListWindow.curCartP, curProduct.ProductId, Convert.ToInt32(amountTxt.Text));
+            tempBl.Cart.UpdateAmount(ICart.curCartP, curProduct.ProductId, Convert.ToInt32(amountTxt.Text));
             Close(); 
             }
             catch (BO.OutOfStockExcption ex)
@@ -47,7 +47,7 @@ namespace PL.Cart
         private void deleteBtn_Click(object sender, RoutedEventArgs e)
         {
             try {
-            tempBl.Cart.UpdateAmount(ProductListWindow.curCartP, curProduct.ProductId, 0);
+            tempBl.Cart.UpdateAmount(ICart.curCartP, curProduct.ProductId, 0);
             Close();
             }
             catch (BO.OutOfStockExcption ex)
