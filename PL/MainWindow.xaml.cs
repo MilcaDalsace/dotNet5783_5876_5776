@@ -31,14 +31,10 @@ namespace PL
 
         IBl bl =  BLApi.Factory.Get();
         IBl tempBl;
-        private void BtnProduct_Click(object sender, RoutedEventArgs e)
-        {
-            new ProductListWindow("user").Show();
-        }
 
-        private void BtnOrder_Click(object sender, RoutedEventArgs e)
+        private void BtnOrderTracking_Click(object sender, RoutedEventArgs e)
         {
-            new OrderListWindow(bl,"user").Show();
+            new OrderListWindow(bl, "orderTracking").ShowDialog();
         }
 
         private void BtnAdmin_Click(object sender, RoutedEventArgs e)
@@ -50,11 +46,6 @@ namespace PL
             SubGrid.IsEnabled = false;
             SubGrid.Visibility = Visibility.Hidden;
 
-        }
-
-        private void newOrderBtn_Click(object sender, RoutedEventArgs e)
-        {
-            new ProductListWindow("user").Show();
         }
         private void AdminOrdersBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -79,13 +70,6 @@ namespace PL
             SubGrid.Visibility = Visibility.Visible;
         }
 
-        private void OrderTrackingBtn_Click(object sender, RoutedEventArgs e)
-        {
-            new OrderListWindow(bl,"orderTracking").Show();
-            //OrderTrackingSP.IsEnabled = true;
-            //OrderTrackingSP.Visibility = Visibility.Visible;
-        }
-
         private void CheckOrderIdBtn_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -107,6 +91,11 @@ namespace PL
                 OrderTrackingSP.Visibility = Visibility.Hidden;
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void BtnNewOrder_Click(object sender, RoutedEventArgs e)
+        {
+            new ProductListWindow("user").ShowDialog();
         }
     }
 }

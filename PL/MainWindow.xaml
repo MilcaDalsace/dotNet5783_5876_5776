@@ -23,11 +23,9 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
             <Button x:Name="BtnAdmin" Content="Admin" HorizontalAlignment="Center" VerticalAlignment="Top" Height="60" Width="200" Click="BtnAdmin_Click" RenderTransformOrigin="0.383,-0.04" FontFamily="Comic Sans MS" FontSize="20" FontWeight="Bold" Opacity="0.5" BorderBrush="White"/>
-            <Button x:Name="BtnOrder" Grid.Column="1" Content="Order" HorizontalAlignment="Center" VerticalAlignment="Top" Height="60" Width="200" Click="BtnOrder_Click" Opacity="0.5" FontFamily="Comic Sans MS" FontSize="18" FontWeight="Bold" BorderBrush="White"/>
-            <Button x:Name="BtnProduct" Grid.Column="2" Content="Product" HorizontalAlignment="Center" VerticalAlignment="Top" Height="60" Width="200" Click="BtnProduct_Click" BorderBrush="White" Opacity="0.5" FontFamily="Comic Sans MS" FontWeight="Bold" FontSize="18"/>
-            <Button x:Name="BtnCart" Grid.Column="3" Content="Cart" HorizontalAlignment="Center" VerticalAlignment="Top" Height="60" Width="200" FontSize="18" FontFamily="Comic Sans MS" FontWeight="Bold" BorderBrush="White" Opacity="0.5" RenderTransformOrigin="0.17,0.567"/>
-            <Button x:Name="newOrderBtn" Content="New Order" Margin="175,104,145,0" VerticalAlignment="Top" Height="60" Grid.ColumnSpan="2" Click="newOrderBtn_Click"/>
-            <Button x:Name="OrderTrackingBtn" Grid.Column="3" Content="Order Tracking" HorizontalAlignment="Left" Height="45" Margin="24,119,0,0" VerticalAlignment="Top" Width="142" Click="OrderTrackingBtn_Click"/>
+            <Button x:Name="BtnOrderTracking" Grid.Column="1" Content="Order Tracking" HorizontalAlignment="Center" VerticalAlignment="Top" Height="60" Width="200" Click="BtnOrderTracking_Click" Opacity="0.5" FontFamily="Comic Sans MS" FontSize="18" FontWeight="Bold" BorderBrush="White"/>
+            <Button x:Name="BtnNewOrder" Grid.Column="2" Content="New Order" HorizontalAlignment="Center" VerticalAlignment="Top" Height="60" Width="200" Click="BtnNewOrder_Click" BorderBrush="White" Opacity="0.5" FontFamily="Comic Sans MS" FontWeight="Bold" FontSize="18"/>
+            <Button x:Name="BtnUser" Grid.Column="3" Content="User" HorizontalAlignment="Center" VerticalAlignment="Top" Height="60" Width="200" FontSize="18" FontFamily="Comic Sans MS" FontWeight="Bold" BorderBrush="White" Opacity="0.5" RenderTransformOrigin="0.17,0.567"/>
         </Grid>
 
         <Button x:Name="AdminOrdersBtn" Grid.Column="1" Content="orders info" IsEnabled="False" Visibility="Hidden" HorizontalAlignment="Left" Height="216" Margin="405,208,0,0" VerticalAlignment="Top" Width="385" Click="AdminOrdersBtn_Click" Grid.RowSpan="3" AutomationProperties.ItemStatus="" />
