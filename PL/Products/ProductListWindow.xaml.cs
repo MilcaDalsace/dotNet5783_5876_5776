@@ -28,9 +28,11 @@ namespace PL
         int debily=0;
         private IBl tempBl=BLApi.Factory.Get();
         string userStatus;
+        
         public ProductListWindow(string status)
         {
             InitializeComponent();
+            //DataContext= tempBl.Product.GetProductList();
             if (status != "admin")
             {
                 AddProductBtn.Visibility = Visibility.Hidden;
@@ -64,7 +66,8 @@ namespace PL
 
         private void ProductsListview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            BO.ProductForList product = (BO.ProductForList)(sender as ListView).SelectedItem;
+            BO.ProductForList product = (BO.ProductForList)((ListView)sender).SelectedItem;
+            //BO.ProductForList product = (BO.ProductForList)(sender as ListView).SelectedItem;
             new ProductWindow(tempBl, product.ID, userStatus).ShowDialog();
             ProductsListview.ItemsSource = tempBl.Product.GetProductList();
 

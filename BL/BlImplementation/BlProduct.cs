@@ -12,7 +12,7 @@ namespace BlImplementation
     internal class BlProduct : BLApi.IProduct
     {
 
-        IDal CDal = DalApi.Factory.Get();
+        IDal CDal = DalApi.Factory.Get()!;
         /// <summary>
         /// A function that returns a list of products
         /// </summary>

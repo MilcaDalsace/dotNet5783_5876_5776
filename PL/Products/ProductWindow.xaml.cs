@@ -22,14 +22,14 @@ namespace PL
     public partial class ProductWindow : Window
     {
         private IBl tempBl;
-        private BO.Product tempProduct;
+        private BO.Product tempProduct=new BO.Product();
         int? tempId;
         int debily = 0;
-     BO.Cart userCartToUpdate = new BO.Cart();
+        BO.Cart userCartToUpdate = new BO.Cart();
         public ProductWindow(IBl bl,int id,string status)
         {
             InitializeComponent();
-            
+            DataContext = tempProduct;
             tempBl = bl;
             proCategoryCB.ItemsSource = Enum.GetValues(typeof(BO.Categories));
             tempProduct = new BO.Product();

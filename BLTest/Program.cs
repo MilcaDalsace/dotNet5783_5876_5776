@@ -26,7 +26,8 @@ namespace BLTest
                 "enter 2 to  orders\n" +
                 "enter 3 to cart \n"
                 );
-            int userChoice = int.Parse(Console.ReadLine());
+            int userChoice;
+            int.TryParse(Console.ReadLine(), out userChoice);
             int chooseMethod;
             ///<summary>
             ///A loop that works as long as the user's choice is not an exit
@@ -50,8 +51,7 @@ namespace BLTest
                            "enter 4 to add product \n" +
                            "enter 5 to delete product \n" +
                            "enter 6 to update product \n");
-
-                        chooseMethod = int.Parse(Console.ReadLine());
+                        int.TryParse(Console.ReadLine(), out chooseMethod);
                         Product(chooseMethod);
                         break;
                     case 2:
@@ -60,15 +60,15 @@ namespace BLTest
                            "enter 3 to update order sent \n" +
                            "enter 4 to update order supply \n"+
                             "enter 5 to update order  \n");
-                        chooseMethod = int.Parse(Console.ReadLine());
+                        int.TryParse(Console.ReadLine(), out chooseMethod);
                         Order(chooseMethod);
                         break;
                     case 3:
                         Console.WriteLine("enter 1 to add \n" +
                             "enter 2 to update amount \n" +
                             "enter 3 to save cart \n");
-                        chooseMethod = int.Parse(Console.ReadLine());
-                       UserCart= Cart(chooseMethod, UserCart);
+                        int.TryParse(Console.ReadLine(), out chooseMethod);
+                        UserCart = Cart(chooseMethod, UserCart);
                         break;
                     default:
                         break;
@@ -79,7 +79,7 @@ namespace BLTest
                    "enter 2 to  orders\n" +
                    "enter 3 to cart \n"
                    );
-                userChoice = int.Parse(Console.ReadLine());
+                int.TryParse(Console.ReadLine(), out userChoice);
             }
         }
         private static void Product(int userChoiceMethod)
@@ -98,7 +98,8 @@ namespace BLTest
                     break;
                 case 3:
                     Console.WriteLine("enter id of product");
-                    int idProduct = int.Parse(Console.ReadLine());
+                    int idProduct;
+                    int.TryParse(Console.ReadLine(), out idProduct);
                     try
                     {
                         BO.Product productDetails = ibl.Product.GetProductDetails(idProduct);
@@ -110,17 +111,22 @@ namespace BLTest
                     }
                     catch (BO.NoSuchObjectExcption ex)
                     {
-                        Console.WriteLine(ex.Message, ex.InnerException.Message);
+                        if (ex.InnerException != null)
+                            Console.WriteLine(ex.Message, ex.InnerException.Message);
                     }
                     break;
                 case 4:
                     // add
                     Console.WriteLine("enter name,price,inStock");
+                    int TPrice, TInstock ;
+                    int.TryParse(Console.ReadLine(), out TPrice);
+                    int.TryParse(Console.ReadLine(), out TInstock); ;
+
                     BO.Product ProductToAdd = new BO.Product()
                     {
                         Name = Console.ReadLine(),
-                        Price = int.Parse(Console.ReadLine()),
-                        InStock = int.Parse(Console.ReadLine())
+                        Price = TPrice,
+                        InStock =TInstock
                     };
                     Console.WriteLine("choose category: \n" +
                       "1 to babygrows \n" +
@@ -129,14 +135,18 @@ namespace BLTest
                       "4 to pants \n" +
                       "5 to dresses \n" +
                       "6 to tShirt \n");
-                    ProductToAdd.Category = (BO.Categories)int.Parse(Console.ReadLine());
+                    int category;
+                    int.TryParse(Console.ReadLine(), out category);
+                    ProductToAdd.Category = (BO.Categories)category;
+                    //ProductToAdd.Category = (BO.Categories)int.Parse(Console.ReadLine());
                     try
                     {
                         ibl.Product.AddProduct(ProductToAdd);
                     }
                     catch (TheArrayIsFull ex)
                     {
-                        Console.WriteLine(ex.Message, ex.InnerException.Message);
+                        if (ex.InnerException != null)
+                            Console.WriteLine(ex.Message, ex.InnerException.Message);
                     }
                     catch (OneFieldsInCorrect ex)
                     {
@@ -145,14 +155,17 @@ namespace BLTest
                     break;
                 case 5:
                     Console.WriteLine("enter id of product to delete:");
-                    int idOfProduct = int.Parse(Console.ReadLine());
+                    int idOfProduct;
+                    int.TryParse(Console.ReadLine(), out idOfProduct);
+                   // int idOfProduct = int.Parse(Console.ReadLine());
                     try
                     {
                         ibl.Product.DeleteProduct(idOfProduct);
                     }
                     catch (BO.NoSuchObjectExcption ex)
                     {
-                        Console.WriteLine(ex.Message, ex.InnerException.Message); ;
+                        if (ex.InnerException != null)
+                            Console.WriteLine(ex.Message, ex.InnerException.Message); ;
                     }
 
                     catch (BO.ProductInOrder ex)
@@ -162,12 +175,17 @@ namespace BLTest
                     break;
                 case 6:
                     Console.WriteLine("enter id of product new name,in stock,price");
+                    int TId, TInstck;
+                    float TPrice1;
+                    int.TryParse(Console.ReadLine(), out TId);
+                    int.TryParse(Console.ReadLine(), out TInstck);
+                    float.TryParse(Console.ReadLine(), out TPrice1);
                     BO.Product productToReturn = new BO.Product()
                     {
-                        ID = int.Parse(Console.ReadLine()),
+                        ID =TId,
                         Name = Console.ReadLine(),
-                        InStock = int.Parse(Console.ReadLine()),
-                        Price = float.Parse(Console.ReadLine()),
+                        InStock = TInstck,
+                        Price = TPrice1,
                     };
                     Console.WriteLine("choose category:" +
                         "1 to babygrows" +
@@ -176,14 +194,17 @@ namespace BLTest
                         "4 to pants" +
                         "5 to dresses" +
                         "6 to tShirt");
-                    productToReturn.Category = (BO.Categories)int.Parse(Console.ReadLine());
+                    int category1;
+                    int.TryParse(Console.ReadLine(), out category1);
+                    productToReturn.Category = (BO.Categories)category1;
                     try
                     {
                         ibl.Product.UpdateProduct(productToReturn);
                     }
                     catch (BO.NoSuchObjectExcption ex)
                     {
-                        Console.WriteLine(ex.Message, ex.InnerException.Message);
+                        if (ex.InnerException != null)
+                            Console.WriteLine(ex.Message, ex.InnerException.Message);
                     }
                     break;
                 default:
@@ -201,7 +222,8 @@ namespace BLTest
                     break;
                 case 2:
                     Console.WriteLine("enter id of order");
-                    int idorder = int.Parse(Console.ReadLine());
+                    int idorder;
+                    int.TryParse(Console.ReadLine(), out idorder);
                     try
                     {
                         BO.Order orderDetails = ibl.Order.GetOrderDetails(idorder);
@@ -213,19 +235,22 @@ namespace BLTest
                     }
                     catch (BO.NoSuchObjectExcption ex)
                     {
-                        Console.WriteLine(ex.Message, ex.InnerException.Message);
+                        if (ex.InnerException != null)
+                            Console.WriteLine(ex.Message, ex.InnerException.Message);
                     }
                     break;
                 case 3:
                     Console.WriteLine("enter id of order to update");
-                    int idOrder = int.Parse(Console.ReadLine());
+                    int idOrder;
+                    int.TryParse(Console.ReadLine(), out idOrder);
                     try
                     {
                         ibl.Order.UpdateOrderSent(idOrder);
                     }
                     catch (BO.NoSuchObjectExcption ex)
                     {
-                        Console.WriteLine(ex.Message, ex.InnerException.Message);
+                        if (ex.InnerException != null)
+                            Console.WriteLine(ex.Message, ex.InnerException.Message);
                     }
                     catch (BO.OrderAlreadyUpdate ex)
                     {
@@ -234,14 +259,16 @@ namespace BLTest
                     break;
                 case 4:
                     Console.WriteLine("enter id of order to update");
-                    int idOrderSupply = int.Parse(Console.ReadLine());
+                    int idOrderSupply;
+                    int.TryParse(Console.ReadLine(), out idOrderSupply);
                     try
                     {
                         ibl.Order.UpdateOrderSupply(idOrderSupply);
                     }
                     catch (BO.NoSuchObjectExcption ex)
                     {
-                        Console.WriteLine(ex.Message, ex.InnerException.Message);
+                        if (ex.InnerException != null)
+                            Console.WriteLine(ex.Message, ex.InnerException.Message);
                     }
                     catch (BO.OrderAlreadyUpdate ex)
                     {
@@ -256,14 +283,18 @@ namespace BLTest
                     Console.WriteLine("enter 1 to delete item" +
                         "2 to add item" +
                         "3 to update item");
-                    int action=int.Parse(Console.ReadLine());
+                    int action;
+                    int.TryParse(Console.ReadLine(), out action);
                     Console.WriteLine("enter order id ,product id");
-                    int idOrderToUpdate = int.Parse(Console.ReadLine());
-                    int itemId=int.Parse(Console.ReadLine());
-                    if(action!=1)
+                    int idOrderToUpdate;
+                    int.TryParse(Console.ReadLine(), out idOrderToUpdate);
+                    int itemId;
+                    int.TryParse(Console.ReadLine(), out itemId);
+                    if (action!=1)
                     {
                         Console.WriteLine("enter new amount");
-                        int newAmount=int.Parse(Console.ReadLine());
+                        int newAmount;
+                        int.TryParse(Console.ReadLine(), out newAmount);
                         ibl.Order.UpdateOrder(idOrderToUpdate, itemId, newAmount,action );
                     }
                     else
@@ -282,7 +313,9 @@ namespace BLTest
                 case 1:
                     Console.WriteLine("enter id of product to add");
                     try {
-                        userCart = ibl.Cart.Add(userCart, int.Parse(Console.ReadLine()));
+                        int id;
+                        int.TryParse(Console.ReadLine(), out id);
+                        userCart = ibl.Cart.Add(userCart, id);
                         Console.WriteLine(userCart);
                         return userCart;
                     }
@@ -292,16 +325,18 @@ namespace BLTest
                         return userCart;
                     }
                    catch (BO.NoSuchObjectExcption ex){
-                        Console.WriteLine(ex.Message, ex.InnerException.Message);
+                        if (ex.InnerException != null)
+                            Console.WriteLine(ex.Message, ex.InnerException.Message);
                         return userCart;
                     }
-                    break;
                 case 2:
                     Console.WriteLine("enter id of product and update amount");
                     try
                     {
-                        int id = int.Parse(Console.ReadLine());
-                        int amount=int.Parse(Console.ReadLine());
+                        int id;
+                        int.TryParse(Console.ReadLine(), out id);
+                        int amount;
+                        int.TryParse(Console.ReadLine(), out amount);
                         userCart = ibl.Cart.UpdateAmount(userCart,id,amount);
                         Console.WriteLine(userCart);
                         return userCart;
@@ -316,7 +351,6 @@ namespace BLTest
                         Console.WriteLine(ex.Message);
                         return userCart;
                     }
-                    break;
                 case 3:
                     Console.WriteLine("enter user name,adress,email");
                     userCart.Name = Console.ReadLine();
@@ -335,10 +369,12 @@ namespace BLTest
                     }
                     catch (BO.TheArrayIsFullException ex)
                     {
-                        Console.WriteLine(ex.Message, ex.InnerException.Message);
+                        if (ex.InnerException != null)
+                            Console.WriteLine(ex.Message, ex.InnerException.Message);
                     }
                     catch (BO.NoSuchObjectExcption ex)
                     {
+                        if(ex.InnerException != null)
                         Console.WriteLine(ex.Message, ex.InnerException.Message);
                     }
                     catch (BO.OutOfStockExcption ex)
@@ -346,7 +382,6 @@ namespace BLTest
                         Console.WriteLine(ex.Message);
                     }
                     return userCart;
-                    break;
                 default:
                     break;
             }

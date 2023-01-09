@@ -9,7 +9,8 @@ namespace Dal
 {
     internal class Program
     {
-        static private IDal dalList=new DalList();
+        static private IDal? dalList = Factory.Get();
+        //new DalList();
 
         public static void Main(String[] args)
         {
@@ -19,7 +20,8 @@ namespace Dal
                 "enter 2 to  orders\n" +
                 "enter 3 to orderItems \n"
                 );
-            int userChoice = int.Parse(Console.ReadLine());
+            int userChoice;
+            int.TryParse(Console.ReadLine(),out userChoice);
             while (userChoice != 0)
             {
                 if (userChoice == 0)
@@ -34,7 +36,8 @@ namespace Dal
                     Console.WriteLine("enter 6 to show all order item by order id \n" +
                  "enter 7 to  show order item by id of orderItem n ");
 
-                int chooseMethod = int.Parse(Console.ReadLine());
+                int chooseMethod;
+                int.TryParse(Console.ReadLine(), out chooseMethod);
 
                 switch (userChoice)
                 {
@@ -56,7 +59,7 @@ namespace Dal
                    "enter 2 to  orders\n" +
                    "enter 3 to orderItems \n"
                    );
-                userChoice = int.Parse(Console.ReadLine());
+                int.TryParse(Console.ReadLine(), out userChoice);
             }
         }
         private static void Product(int userChoiceMethod)
@@ -67,18 +70,24 @@ namespace Dal
                 case 1:
                     Console.WriteLine("enter nameProduct priceProduct and amountInStock");
                     prudoctToCreate.Name = Console.ReadLine();
-                    prudoctToCreate.Price = float.Parse(Console.ReadLine());
-                    prudoctToCreate.InStock = int.Parse(Console.ReadLine());
+                    float TPrice;
+                    int TInStock;
+                    float.TryParse(Console.ReadLine(), out TPrice);
+                    prudoctToCreate.Price =TPrice;
+                    int.TryParse(Console.ReadLine(), out TInStock);
+                    prudoctToCreate.InStock = TInStock;
                     Console.WriteLine("enter 1 to babygrows\n" +
                         "enter 2 to shirts\n" +
                         "enter 3 to skirts\n" +
                         "enter 4 to pants\n" +
                         "enter 5 to dresses\n" +
                         "enter 6 to tShirt\n");
-                    prudoctToCreate.Category = (DO.Categories)int.Parse(Console.ReadLine());
+                    int category;
+                    int.TryParse(Console.ReadLine(), out category);
+                    prudoctToCreate.Category = (DO.Categories)category;
                     try
                     {
-                        Console.WriteLine(" Id of the new product is:" + dalList.product.Create(prudoctToCreate));
+                        Console.WriteLine(" Id of the new product is:" + dalList?.product.Create(prudoctToCreate));
                     }
                     catch (Exception ex)
                     {
@@ -90,7 +99,9 @@ namespace Dal
                     Console.WriteLine("enter id of product to show");
                     try
                     {
-                        Console.WriteLine(dalList.product.Read(int.Parse(Console.ReadLine())));
+                        int id1;
+                        int.TryParse(Console.ReadLine(), out id1);
+                        Console.WriteLine(dalList?.product.Read(id1));
                     }
                     catch (Exception ex)
                     {
@@ -98,7 +109,7 @@ namespace Dal
                     }
                     break;
                 case 3:
-                    IEnumerable<DO.Product> productToPrint = dalList.product.GetAll();
+                    IEnumerable<DO.Product> productToPrint = dalList?.product.GetAll()?? throw new NullException();
                     foreach (DO.Product i in productToPrint)
 
                     {
@@ -111,20 +122,25 @@ namespace Dal
                     break;
                 case 4:
                     Console.WriteLine("enter id of prudoct to update");
-                    int idToUpdate = int.Parse(Console.ReadLine());
+                    int idToUpdate;
+                    int.TryParse(Console.ReadLine(),out idToUpdate);
                     try
                     {
-                        DO.Product orderTemp = dalList.product.Read(idToUpdate);
+                        DO.Product orderTemp = dalList?.product.Read(idToUpdate)?? throw new NullException();
                         Console.WriteLine(orderTemp);
                         Console.WriteLine("enter new name price and amount inStock");
-                        string tempName = Console.ReadLine();
-                        float tempPrice = float.Parse(Console.ReadLine());
-                        int tempInStock = int.Parse(Console.ReadLine());
+                        string ? tempName = Console.ReadLine();
+                        float tempPrice;
+                        float.TryParse(Console.ReadLine(),out tempPrice);
+                        int tempInStock;
+                        int.TryParse(Console.ReadLine(),out tempInStock);
                         prudoctToCreate.Category = orderTemp.Category;
                         prudoctToCreate.ID = idToUpdate;
                         prudoctToCreate.Name = tempName == "" ? prudoctToCreate.Name : tempName;
-                        prudoctToCreate.Price = tempPrice == null ? prudoctToCreate.Price : tempPrice;
-                        prudoctToCreate.InStock = tempInStock == null ? prudoctToCreate.InStock : tempInStock;
+                        prudoctToCreate.Price =tempPrice;
+                        prudoctToCreate.InStock =tempInStock;
+                        //prudoctToCreate.Price = tempPrice == null ? prudoctToCreate.Price : tempPrice;
+                        //prudoctToCreate.InStock = tempInStock == null ? prudoctToCreate.InStock : tempInStock;
                         dalList.product.Update(prudoctToCreate);
                     }
                     catch (Exception ex)
@@ -135,7 +151,9 @@ namespace Dal
                     break;
                 case 5:
                     Console.WriteLine("enter id of product to delete");
-                    dalList.product.Delete(int.Parse(Console.ReadLine()));
+                    int id;
+                    int.TryParse(Console.ReadLine(), out id);
+                    dalList?.product.Delete(id);
                     break;
                 default:
                     break;
@@ -168,7 +186,7 @@ namespace Dal
                     orderToCreate.DeliveryDate = deliveryDateResult;
                     try
                     {
-                        Console.WriteLine("The new order id is:" + dalList.Order.Create(orderToCreate));
+                        Console.WriteLine("The new order id is:" + dalList?.Order.Create(orderToCreate));
                     }
                     catch (Exception ex)
                     {
@@ -180,7 +198,9 @@ namespace Dal
                     Console.WriteLine("enter id of order to show");
                     try
                     {
-                        Console.WriteLine(dalList.Order.Read(int.Parse(Console.ReadLine())));
+                        int id2;
+                        int.TryParse(Console.ReadLine(), out id2);
+                        Console.WriteLine(dalList?.Order.Read(id2));
                     }
                     catch (Exception ex)
                     {
@@ -188,7 +208,7 @@ namespace Dal
                     }
                     break;
                 case 3:
-                    IEnumerable<DO.Order> orderToPrint = dalList.Order.GetAll();
+                    IEnumerable<DO.Order> orderToPrint = dalList?.Order.GetAll()?? throw new NullException();
                     foreach (DO.Order i in orderToPrint)
 
                     {
@@ -200,16 +220,17 @@ namespace Dal
                     break;
                 case 4:
                     Console.WriteLine("enter id of order to update");
-                    int idToUpdate = int.Parse(Console.ReadLine());
+                    int idToUpdate;
+                    int.TryParse(Console.ReadLine(),out idToUpdate);
                     try
                     {
-                        DO.Order lastOrder = dalList.Order.Read(idToUpdate);
+                        DO.Order lastOrder = dalList?.Order.Read(idToUpdate)?? throw new NullException();
                         Console.WriteLine(lastOrder);
                         Console.WriteLine("enter new customer name customer email customer adress order date ship date and delivery date");
                         orderToCreate.ID = idToUpdate;
-                        string tempName = Console.ReadLine();
-                        string tempEmail = Console.ReadLine();
-                        string tempAdress = Console.ReadLine();
+                        string ? tempName = Console.ReadLine();
+                        string ? tempEmail = Console.ReadLine();
+                        string ? tempAdress = Console.ReadLine();
 
                         //DateTime tempOrderDate = DateTime.Parse(Console.ReadLine());
                         string? tempOrderDate = Console.ReadLine();
@@ -236,7 +257,9 @@ namespace Dal
                     break;
                 case 5:
                     Console.WriteLine("enter id of product to delete");
-                    dalList.Order.Delete(int.Parse(Console.ReadLine()));
+                    int id;
+                    int.TryParse(Console.ReadLine(), out id);
+                    dalList?.Order.Delete(id);
                     break;
                 default:
                     break;
@@ -249,13 +272,18 @@ namespace Dal
             {
                 case 1:
                     Console.WriteLine("enter order id prudoct id price and amount");
-                    orderItemToCreate.OrderId = int.Parse(Console.ReadLine());
-                    orderItemToCreate.ProductId = int.Parse(Console.ReadLine());
-                    orderItemToCreate.Price = int.Parse(Console.ReadLine());
-                    orderItemToCreate.Amount = int.Parse(Console.ReadLine());
+                    int oid, pid, price, amount;
+                    int.TryParse(Console.ReadLine(), out oid);
+                    orderItemToCreate.OrderId =oid ;
+                    int.TryParse(Console.ReadLine(), out pid);
+                    orderItemToCreate.ProductId =pid;
+                    int.TryParse(Console.ReadLine(),out price);
+                    orderItemToCreate.Price =price ;
+                    int.TryParse(Console.ReadLine(), out amount);
+                    orderItemToCreate.Amount =amount;
                     try
                     {
-                       Console.WriteLine(dalList.orderItem.Create(orderItemToCreate));
+                       Console.WriteLine(dalList?.orderItem.Create(orderItemToCreate));
                     }
                     catch (Exception ex)
                     {
@@ -267,7 +295,10 @@ namespace Dal
                     Console.WriteLine("enter id of order and id of item to show");
                     try
                     {
-                        Console.WriteLine(dalList.orderItem.ReadByOrderitemId(int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine())));
+                        int oid1, pid1;
+                        int.TryParse(Console.ReadLine(), out oid1);
+                        int.TryParse(Console.ReadLine(), out pid1);
+                        Console.WriteLine(dalList?.orderItem.ReadByOrderitemId(oid1, pid1)?? throw new NullException());
                     }
                     catch (Exception ex)
                     {
@@ -275,7 +306,7 @@ namespace Dal
                     }
                     break;
                 case 3:
-                    IEnumerable<DO.OrderItem> orderItemToPrint = dalList.orderItem.GetAll();
+                    IEnumerable<DO.OrderItem> orderItemToPrint = dalList?.orderItem.GetAll()??throw new NullException();
                     foreach (DO.OrderItem i in orderItemToPrint)
                     {
                         if (i.ID == 0)
@@ -287,22 +318,26 @@ namespace Dal
                     break;
                 case 4:
                     Console.WriteLine("enter id of order and id of product to update");
-                    int idOderToUpdate = int.Parse(Console.ReadLine());
-                    int productIdToUpdate = int.Parse(Console.ReadLine());
+                    int idOderToUpdate;
+                    int.TryParse(Console.ReadLine(),out idOderToUpdate);
+                    int productIdToUpdate;
+                    int.TryParse(Console.ReadLine(),out productIdToUpdate);
                     try
                     {
                         DO.OrderItem orderIdToUpdate = new DO.OrderItem();
-                        orderIdToUpdate= dalList.orderItem.ReadByOrderitemId(idOderToUpdate, productIdToUpdate);    
+                        orderIdToUpdate= dalList?.orderItem.ReadByOrderitemId(idOderToUpdate, productIdToUpdate);    
                         Console.WriteLine(orderIdToUpdate);
                         Console.WriteLine("enter order id, prudoct id, price and amount");
                         orderItemToCreate.ID= orderIdToUpdate.ID;
-                        float tempPrice = float.Parse(Console.ReadLine());
-                        int tempAmount = int.Parse(Console.ReadLine());
+                        float tempPrice;
+                        float.TryParse(Console.ReadLine(),out tempPrice);
+                        int tempAmount;
+                        int.TryParse(Console.ReadLine(),out tempAmount);
                         orderItemToCreate.OrderId = idOderToUpdate;
                         orderItemToCreate.ProductId = productIdToUpdate;
-                        orderItemToCreate.Price = tempPrice == null ? orderIdToUpdate.Price : tempPrice;
-                        orderItemToCreate.Amount = tempAmount == null ? orderIdToUpdate.Amount : tempAmount;
-                        dalList.orderItem.Update(orderItemToCreate);
+                        orderItemToCreate.Price =tempPrice;
+                        orderItemToCreate.Amount =tempAmount;
+                        dalList?.orderItem.Update(orderItemToCreate);
                     }
                     catch (Exception ex)
                     {
@@ -312,15 +347,19 @@ break;
                    
                     break;
                 case 5:
-                    Console.WriteLine("enter id of oorderItem to delete");
-                    dalList.orderItem.Delete(int.Parse(Console.ReadLine()));
+                    Console.WriteLine("enter id of orderItem to delete");
+                    int id;
+                    int.TryParse(Console.ReadLine(), out id);
+                    dalList?.orderItem.Delete(id);
                     break;
                 case 6:
                     Console.WriteLine("enter order id");
-                    int id1 = int.Parse(Console.ReadLine());
-                    IEnumerable<DO.OrderItem> orderToShow= dalList.orderItem.GetAll(item=>item.ID==id1);
+                    int id1;
+                    int.TryParse(Console.ReadLine(),out id1);
+                    IEnumerable<DO.OrderItem> orderToShow= dalList?.orderItem.GetAll(item=>item.ID==id1)?? throw new NullException();
                     if (orderToShow == null)
                         Console.WriteLine("order not found or your order is empty");
+                    else
                     foreach (DO.OrderItem item in orderToShow) { 
                         if(item.OrderId==0)
                             return;
@@ -331,8 +370,10 @@ break;
                 case 7:
                     Console.WriteLine("enter orderItem id");
                     try 
-                    { 
-                    Console.WriteLine(dalList.orderItem.Read(int.Parse(Console.ReadLine())));
+                    {
+                        int oiid;
+                        int.TryParse(Console.ReadLine(),out oiid);
+                    Console.WriteLine(dalList?.orderItem.Read(oiid));
                     }
                     catch(Exception ex)
                     {

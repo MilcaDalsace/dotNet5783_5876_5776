@@ -50,13 +50,15 @@ namespace PL.Order
             BO.OrderForList order1;
             if (orderStatus== "orderTracking")
             {
-                order = (BO.OrderTracking)(sender as ListView).SelectedItem;
+                order = (BO.OrderTracking)((ListView)sender).SelectedItem;
+                //order = (BO.OrderTracking)(sender as ListView).SelectedItem;
                 new OrderWindow(tempBl,order.ID,orderStatus).Show();
             }
             else
             {
-                 order1 = (BO.OrderForList)(sender as ListView).SelectedItem;
-                 new OrderWindow(tempBl, order1.ID, orderStatus).Show();
+                 order1 = (BO.OrderForList)((ListView)sender).SelectedItem;
+                 //order1 = (BO.OrderForList)(sender as ListView).SelectedItem;
+                new OrderWindow(tempBl, order1.ID, orderStatus).Show();
             }
                
            

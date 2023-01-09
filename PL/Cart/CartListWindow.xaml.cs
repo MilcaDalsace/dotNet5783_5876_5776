@@ -37,7 +37,8 @@ namespace PL.Cart
 
         private void CartLstview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            BO.OrderItem product = (BO.OrderItem)(sender as ListView).SelectedItem;
+            BO.OrderItem product = (BO.OrderItem)((ListView)sender).SelectedItem;
+            //BO.OrderItem product = (BO.OrderItem)(sender as ListView).SelectedItem;
             new CartWindow(product).ShowDialog();
             CartLstview.ItemsSource = ICart.curCartP.ItemOrderList;
 

@@ -26,15 +26,16 @@ namespace PL.Order
             InitializeComponent();
             OrderIdTB.Text=tempOrderTracking.ID.ToString();
             OrderStatusTB.Text=tempOrderTracking.OrderStatus.ToString();
-            List<(DateTime, string)?> tempDateAndStatus = tempOrderTracking.DateAndStatus;
+            List<(DateTime, string)?>? tempDateAndStatus = tempOrderTracking.DateAndStatus;
             if (tempOrderTracking.OrderStatus.ToString()== "arrived")
             {
-                OrderDateTB.Text = tempDateAndStatus[0].Value.Item1.ToString();
-                OrderDateStatusTB.Text = tempDateAndStatus[0].Value.Item2.ToString();
-                DeliveryDateTB.Text = tempDateAndStatus[1].Value.Item1.ToString();
-                DeliveryDateStatusTB.Text = tempDateAndStatus[1].Value.Item2.ToString();
-                ShipDateTB.Text = tempDateAndStatus[2].Value.Item1.ToString();
-                ShipDateStatusTB.Text = tempDateAndStatus[2].Value.Item2.ToString();
+                OrderDateTB.Text = tempDateAndStatus?[0]?.Item1.ToString();
+                //.Value.Item1.ToString();
+                OrderDateStatusTB.Text = tempDateAndStatus?[0]?.Item2.ToString();
+                DeliveryDateTB.Text = tempDateAndStatus?[1]?.Item1.ToString();
+                DeliveryDateStatusTB.Text = tempDateAndStatus?[1]?.Item2.ToString();
+                ShipDateTB.Text = tempDateAndStatus?[2]?.Item1.ToString();
+                ShipDateStatusTB.Text = tempDateAndStatus?[2]?.Item2.ToString();
 
                 OrderDateTB.Visibility = Visibility.Visible;
                 OrderDateStatusTB.Visibility = Visibility.Visible;
@@ -48,10 +49,10 @@ namespace PL.Order
             }
             if (tempOrderTracking.OrderStatus.ToString() == "sent")
             {
-                OrderDateTB.Text = tempDateAndStatus[0].Value.Item1.ToString();
-                OrderDateStatusTB.Text = tempDateAndStatus[0].Value.Item2.ToString();
-                DeliveryDateTB.Text = tempDateAndStatus[1].Value.Item1.ToString();
-                DeliveryDateStatusTB.Text = tempDateAndStatus[1].Value.Item2.ToString();
+                OrderDateTB.Text = tempDateAndStatus?[0]?.Item1.ToString();
+                OrderDateStatusTB.Text = tempDateAndStatus?[0]?.Item2.ToString();
+                DeliveryDateTB.Text = tempDateAndStatus?[1]?.Item1.ToString();
+                DeliveryDateStatusTB.Text = tempDateAndStatus?[1]?.Item2.ToString();
                 OrderDateTB.Visibility = Visibility.Visible;
                 OrderDateLbl.Visibility = Visibility.Visible;
                 DeliveryDateTB.Visibility = Visibility.Visible;
@@ -59,8 +60,8 @@ namespace PL.Order
             }
             if (tempOrderTracking.OrderStatus.ToString() == "received")
             {
-                OrderDateTB.Text = tempDateAndStatus[0].Value.Item1.ToString();
-                OrderDateStatusTB.Text= tempDateAndStatus[0].Value.Item2.ToString();
+                OrderDateTB.Text = tempDateAndStatus?[0]?.Item1.ToString();
+                OrderDateStatusTB.Text= tempDateAndStatus?[0]?.Item2.ToString();
                 OrderDateTB.Visibility = Visibility.Visible;
                 OrderDateLbl.Visibility = Visibility.Visible;
             }

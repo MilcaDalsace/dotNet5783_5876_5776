@@ -32,9 +32,10 @@ namespace PL.Order
             //תנאי שגוי לשנות
             if (order!=null)
             {
-                ordCustomerNameTxtB.Text = order.CustomerName.ToString();
-                ordCustomerEmailTxtB.Text=order.CustomerEmail.ToString();
-                ordCustomerAdderssLbl.Text = order.CustomerAdress.ToString();
+                //?
+                ordCustomerNameTxtB.Text = order.CustomerName?.ToString();
+                ordCustomerEmailTxtB.Text=order.CustomerEmail?.ToString();
+                ordCustomerAdderssLbl.Text = order.CustomerAdress?.ToString();
                 ordStatusTxtB.Text = order.OrderStatus.ToString();
                 ordFinalPriceLblTxtB.Text = order.FinalPrice.ToString();
                 ordDeliveryDateTxtB.Text = order.DeliveryDate.ToString();

@@ -10,11 +10,11 @@ namespace BO
     public class Order
     {
         public int ID { get; set; }
-        public string CustomerName { get; set; }
-        public string CustomerEmail { get; set; }
-        public string CustomerAdress { get; set; }
+        public string? CustomerName { get; set; }
+        public string? CustomerEmail { get; set; }
+        public string? CustomerAdress { get; set; }
         public Status OrderStatus { get; set; }
-        public List<OrderItem> OrderItemList { get; set; }
+        public List<OrderItem> ? OrderItemList { get; set; }
         public float FinalPrice { get; set; }
         public DateTime OrderDate { get; set; }
         public DateTime ShipDate { get; set; }
@@ -42,8 +42,8 @@ namespace BO
                     + "\n orderDate: " + OrderDate
                     + "\n shipDate: " + ShipDate + "\n deliveryDate: " + DeliveryDate
                     ;
-            for (int i = 0; i < OrderItemList.Count; i++)
-                tostring += "\n item" + (i + 1) + ": " + OrderItemList[i] + "\n";
+            for (int i = 0; i < (OrderItemList==null?0: OrderItemList.Count); i++)
+                tostring += "\n item" + (i + 1) + ": " + (OrderItemList == null?0: OrderItemList[i] )+ "\n";
             return tostring;
         }
     }

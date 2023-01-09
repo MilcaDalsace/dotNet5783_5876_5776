@@ -10,16 +10,16 @@ namespace BO
     {
         public int ID { get; set; }
         public Status OrderStatus { get; set; }
-        public List<(DateTime, string)?> DateAndStatus { get; set; }
+        public List<(DateTime, string)?>? DateAndStatus { get; set; }
 
 
 
         public override string ToString()
         {
             String toString = "Product ID: " + ID + "\nStatus: " + OrderStatus + "\nTime and status:\n";
-            for (int i = 0; i < DateAndStatus.Count; i++)
+            for (int i = 0; i < (DateAndStatus==null?0: DateAndStatus.Count); i++)
             {
-                toString += DateAndStatus[i] + "\n";
+                toString += (DateAndStatus == null ? 0: DateAndStatus[i] )+ "\n";
             }
 
             return toString;

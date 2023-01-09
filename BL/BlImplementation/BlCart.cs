@@ -11,8 +11,8 @@ namespace BlImplementation
 {
     internal class BlCart : ICart
     {
-        public static BO.Cart curCartP = new BO.Cart();
-        IDal CDal = DalApi.Factory.Get();
+      //  public static BO.Cart curCartP = new BO.Cart();
+        IDal ? CDal = DalApi.Factory.Get();
         /// <summary>
         /// A function that adds an item to the cart
         ///provided that: the item exists
@@ -25,7 +25,7 @@ namespace BlImplementation
             try
             {
                 //get the product from the list
-                DO.Product ProductToAdd = CDal.product.Read(product);
+                DO.Product ProductToAdd = CDal?.product.Read(product)??throw new NullException();
                 //Checking if the product is already in the basket and if
                 //so just updating the quantity
                 if (CurrCart.ItemOrderList != null)
@@ -91,7 +91,7 @@ namespace BlImplementation
             int difAmount;
             //Searches for the product you want to install and updates it
             bool found = false;
-            CurrCart.ItemOrderList.ToList().ForEach(Curr =>
+            CurrCart.ItemOrderList?.ToList().ForEach(Curr =>
             {
                 if (Curr.ProductId == product)
                 {
@@ -105,7 +105,7 @@ namespace BlImplementation
                     }
                     if (Curr.Amount < amount)
                     {
-                        if (amount - Curr.Amount > CDal.product.Read(product).InStock)
+                        if (amount - Curr.Amount > CDal?.product.Read(product).InStock)
                             throw new BO.OutOfStockExcption();
                         difAmount = amount - Curr.Amount;
                         Curr.Amount = amount;
@@ -149,9 +149,10 @@ namespace BlImplementation
             try
             {
                 DO.Product ProductToAdd;
-                CurrCart.ItemOrderList.ToList().ForEach(Curr =>
+                //?
+                CurrCart.ItemOrderList?.ToList().ForEach(Curr =>
                 {
-                    ProductToAdd = CDal.product.Read(Curr.ProductId);
+                    ProductToAdd = CDal?.product.Read(Curr.ProductId)?? throw new NullException();
                     if (ProductToAdd.InStock - Curr.Amount < 0)
                         throw new BO.OutOfStockExcption();
                     if (Curr.Amount < 0)
@@ -161,14 +162,14 @@ namespace BlImplementation
                 {
                     OrderDate = DateTime.Now,
                     CustomerName = CurrCart.Name,
-                    CustomerEmail = CurrCart.CustomerEmail,
+                    CustomerEmail = CurrCart.CustomerEmail!,
                     CustomerAdress = CurrCart.CustomerAdress,
                     ShipDate = DateTime.MinValue,
                     DeliveryDate = DateTime.MinValue
                 };
                 float finalPriceCart = 0;
-                int orderId = CDal.Order.Create(OrderToAdd);
-                CurrCart.ItemOrderList.ToList().ForEach(Curr =>
+                int orderId = CDal?.Order.Create(OrderToAdd)??throw new NullException();
+                CurrCart.ItemOrderList?.ToList().ForEach(Curr =>
                 {
                     ProductToAdd = CDal.product.Read(Curr.ProductId);
                     DO.OrderItem OrderItemToAdd = new DO.OrderItem()
@@ -184,7 +185,7 @@ namespace BlImplementation
                     finalPriceCart += Curr.Amount * ProductToAdd.Price;
                 });
             }
-            catch (TheArrayIsFull ex) { throw new BO.TheArrayIsFullException(); }
+            catch (TheArrayIsFull ex) { throw new BO.TheArrayIsFullException(ex); }
 
             catch (ObjectNotFoundException ex) { throw new BO.NoSuchObjectExcption(ex); };
 

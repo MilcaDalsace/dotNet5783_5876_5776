@@ -36,6 +36,11 @@ namespace BO
         public override string Message => "One fields inCorrect";
 
     }
+    public class NullException : Exception  //
+    {
+        public override string Message => "null exception";
+
+    }
     //public class OutOfStock : Exception  //
     //{
     //    public OutOfStock(OutOfStock ex) : base("Oout of stock", ex) { }

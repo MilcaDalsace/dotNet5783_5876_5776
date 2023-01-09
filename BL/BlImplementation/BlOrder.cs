@@ -14,7 +14,7 @@ namespace BlImplementation;
 
 internal class BlOrder : BLApi.IOrder
 {
-    IDal CDal = DalApi.Factory.Get();
+    IDal ? CDal = DalApi.Factory.Get();
     /// <summary>
     /// A function that returns a list of orders
     /// I don't get anything
@@ -23,7 +23,7 @@ internal class BlOrder : BLApi.IOrder
     {
         float sum = 0;
         List<BO.OrderForList> listToReturn = new List<BO.OrderForList>();
-        IEnumerable<DO.Order> list = CDal.Order.GetAll();
+        IEnumerable<DO.Order> list = CDal?.Order.GetAll()??throw new BO.NullException();
         try
         {
             list.ToList().ForEach(order =>
@@ -66,7 +66,7 @@ internal class BlOrder : BLApi.IOrder
     {
         float sum = 0;
         DO.Order currOrder = new DO.Order();
-        IEnumerable<DO.OrderItem> orderItemsIenum = CDal.orderItem.GetAll();
+        IEnumerable<DO.OrderItem> orderItemsIenum = CDal?.orderItem.GetAll()??throw new BO.NullException();
         List<BO.OrderItem> orderItems = new List<BO.OrderItem>();
         orderItemsIenum.ToList().ForEach(orderItem =>
         {
@@ -118,7 +118,7 @@ internal class BlOrder : BLApi.IOrder
         DO.Order orderToUpdate = new DO.Order();
         try
         {
-            orderToUpdate = CDal.Order.Read(idOrder);
+            orderToUpdate = CDal?.Order.Read(idOrder)??throw new BO.NullException();
             if (orderStatus(orderToUpdate) == BO.Status.received)
             {
                 orderToUpdate.ShipDate = DateTime.Now;
@@ -142,7 +142,7 @@ internal class BlOrder : BLApi.IOrder
     {
         try
         {
-            DO.Order order = CDal.Order.Read(idOrder);
+            DO.Order order = CDal?.Order.Read(idOrder)??throw new BO.NullException();
             if (orderStatus(order) == BO.Status.sent)
             {
                 order.DeliveryDate = DateTime.Now;
@@ -169,7 +169,7 @@ internal class BlOrder : BLApi.IOrder
             switch (action)
             {
                 case 1:
-                    DO.OrderItem baseItem = CDal.orderItem.ReadByFunc(item => item.OrderId == idOrder && item.ProductId == idProduct);
+                    DO.OrderItem baseItem = CDal?.orderItem.ReadByFunc(item => item.OrderId == idOrder && item.ProductId == idProduct)??throw new BO.NullException();
                     CDal.orderItem.Delete(baseItem.ID);
                     break;
                 case 2:
@@ -181,10 +181,10 @@ internal class BlOrder : BLApi.IOrder
                         //Price=?
                     };
                     //add try
-                    CDal.orderItem.Create(newOrder);
+                    CDal?.orderItem.Create(newOrder);
                     break;
                 case 3:
-                    float price = CDal.product.Read(idProduct).Price;
+                    float price = CDal?.product.Read(idProduct).Price??throw new BO.NullException();
                     DO.OrderItem baseItemForUpdate = CDal.orderItem.ReadByFunc(item => item.OrderId == idOrder && item.ProductId == idProduct);
                     baseItemForUpdate.Amount = CurAmount;
                     baseItemForUpdate.Price = price * CurAmount;

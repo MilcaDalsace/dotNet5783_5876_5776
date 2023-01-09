@@ -26,5 +26,9 @@ namespace DalApi
         public override string Message => "The number of order details is limited to 4";
 
     }
+    public class NullException : Exception  // Limit to 4 items of the same type per order
+    {
+        public override string Message => "null exception";
 
+    }
 }
