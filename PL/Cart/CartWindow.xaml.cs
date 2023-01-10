@@ -21,15 +21,12 @@ namespace PL.Cart
     public partial class CartWindow : Window
     {
         private IBl tempBl = BLApi.Factory.Get();
-        BO.OrderItem curProduct;
+        public BO.OrderItem curProduct { get; set; }
         public CartWindow(BO.OrderItem product)
         {
             InitializeComponent();
             curProduct=product;
-            nameTxt.Text=product.ProductName;
-            priceTxt.Text = product.Price.ToString();
-            finalPriceTxt.Text=product.FinalPrice.ToString();
-            amountTxt.Text=product.Amount.ToString();
+            DataContext = new { product = curProduct };
         }
 
         private void changeAmountBtn_Click(object sender, RoutedEventArgs e)

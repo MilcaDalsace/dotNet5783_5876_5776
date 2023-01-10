@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,42 +25,27 @@ namespace PL
         private IBl tempBl;
         private BO.Product tempProduct=new BO.Product();
         int? tempId;
-        int debily = 0;
         BO.Cart userCartToUpdate = new BO.Cart();
+        public string StatusProp { get; set; }
+        public Array categoryProp { get; set; }
         public ProductWindow(IBl bl,int id,string status)
         {
             InitializeComponent();
-            DataContext = tempProduct;
+            StatusProp = status;
             tempBl = bl;
-            proCategoryCB.ItemsSource = Enum.GetValues(typeof(BO.Categories));
+            categoryProp = Enum.GetValues(typeof(BO.Categories));
             tempProduct = new BO.Product();
             tempId = id;
             if (id != 0)
-            {
-                tempProduct= tempBl.Product.GetProductDetails(id); ;
-                proNameTxtB.Text= tempProduct.Name;
-                proAmountTxtB.Text = tempProduct.InStock.ToString();
-                proPriceTxtB.Text = tempProduct.Price.ToString();
-                proCategoryCB.Text = tempProduct.Category.ToString();
-            }
-            if (status != "admin")
-            {
-                proNameTxtB.IsEnabled = false;
-                proAmountTxtB.IsEnabled = false;
-                proPriceTxtB.IsEnabled = false;
-                proCategoryCB.IsEnabled = false;
-                submitBtn.Visibility = Visibility.Hidden;
-            }
-            else
-                AddProToCartBtn.Visibility= Visibility.Hidden;  
-            }
+                tempProduct = tempBl.Product.GetProductDetails(id);
+            DataContext = new { product= tempProduct, StatusProp = StatusProp,category= categoryProp };
+        }
         private void submitBtn_Click(object sender, RoutedEventArgs e)
         {
             try { 
             if (tempId==0)
             {
                 tempBl.Product.AddProduct(tempProduct);
-                debily++;
                 Close();
             }
             else
@@ -77,26 +63,26 @@ namespace PL
             }
         }
 
-        private void proNameTxtB_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            tempProduct.Name=proNameTxtB.Text;
-        }
+        //private void proNameTxtB_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    tempProduct.Name=proNameTxtB.Text;
+        //}
 
-        private void proPriceTxtB_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            //tofloat how to do
-            tempProduct.Price = Convert.ToInt32(proPriceTxtB.Text);
-        }
+        //private void proPriceTxtB_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    //tofloat how to do
+        //    tempProduct.Price = Convert.ToInt32(proPriceTxtB.Text);
+        //}
 
-        private void proAmountTxtB_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            tempProduct.InStock =Convert.ToInt32(proAmountTxtB.Text);
-        }
+        //private void proAmountTxtB_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    tempProduct.InStock =Convert.ToInt32(proAmountTxtB.Text);
+        //}
 
-        private void proCategoryCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            tempProduct.Category =(BO.Categories)( proCategoryCB.SelectedItem);
-        }
+        //private void proCategoryCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    tempProduct.Category = (BO.Categories)(proCategoryCB.SelectedItem);
+        //}
 
         private void AddProToCartBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -125,6 +111,91 @@ namespace PL
                 this.Close();
             }
             // ProductListWindow.curCartP.ItemOrderList = userCartToUpdate.ItemOrderList.Add(tempProduct);
+        }
+    }
+    public class NotBooleanToIsEnabledConverter : IValueConverter
+        {
+            public object Convert(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture)
+            {
+                //bool boolValue = (bool)value;
+                if (value.ToString()!= "admin")
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+
+            CultureInfo culture)
+            {
+                throw new NotImplementedException();
+            }
+        }
+    public class NotBooleanToVisibilityConverter : IValueConverter
+    {
+        public object Convert(
+        object value,
+        Type targetType,
+        object parameter,
+        CultureInfo culture)
+        {
+            // bool boolValue = (bool)value;
+            if (value.ToString() != "admin")
+            {
+                return Visibility.Hidden;
+            }
+            else
+            {
+                return Visibility.Visible;
+            }
+        }
+        public object ConvertBack(
+        object value,
+        Type targetType,
+        object parameter,
+
+        CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    //NotBooleanToAddProToCartBtnConverter
+    public class NotBooleanToAddProToCartBtnConverter : IValueConverter
+    {
+        public object Convert(
+        object value,
+        Type targetType,
+        object parameter,
+        CultureInfo culture)
+        {
+            // bool boolValue = (bool)value;
+            if (value.ToString() == "admin")
+            {
+                return Visibility.Hidden;
+            }
+            else
+            {
+                return Visibility.Visible;
+            }
+        }
+        public object ConvertBack(
+        object value,
+        Type targetType,
+        object parameter,
+
+        CultureInfo culture)
+        {
+            throw new NotImplementedException();
         }
     }
 }

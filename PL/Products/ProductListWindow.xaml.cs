@@ -18,21 +18,25 @@ using BO;
 using PL;
 using PL.Cart;
 using BlImplementation;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
 namespace PL
 {
     /// <summary>
     /// Interaction logic for ProductListWindow.xaml
     /// </summary>
-    public partial class ProductListWindow : Window
+    public partial class ProductListWindow : Window,INotifyPropertyChanged
     {
         int debily=0;
         private IBl tempBl=BLApi.Factory.Get();
         string userStatus;
-        
+        public event PropertyChangedEventHandler PropertyChanged;
         public ProductListWindow(string status)
         {
             InitializeComponent();
-            //DataContext= tempBl.Product.GetProductList();
+            ////ataContext=this;
+           DataContext= tempBl.Product.GetProductList();
             if (status != "admin")
             {
                 AddProductBtn.Visibility = Visibility.Hidden;
@@ -59,11 +63,15 @@ namespace PL
         private void AddProductBtn_Click(object sender, RoutedEventArgs e)
         {
             new ProductWindow(tempBl,0, userStatus).ShowDialog();
+            OnPropertyChanged();
             //change 27/12
             //bool GetBy(DO.Product p) => p.Category == (DO.Categories)AttributeSelector.SelectedItem;
-            ProductsListview.ItemsSource = tempBl.Product.GetProductList();
+            //ProductsListview.ItemsSource = tempBl.Product.GetProductList();
         }
-
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
         private void ProductsListview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             BO.ProductForList product = (BO.ProductForList)((ListView)sender).SelectedItem;
