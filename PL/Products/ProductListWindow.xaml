@@ -19,18 +19,18 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-            <ComboBox x:Name="AttributeSelector" Grid.Column="1" Margin="40,56,40,0" VerticalAlignment="Top" SelectionChanged="AttributeSelector_SelectionChanged"/>
+            <ComboBox x:Name="AttributeSelector" Margin="10,10,10,0" VerticalAlignment="Top" SelectionChanged="AttributeSelector_SelectionChanged" FontFamily="Comic Sans MS" FontSize="12" Grid.ColumnSpan="4" Height="26"/>
             <Label Content="Label"  HorizontalAlignment="Left" Grid.Column="0" Margin="448,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.056,2.452"/>
         </Grid>
-        <ListView x:Name="ProductsListview" DisplayMemberPath="{Binding}"  d:ItemsSource="{d:SampleData  ItemCount=100}" MouseDoubleClick="ProductsListview_MouseDoubleClick" HorizontalAlignment="Left" Margin="0,208,0,0" Grid.RowSpan="2" Width="800" >
+        <ListView x:Name="ProductsListview" DisplayMemberPath="{Binding}"  d:ItemsSource="{d:SampleData  ItemCount=100}" MouseDoubleClick="ProductsListview_MouseDoubleClick" HorizontalAlignment="Center" Width="780" FontFamily="Comic Sans MS" FontSize="12" VerticalAlignment="Top" Height="499" Margin="0,50,0,0" Grid.RowSpan="3">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="AddProductBtn" Content="Add new Product" Grid.Row="2" HorizontalAlignment="Right" Margin="5" Padding="5" Click="AddProductBtn_Click" FontFamily="Comic Sans MS" FontWeight="Bold" FontSize="18" Opacity="0.5" BorderBrush="White"/>
-        <Button x:Name="ShowCartBtn" Content="Show cart" HorizontalAlignment="Left" Margin="445,63,0,0" Grid.Row="2" VerticalAlignment="Top" Height="105" Width="80" Click="ShowCartBtn_Click"/>
+        <Button x:Name="AddProductBtn" Content="Add new Product" Grid.Row="2" HorizontalAlignment="Left" Margin="10,158,0,0" Height="40" Click="AddProductBtn_Click" FontFamily="Comic Sans MS" FontWeight="Bold" FontSize="20" Opacity="0.5" BorderBrush="White" Width="385" RenderTransformOrigin="0.485,0.018"/>
+        <Button x:Name="ShowCartBtn" Content="Show cart" HorizontalAlignment="Right" Margin="405,158,0,0" Grid.Row="2" VerticalAlignment="Center" Height="40" Width="385" Click="ShowCartBtn_Click" FontWeight="Bold" FontFamily="Comic Sans MS" FontSize="20"/>
 
     </Grid>
 </Window>
