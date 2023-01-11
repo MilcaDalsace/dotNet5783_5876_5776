@@ -96,7 +96,7 @@ namespace BlImplementation
                 if (Curr.ProductId == product)
                 {
                     found = true;
-                    if (Curr.Amount > amount)
+                    if (Curr.Amount >= amount)
                     {
                         difAmount = Curr.Amount - amount;
                         Curr.Amount = amount;

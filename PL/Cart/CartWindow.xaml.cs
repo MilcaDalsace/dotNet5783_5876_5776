@@ -25,12 +25,14 @@ namespace PL.Cart
         public CartWindow(BO.OrderItem product)
         {
             InitializeComponent();
-            curProduct=product;
+            curProduct = product;
+            ICart.curCartP.CustomerAdress = "l";
             DataContext = new { product = curProduct };
         }
 
         private void changeAmountBtn_Click(object sender, RoutedEventArgs e)
         {
+            ICart.curCartP.CustomerAdress = "l";            
             try {
             tempBl.Cart.UpdateAmount(ICart.curCartP, curProduct.ProductId, Convert.ToInt32(amountTxt.Text));
             Close(); 
@@ -52,5 +54,14 @@ namespace PL.Cart
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void finalPriceTxt_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void amountTxt_TextChanged(object sender, TextChangedEventArgs e)
+        {
+               }
     }
 }
