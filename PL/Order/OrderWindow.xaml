@@ -8,27 +8,29 @@
         Title="OrderWindow" Height="450" Width="800">
     <Window.Resources>
         <local:NotBooleanToDeliVeryvisibilityConverter x:Key="notBooleanToDeliVeryvisibilityConverter" />
-        
     </Window.Resources>
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Order/background5.jpg"/>
+        </Grid.Background>
 
-        <TextBox x:Name="ordCustomerNameTxtB" IsEnabled="False" HorizontalAlignment="Left" Margin="110,20,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="ordCustomerEmailTxtB" IsEnabled="False" Text="{Binding order.CustomerEmail, Mode=TwoWay }" HorizontalAlignment="Left" Margin="110,51,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="ordCustomerAdderssLbl" IsEnabled="False" Text="{Binding order.CustomerAdress, Mode=TwoWay }" HorizontalAlignment="Left" Margin="121,82,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label x:Name="ordCustomerEmailLbl" Content="customer Email:" HorizontalAlignment="Left" Margin="15,47,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.41,-1.78"/>
-        <Label x:Name="ordCustomerAdderssLbl1" Content="customer address:" HorizontalAlignment="Left" Margin="15,78,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.41,-1.78"/>
-        <Label x:Name="prodNameLbl" HorizontalAlignment="Left" Margin="215,147,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.41,-1.78" Width="158"/>
-        <Label x:Name="ordCustomerNameLbl" Content="customer name:" HorizontalAlignment="Left" Margin="15,16,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.41,-1.78"/>
-        <Label x:Name="orderStatusLbl" Content="order status:" HorizontalAlignment="Left" Margin="15,109,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.41,-1.78"/>
-        <Label x:Name="ordFinalPriceLbl" Content="final price:" HorizontalAlignment="Left" Margin="15,299,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.41,-1.78"/>
-        <Label x:Name="ordShipDateLbl" Content="ship date:" HorizontalAlignment="Left" Margin="15,349,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.41,-1.78"/>
-        <Label x:Name="ordDeliveryDateLbl" Content="delivery date:" HorizontalAlignment="Left" Margin="10,380,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.41,-1.78"/>
-        <TextBox x:Name="ordStatusTxtB" IsEnabled="False" Text="{Binding order.OrderStatus, Mode=TwoWay }" HorizontalAlignment="Left" Margin="91,113,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="ordDeliveryDateTxtB" IsEnabled="False" Text="{Binding order.DeliveryDate, Mode=TwoWay }" HorizontalAlignment="Left" Margin="96,384,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="ordFinalPriceLblTxtB" IsEnabled="False" Text="{Binding order.FinalPrice, Mode=TwoWay }" HorizontalAlignment="Left" Margin="81,303,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="ordShipDateTxtB" IsEnabled="False" Text="{Binding order.ShipDate, Mode=TwoWay }" HorizontalAlignment="Left" Margin="77,353,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
-        <GroupBox x:Name="ordItemListGB" Header="order item list:" Margin="15,138,540,144" HorizontalAlignment="Left" Width="200">
-            <ListView x:Name="orderItemListLV" ItemsSource="{Binding order.OrderItemList }">
+        <TextBox x:Name="ordCustomerNameTxtB" IsEnabled="False" HorizontalAlignment="Left" Margin="110,20,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Opacity="20.05" />
+        <TextBox x:Name="ordCustomerEmailTxtB" IsEnabled="False" Text="{Binding order.CustomerEmail, Mode=TwoWay }" HorizontalAlignment="Left" Margin="110,51,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Opacity="20.05"/>
+        <TextBox x:Name="ordCustomerAdderssLbl" IsEnabled="False" Text="{Binding order.CustomerAdress, Mode=TwoWay }" HorizontalAlignment="Left" Margin="121,82,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="20.05"/>
+        <Label x:Name="ordCustomerEmailLbl" Content="customer Email:" HorizontalAlignment="Left" Margin="15,47,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.41,-1.78" Opacity="20.05"/>
+        <Label x:Name="ordCustomerAdderssLbl1" Content="customer address:" HorizontalAlignment="Left" Margin="15,78,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.41,-1.78" Opacity="20.05"/>
+        <Label x:Name="prodNameLbl" HorizontalAlignment="Left" Margin="215,147,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.41,-1.78" Width="158" Opacity="20.05"/>
+        <Label x:Name="ordCustomerNameLbl" Content="customer name:" HorizontalAlignment="Left" Margin="15,16,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.41,-1.78" Opacity="20.05"/>
+        <Label x:Name="orderStatusLbl" Content="order status:" HorizontalAlignment="Left" Margin="15,109,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.41,-1.78" Opacity="20.05"/>
+        <Label x:Name="ordFinalPriceLbl" Content="final price:" HorizontalAlignment="Left" Margin="15,299,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.41,-1.78" Opacity="20.05"/>
+        <Label x:Name="ordShipDateLbl" Content="ship date:" HorizontalAlignment="Left" Margin="15,349,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.41,-1.78" Opacity="20.05"/>
+        <Label x:Name="ordDeliveryDateLbl" Content="delivery date:" HorizontalAlignment="Left" Margin="15,380,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.41,-1.78" Opacity="20.05"/>
+        <TextBox x:Name="ordStatusTxtB" IsEnabled="False" Text="{Binding order.OrderStatus, Mode=TwoWay }" HorizontalAlignment="Left" Margin="91,113,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="20.05"/>
+        <TextBox x:Name="ordDeliveryDateTxtB" IsEnabled="False" Text="{Binding order.DeliveryDate, Mode=TwoWay }" HorizontalAlignment="Left" Margin="96,384,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="20.05"/>
+        <TextBox x:Name="ordFinalPriceLblTxtB" IsEnabled="False" Text="{Binding order.FinalPrice, Mode=TwoWay }" HorizontalAlignment="Left" Margin="81,303,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Opacity="20.05"/>
+        <TextBox x:Name="ordShipDateTxtB" IsEnabled="False" Text="{Binding order.ShipDate, Mode=TwoWay }" HorizontalAlignment="Left" Margin="77,353,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Opacity="20.05"/>
+        <GroupBox x:Name="ordItemListGB" Header="order item list:" Margin="15,138,0,140" HorizontalAlignment="Left" Width="244" Opacity="20.05">
+            <ListView x:Name="orderItemListLV" ItemsSource="{Binding order.OrderItemList }" Opacity="20.05">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price}"/>
@@ -39,8 +41,8 @@
                 </ListView.View>
             </ListView>
         </GroupBox>
-        <Button x:Name="ordUpdateShipDateBtn" Visibility="{Binding Path=status, Converter={StaticResource notBooleanToDeliVeryvisibilityConverter}}" Content="update" HorizontalAlignment="Left" Height="19" Margin="202,353,0,0" VerticalAlignment="Top" Width="114" Click="ordUpdateShipDateBtn_Click"/>
-        <Button x:Name="ordUpdateDeliveryDateBtn" Visibility="{Binding Path=status, Converter={StaticResource notBooleanToDeliVeryvisibilityConverter}}" Content="update" HorizontalAlignment="Left" Height="19" Margin="221,380,0,0" VerticalAlignment="Top" Width="114" Click="ordUpdateDeliveryDateBtn_Click"/>
+        <Button x:Name="ordUpdateShipDateBtn" Visibility="{Binding Path=status, Converter={StaticResource notBooleanToDeliVeryvisibilityConverter}}" Content="update" HorizontalAlignment="Left" Height="19" Margin="202,353,0,0" VerticalAlignment="Top" Width="114" Click="ordUpdateShipDateBtn_Click" Opacity="20.05"/>
+        <Button x:Name="ordUpdateDeliveryDateBtn" Visibility="{Binding Path=status, Converter={StaticResource notBooleanToDeliVeryvisibilityConverter}}" Content="update" HorizontalAlignment="Left" Height="19" Margin="221,380,0,0" VerticalAlignment="Top" Width="114" Click="ordUpdateDeliveryDateBtn_Click" Opacity="20.05"/>
 
 
     </Grid>

@@ -34,7 +34,9 @@ namespace PL
 
         private void BtnOrderTracking_Click(object sender, RoutedEventArgs e)
         {
-            new OrderListWindow(bl, "orderTracking").ShowDialog();
+            //new OrderListWindow(bl, "orderTracking").ShowDialog();
+            OrderTrackingSP.Visibility = Visibility.Visible;
+            OrderTrackingSP.IsEnabled = true;
         }
 
         private void BtnAdmin_Click(object sender, RoutedEventArgs e)

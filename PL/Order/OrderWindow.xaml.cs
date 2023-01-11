@@ -25,16 +25,16 @@ namespace PL.Order
         int tempId;
         private BO.Order? order;
         public string statusProp { get; set; }
-        public OrderWindow(IBl bl,int id,string status)
+        public OrderWindow(IBl bl, int id, string status)
         {
             InitializeComponent();
             tempBl = bl;
             tempId = id;
             statusProp = status;
             order = tempBl.Order.GetOrderDetails(id);
-            DataContext=new { order = order,status= statusProp };
+            DataContext = new { order = order, status = statusProp };
             //תנאי שגוי לשנות
-            if (order!=null)
+            if (order != null)
             {
                 //?
                 //ordCustomerNameTxtB.Text = order.CustomerName?.ToString();
@@ -44,7 +44,7 @@ namespace PL.Order
                 //ordFinalPriceLblTxtB.Text = order.FinalPrice.ToString();
                 //ordDeliveryDateTxtB.Text = order.DeliveryDate.ToString();
                 //ordShipDateTxtB.Text = order.ShipDate.ToString();
-               // orderItemListLV.ItemsSource=order.OrderItemList;
+                // orderItemListLV.ItemsSource=order.OrderItemList;
                 //ordCustomerNameTxtB.IsEnabled=false;
                 //ordCustomerEmailTxtB.IsEnabled = false;
                 //ordCustomerAdderssLbl.IsEnabled = false;
@@ -62,11 +62,11 @@ namespace PL.Order
                 //    ordUpdateDeliveryDateBtn.Visibility = Visibility.Visible;
                 //    ordUpdateShipDateBtn.Visibility = Visibility.Visible;
                 //}
-                if(status== "orderTracking")
-                {
+                //if (status == "orderTracking")
+                //{
 
-                }
-                    //saveChangesBtn.Visibility=Visibility.Visible;
+                //}
+                //saveChangesBtn.Visibility=Visibility.Visible;
             }
         }
 

@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <None Remove="background4.jpg" />
+    <None Remove="Order\background5.jpg" />
     <None Remove="Products\background1.jpg" />
   </ItemGroup>
 
@@ -28,6 +29,7 @@
 
   <ItemGroup>
     <Resource Include="background4.jpg" />
+    <Resource Include="Order\background5.jpg" />
     <Resource Include="Products\background1.jpg" />
   </ItemGroup>
 

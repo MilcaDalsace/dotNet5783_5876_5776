@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:PL.Order"
         mc:Ignorable="d"
         Title="OrderTrackingWindow" Height="450" Width="800">
-    <Grid>
-        <TextBox x:Name="ShipDateTB" HorizontalAlignment="Left" Margin="275,261,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" Visibility="Hidden"/>
+    <Grid >
+        <TextBox x:Name="ShipDateTB" HorizontalAlignment="Left" Margin="275,261,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" Visibility="Hidden" />
         <Label x:Name="ShipDateLbl" Content="Ship Date" HorizontalAlignment="Left" Margin="182,257,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.589,0.576" IsEnabled="False" Visibility="Hidden"/>
         <TextBox x:Name="OrderStatusTB" HorizontalAlignment="Left" Margin="275,168,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
         <Label x:Name="OrderStatusLbl" Content="Order status" HorizontalAlignment="Left" Margin="185,164,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.589,0.576"/>
