@@ -6,6 +6,10 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="ProductListWindow" Height="640" Width="800">
+    <Window.Resources>
+        <local:NotBooleanToVisibilityConverter1 x:Key="notBooleanToVisibilityConverter" />
+        <local:NotBooleanToVisibilityShowCartBtnConverter x:Key="notBooleanToVisibilityShowCartBtnConverter" />
+    </Window.Resources>
     <Grid Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="50*"/>
@@ -22,15 +26,18 @@
             <ComboBox x:Name="AttributeSelector" Grid.Column="1" Margin="40,56,40,0" VerticalAlignment="Top" SelectionChanged="AttributeSelector_SelectionChanged"/>
             <Label Content="Label"  HorizontalAlignment="Left" Grid.Column="0" Margin="448,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.056,2.452"/>
         </Grid>
-        <ListView x:Name="ProductsListview" DisplayMemberPath="{Binding}"  d:ItemsSource="{d:SampleData  ItemCount=100}" MouseDoubleClick="ProductsListview_MouseDoubleClick" HorizontalAlignment="Left" Margin="0,208,0,0" Grid.RowSpan="2" Width="800" >
+        <ListView x:Name="ProductsListview" ItemsSource="{Binding products}" DisplayMemberPath="{Binding}"  d:ItemsSource="{d:SampleData  ItemCount=100}" MouseDoubleClick="ProductsListview_MouseDoubleClick" HorizontalAlignment="Left" Margin="0,208,0,0" Grid.RowSpan="2" Width="800" >
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn Header="id" DisplayMemberBinding="{Binding ID}"/>
+                    <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price}"/>
+                    <GridViewColumn Header="category" DisplayMemberBinding="{Binding Category}"/>
+                    <GridViewColumn Header="productname" DisplayMemberBinding="{Binding ProductName}"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="AddProductBtn" Content="Add new Product" Grid.Row="2" HorizontalAlignment="Right" Margin="5" Padding="5" Click="AddProductBtn_Click" FontFamily="Comic Sans MS" FontWeight="Bold" FontSize="18" Opacity="0.5" BorderBrush="White"/>
-        <Button x:Name="ShowCartBtn" Content="Show cart" HorizontalAlignment="Left" Margin="445,63,0,0" Grid.Row="2" VerticalAlignment="Top" Height="105" Width="80" Click="ShowCartBtn_Click"/>
+        <Button x:Name="AddProductBtn" Visibility="{Binding Path=status, Converter={StaticResource notBooleanToVisibilityConverter}}" Content="Add new Product" Grid.Row="2" HorizontalAlignment="Right" Margin="5" Padding="5" Click="AddProductBtn_Click" FontFamily="Comic Sans MS" FontWeight="Bold" FontSize="18" Opacity="0.5" BorderBrush="White"/>
+        <Button x:Name="ShowCartBtn" Visibility="{Binding Path=status, Converter={StaticResource notBooleanToVisibilityShowCartBtnConverter}}" Content="Show cart" HorizontalAlignment="Left" Margin="445,63,0,0" Grid.Row="2" VerticalAlignment="Top" Height="105" Width="80" Click="ShowCartBtn_Click"/>
 
     </Grid>
 </Window>

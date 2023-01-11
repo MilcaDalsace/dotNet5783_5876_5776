@@ -15,15 +15,24 @@
         <Grid.Background>
             <ImageBrush ImageSource="/Products/background1.jpg"/>
         </Grid.Background>
-        <Label x:Name="prodNameLbl" Content="enter product name:" HorizontalAlignment="Left" Margin="244,29,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.41,-1.78"/>
-        <Label x:Name="proPriceLbl" Content="enter product price:" HorizontalAlignment="Left" Margin="250,115,0,0" VerticalAlignment="Top" />
-        <Label x:Name="proAmountLbl" Content="enter product amount:" HorizontalAlignment="Left" Margin="244,194,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="proCategoryLbl" Content="enter product Category:" HorizontalAlignment="Left" Margin="244,289,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.41,-1.78"/>
-        <TextBox x:Name="proNameTxtB" IsEnabled="{Binding Path=StatusProp, Converter={StaticResource notBooleanToIsEnabledConverter}}" Text = "{Binding product.Name, Mode=TwoWay }" HorizontalAlignment="Left" Margin="244,60,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" />
-        <TextBox x:Name="proPriceTxtB" IsEnabled="{Binding Path=StatusProp, Converter={StaticResource notBooleanToIsEnabledConverter}}" HorizontalAlignment="Left" Margin="244,146,0,0" TextWrapping="Wrap" Text="{Binding product.Price, Mode=TwoWay }" VerticalAlignment="Top" Width="120"  />
-        <TextBox x:Name="proAmountTxtB" IsEnabled="{Binding Path=StatusProp, Converter={StaticResource notBooleanToIsEnabledConverter}}" HorizontalAlignment="Left" Margin="244,225,0,0" TextWrapping="Wrap" Text="{Binding product.InStock, Mode=TwoWay }" VerticalAlignment="Top" Width="120"  />
-        <ComboBox x:Name="proCategoryCB" ItemsSource="{Binding category}" IsEnabled="{Binding Path=StatusProp, Converter={StaticResource notBooleanToIsEnabledConverter}}" Text="{Binding product.Category,  Mode=TwoWay}" HorizontalAlignment="Left" Margin="244,320,0,0" VerticalAlignment="Top" Width="120" />
-        <Button x:Name="submitBtn" Visibility="{Binding Path=StatusProp, Converter={StaticResource notBooleanToVisibilityConverter}}" Content="submit" HorizontalAlignment="Left" Height="19" Margin="250,376,0,0" VerticalAlignment="Top" Width="114" Click="submitBtn_Click"/>
-        <Button x:Name="AddProToCartBtn" Visibility="{Binding Path=StatusProp, Converter={StaticResource notBooleanToAddProToCartBtnConverter}}" Content="Add to cart" HorizontalAlignment="Left" Margin="449,386,0,0" VerticalAlignment="Top" Click="AddProToCartBtn_Click"/>
+        <Label x:Name="prodNameLbl" Content="enter product name:" HorizontalAlignment="Left" Margin="66,71,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.41,-1.78"/>
+        <Label x:Name="proPriceLbl" Content="enter product price:" HorizontalAlignment="Left" Margin="66,120,0,0" VerticalAlignment="Top" />
+        <Label x:Name="proAmountLbl" Content="enter product amount:" HorizontalAlignment="Left" Margin="66,182,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="proCategoryLbl" Content="enter product Category:" HorizontalAlignment="Left" Margin="66,235,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.41,-1.78"/>
+        <TextBox x:Name="proNameTxtB" IsEnabled="{Binding Path=StatusProp, Converter={StaticResource notBooleanToIsEnabledConverter}}" Text = "{Binding product.Name, Mode=TwoWay }" HorizontalAlignment="Left" Margin="66,102,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" />
+        <TextBox x:Name="proPriceTxtB" IsEnabled="{Binding Path=StatusProp, Converter={StaticResource notBooleanToIsEnabledConverter}}" HorizontalAlignment="Left" Margin="66,151,0,0" TextWrapping="Wrap" Text="{Binding product.Price, Mode=TwoWay }" VerticalAlignment="Top" Width="120"  />
+        <TextBox x:Name="proAmountTxtB" IsEnabled="{Binding Path=StatusProp, Converter={StaticResource notBooleanToIsEnabledConverter}}" HorizontalAlignment="Left" Margin="66,213,0,0" TextWrapping="Wrap" Text="{Binding product.InStock, Mode=TwoWay }" VerticalAlignment="Top" Width="120"  />
+        <ComboBox x:Name="proCategoryCB" ItemsSource="{Binding category}" IsEnabled="{Binding Path=StatusProp, Converter={StaticResource notBooleanToIsEnabledConverter}}" Text="{Binding product.Category,  Mode=TwoWay}" HorizontalAlignment="Left" Margin="64,264,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.5,0.5" >
+            <ComboBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.707"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </ComboBox.RenderTransform>
+        </ComboBox>
+        <Button x:Name="submitBtn" Visibility="{Binding Path=StatusProp, Converter={StaticResource notBooleanToVisibilityConverter}}" Content="submit" HorizontalAlignment="Left" Height="19" Margin="64,294,0,0" VerticalAlignment="Top" Width="114" Click="submitBtn_Click"/>
+        <Button x:Name="AddProToCartBtn" Visibility="{Binding Path=StatusProp, Converter={StaticResource notBooleanToAddProToCartBtnConverter}}" Content="Add to cart" HorizontalAlignment="Left" Margin="64,318,0,0" VerticalAlignment="Top" Click="AddProToCartBtn_Click" Width="118"/>
     </Grid>
 </Window>

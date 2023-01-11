@@ -20,6 +20,7 @@ using PL.Cart;
 using BlImplementation;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Globalization;
 
 namespace PL
 {
@@ -28,30 +29,35 @@ namespace PL
     /// </summary>
     public partial class ProductListWindow : Window,INotifyPropertyChanged
     {
-        int debily=0;
         private IBl tempBl=BLApi.Factory.Get();
-        string userStatus;
+       // string userStatus;
+        public IEnumerable<BO.ProductForList> products { get; set; }
+        public string statusProp { get; set; }
+        public Array categoriesForP { get; set; }
+        //public IEnumerable<BO.ProductForList> productList { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
         public ProductListWindow(string status)
         {
             InitializeComponent();
-            ////ataContext=this;
-           DataContext= tempBl.Product.GetProductList();
-            if (status != "admin")
-            {
-                AddProductBtn.Visibility = Visibility.Hidden;
-                ShowCartBtn.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                AddProductBtn.Visibility = Visibility.Visible;
-                ShowCartBtn.Visibility = Visibility.Hidden;
-            }
+            products= tempBl.Product.GetProductList();
+            statusProp = status;
+            //if (status != "admin")
+            //{
+            //    AddProductBtn.Visibility = Visibility.Hidden;
+            //    ShowCartBtn.Visibility = Visibility.Visible;
+            //}
+            //else
+            //{
+            //    AddProductBtn.Visibility = Visibility.Visible;
+            //    ShowCartBtn.Visibility = Visibility.Hidden;
+            //}
                
-            userStatus = status;
-            AttributeSelector.ItemsSource = Enum.GetValues(typeof(BO.Categories));
-            ProductsListview.ItemsSource = tempBl.Product.GetProductList();
-            debily = ProductsListview.Items.Count;
+           // userStatus = status;
+            //AttributeSelector.ItemsSource
+            categoriesForP = Enum.GetValues(typeof(BO.Categories));
+           // ProductsListview.ItemsSource
+            //productList = tempBl.Product.GetProductList();
+            DataContext = new {products=products,status=statusProp,categories= categoriesForP };
         }
 
         private void AttributeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -62,7 +68,7 @@ namespace PL
 
         private void AddProductBtn_Click(object sender, RoutedEventArgs e)
         {
-            new ProductWindow(tempBl,0, userStatus).ShowDialog();
+            new ProductWindow(tempBl,0, statusProp).ShowDialog();
             OnPropertyChanged();
             //change 27/12
             //bool GetBy(DO.Product p) => p.Category == (DO.Categories)AttributeSelector.SelectedItem;
@@ -75,8 +81,7 @@ namespace PL
         private void ProductsListview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             BO.ProductForList product = (BO.ProductForList)((ListView)sender).SelectedItem;
-            //BO.ProductForList product = (BO.ProductForList)(sender as ListView).SelectedItem;
-            new ProductWindow(tempBl, product.ID, userStatus).ShowDialog();
+            new ProductWindow(tempBl, product.ID, statusProp).ShowDialog();
             ProductsListview.ItemsSource = tempBl.Product.GetProductList();
 
         }
@@ -84,6 +89,60 @@ namespace PL
         private void ShowCartBtn_Click(object sender, RoutedEventArgs e)
         {
             new CartListWindow().Show();
+        }
+    }
+    public class NotBooleanToVisibilityConverter1 : IValueConverter
+    {
+        public object Convert(
+        object value,
+        Type targetType,
+        object parameter,
+        CultureInfo culture)
+        { 
+            if (value.ToString() != "admin")
+            {
+                return Visibility.Hidden;
+            }
+            else
+            {
+                return Visibility.Visible;
+            }
+        }
+        public object ConvertBack(
+        object value,
+        Type targetType,
+        object parameter,
+
+        CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class NotBooleanToVisibilityShowCartBtnConverter : IValueConverter
+    {
+        public object Convert(
+        object value,
+        Type targetType,
+        object parameter,
+        CultureInfo culture)
+        {
+            if (value.ToString() != "admin")
+            {
+                return Visibility.Visible;
+            }
+            else
+            {
+                return Visibility.Hidden;
+            }
+        }
+        public object ConvertBack(
+        object value,
+        Type targetType,
+        object parameter,
+
+        CultureInfo culture)
+        {
+            throw new NotImplementedException();
         }
     }
 }

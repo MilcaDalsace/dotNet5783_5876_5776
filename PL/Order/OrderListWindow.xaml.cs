@@ -1,4 +1,5 @@
 ﻿using BLApi;
+using BO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,10 +30,11 @@ namespace PL.Order
             tempBl = bl;
             List<BO.OrderForList> tempOrderForList = (List<BO.OrderForList>)bl.Order.GetListOrder();
             List<BO.OrderTracking> tempOrderTracking = new List<BO.OrderTracking>();
-            foreach (BO.OrderForList orderForList in tempOrderForList)
-            {
-                tempOrderTracking.Add(bl.Order.GetOrderTracking(orderForList.ID));
-            }
+            tempOrderForList.ToList().ForEach(orderForList => tempOrderTracking.Add(bl.Order.GetOrderTracking(orderForList.ID)));
+            //foreach (BO.OrderForList orderForList in tempOrderForList)
+            //{
+            //    tempOrderTracking.Add(bl.Order.GetOrderTracking(orderForList.ID));
+            //}
             if (orderStatus == "orderTracking")
                 OrderListview.ItemsSource = tempOrderTracking;
             else
@@ -51,14 +53,12 @@ namespace PL.Order
             if (orderStatus== "orderTracking")
             {
                 order = (BO.OrderTracking)((ListView)sender).SelectedItem;
-                //order = (BO.OrderTracking)(sender as ListView).SelectedItem;
                 new OrderWindow(tempBl,order.ID,orderStatus).Show();
             }
             else
             {
                  order1 = (BO.OrderForList)((ListView)sender).SelectedItem;
-                 //order1 = (BO.OrderForList)(sender as ListView).SelectedItem;
-                new OrderWindow(tempBl, order1.ID, orderStatus).Show();
+                 new OrderWindow(tempBl, order1.ID, orderStatus).Show();
             }
                
            
