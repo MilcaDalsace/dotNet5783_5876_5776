@@ -1,1 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+<Orders>
+	<Order>
+		<ID>1</ID>
+		<CustomerName>"orit"</CustomerName>
+		<CustomerEmail>"ooo@gmail.com</CustomerEmail>
+		<CustomerAdress>"bb"</CustomerAdress>
+		<OrderDate>01.01.0001</OrderDate>
+		<ShipDate>01.01.0001</ShipDate>
+		<DeliveryDate>01.01.0001</DeliveryDate>
+	</Order>
+</Orders>
