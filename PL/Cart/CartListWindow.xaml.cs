@@ -1,4 +1,5 @@
 ﻿using BLApi;
+using BO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,10 +22,13 @@ namespace PL.Cart
     public partial class CartListWindow : Window
     {
         private IBl tempBl = BLApi.Factory.Get();
+        public List<BO.OrderItem>? cart { get; set; }
         public CartListWindow()
         {
             InitializeComponent();
-            CartLstview.ItemsSource = ICart.curCartP.ItemOrderList;
+            cart=ICart.curCartP.ItemOrderList;
+            DataContext =cart;
+            //CartLstview.ItemsSource = 
         }
 
         private void submitOrderBtn_Click(object sender, RoutedEventArgs e)
@@ -38,7 +42,6 @@ namespace PL.Cart
         private void CartLstview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             BO.OrderItem product = (BO.OrderItem)((ListView)sender).SelectedItem;
-            //BO.OrderItem product = (BO.OrderItem)(sender as ListView).SelectedItem;
             new CartWindow(product).ShowDialog();
             CartLstview.ItemsSource = ICart.curCartP.ItemOrderList;
 

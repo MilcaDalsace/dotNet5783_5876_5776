@@ -26,19 +26,21 @@ namespace PL.Order
         public OrderListWindow(IBl bl,string status)
         {
             InitializeComponent();
+           
             orderStatus = status;
             tempBl = bl;
             List<BO.OrderForList> tempOrderForList = (List<BO.OrderForList>)bl.Order.GetListOrder();
-            List<BO.OrderTracking> tempOrderTracking = new List<BO.OrderTracking>();
-            tempOrderForList.ToList().ForEach(orderForList => tempOrderTracking.Add(bl.Order.GetOrderTracking(orderForList.ID)));
-            //foreach (BO.OrderForList orderForList in tempOrderForList)
-            //{
-            //    tempOrderTracking.Add(bl.Order.GetOrderTracking(orderForList.ID));
-            //}
-            if (orderStatus == "orderTracking")
-                OrderListview.ItemsSource = tempOrderTracking;
-            else
-                OrderListview.ItemsSource =tempOrderForList;
+            DataContext = new { tempOrderForList=tempOrderForList };
+
+
+            // List<BO.OrderTracking> tempOrderTracking = new List<BO.OrderTracking>();
+           // tempOrderForList.ToList().ForEach(orderForList => tempOrderTracking.Add(bl.Order.GetOrderTracking(orderForList.ID)));
+           // if (orderStatus == "orderTracking")
+                //OrderListview.ItemsSource = tempOrderTracking;
+           //else
+                
+            
+            //OrderListview.ItemsSource =tempOrderForList;
         }
 
         private void AttributeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -48,18 +50,20 @@ namespace PL.Order
 
         private void OrderListview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         { 
-            BO.OrderTracking order;
+            //BO.OrderTracking order;
             BO.OrderForList order1;
-            if (orderStatus== "orderTracking")
-            {
-                order = (BO.OrderTracking)((ListView)sender).SelectedItem;
-                new OrderWindow(tempBl,order.ID,orderStatus).Show();
-            }
-            else
-            {
-                 order1 = (BO.OrderForList)((ListView)sender).SelectedItem;
-                 new OrderWindow(tempBl, order1.ID, orderStatus).Show();
-            }
+            order1 = (BO.OrderForList)((ListView)sender).SelectedItem;
+            new OrderWindow(tempBl, order1.ID, orderStatus).Show();
+            //if (orderStatus== "orderTracking")
+            //{
+            //    order = (BO.OrderTracking)((ListView)sender).SelectedItem;
+            //    new OrderWindow(tempBl,order.ID,orderStatus).Show();
+            //}
+            //else
+            //{
+            //    order1 = (BO.OrderForList)((ListView)sender).SelectedItem;
+            //    new OrderWindow(tempBl, order1.ID, orderStatus).Show();
+            //}
                
            
         }

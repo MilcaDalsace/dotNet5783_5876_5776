@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using DalApi;
 using DO;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace Dal
 {
@@ -26,15 +27,26 @@ namespace Dal
             root.Add(new XElement("OrderDate", item.OrderDate));
             root.Add(new XElement("ShipDate", item.ShipDate));
             root.Add(new XElement("DeliveryDate", item.DeliveryDate));
-            doc.Element("Order").Add(root);
+            doc.Element("Orders").Add(root);
             doc.Save(@"..\xml\Order.xml");
             return item.ID;
         }
         //public  GetAll();
         public IEnumerable<DO.Order> GetAll(Func<DO.Order, bool>? func = null)
         {
-            IEnumerable<DO.Order> aa=new List<DO.Order>();
-            return aa;
+            
+           XDocument doc = XDocument.Load(@"..\xml\Order.xml");
+            //XDocument doc = LinqToXml.XmlHelper.GetPlantDocument();
+            var xmlOrders = doc.Descendants("Order");
+            List<DO.Order> someOrders = new List<DO.Order>();
+
+            foreach (var order in xmlOrders)
+            {
+                DO.Order myOrder = new DO.Order();
+                myOrder.CustomerName = order.Element("CustomerName")?.Value;
+                someOrders.Add(myOrder);
+            }
+            return someOrders;
         }
         public DO.Order Read(int id)
         { return new DO.Order(); }

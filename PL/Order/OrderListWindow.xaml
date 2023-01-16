@@ -21,11 +21,15 @@
             </Grid.ColumnDefinitions >
             <Label Content="Label"  HorizontalAlignment="Left" Grid.Column="0" Margin="448,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.056,2.452"/>
         </Grid>-->
-        <ListView x:Name="OrderListview"  d:ItemsSource="{d:SampleData  ItemCount=100}" MouseDoubleClick="OrderListview_MouseDoubleClick">
+        <ListView x:Name="OrderListview"  ItemsSource="{Binding tempOrderForList}" MouseDoubleClick="OrderListview_MouseDoubleClick">
             <!--Grid.Row="1"-->
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID}"/>
+                    <GridViewColumn Header="CustomerName" DisplayMemberBinding="{Binding CustomerName}"/>
+                    <GridViewColumn Header="AmountItems" DisplayMemberBinding="{Binding AmountItems}"/>
+                    <GridViewColumn Header="OrderSatus" DisplayMemberBinding="{Binding OrderSatus}"/>
+                    <GridViewColumn Header="FinalPrice" DisplayMemberBinding="{Binding FinalPrice}"/>
                 </GridView>
             </ListView.View>
         </ListView>

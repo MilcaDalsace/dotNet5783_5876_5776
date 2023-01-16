@@ -7,10 +7,15 @@
         mc:Ignorable="d"
         Title="CartListWindow" Height="450" Width="800">
     <Grid>
-        <ListView x:Name="CartLstview" d:ItemsSource="{d:SampleData ItemCount=5}" MouseDoubleClick="CartLstview_MouseDoubleClick">
+        <ListView x:Name="CartLstview" ItemsSource="{Binding }" MouseDoubleClick="CartLstview_MouseDoubleClick">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn Header="id" DisplayMemberBinding="{Binding ID}"/>
+                    <GridViewColumn Header="Product id" DisplayMemberBinding="{Binding ProductId}"/>
+                    <GridViewColumn Header="product name" DisplayMemberBinding="{Binding ProductName}"/>
+                    <GridViewColumn Header="price" DisplayMemberBinding="{Binding Price}"/>
+                    <GridViewColumn Header="amount" DisplayMemberBinding="{Binding Amount}"/>
+                    <GridViewColumn Header="final price" DisplayMemberBinding="{Binding FinalPrice}"/>
                 </GridView>
             </ListView.View>
         </ListView>

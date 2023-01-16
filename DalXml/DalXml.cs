@@ -16,7 +16,7 @@ namespace Dal
         {
             int a = 0;
         }
-        private XDocument m_XDocument = XDocument.Load(@"c:\" + "DalXml");
+      //  private XDocument m_XDocument = XDocument.Load(@"c:\" + "DalXml");
         //private XmlSerializer m_XmlSerializer= new XmlSerializer(typeof(EmployeeDTO));;
         //  m_XDocument = 
         // m_XmlSerializer

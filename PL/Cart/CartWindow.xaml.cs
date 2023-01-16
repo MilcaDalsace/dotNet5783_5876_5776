@@ -26,7 +26,7 @@ namespace PL.Cart
         {
             InitializeComponent();
             curProduct = product;
-            ICart.curCartP.CustomerAdress = "l";
+            //ICart.curCartP.CustomerAdress = "l";
             DataContext = new { product = curProduct };
         }
 
