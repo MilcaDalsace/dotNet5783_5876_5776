@@ -20,7 +20,6 @@ namespace Dal
         public IEnumerable<DO.Product> GetAll(Func<DO.Product, bool>? func = null)
         {
             XDocument doc = XDocument.Load(@"..\xml\Product.xml");
-            //XDocument doc = LinqToXml.XmlHelper.GetPlantDocument();
             var xmlProducts = doc.Descendants("Product");
             List<DO.Product> someProducts = new List<DO.Product>();
 

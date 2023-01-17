@@ -23,7 +23,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-            <ComboBox x:Name="AttributeSelector" Grid.Column="1" Margin="40,56,40,0" VerticalAlignment="Top" SelectionChanged="AttributeSelector_SelectionChanged"/>
+            <ComboBox x:Name="AttributeSelector" ItemsSource="{Binding categories}" Grid.Column="1" Margin="40,56,40,0" VerticalAlignment="Top" SelectionChanged="AttributeSelector_SelectionChanged"/>
             <Label Content="Label"  HorizontalAlignment="Left" Grid.Column="0" Margin="448,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.056,2.452"/>
         </Grid>
         <ListView x:Name="ProductsListview" ItemsSource="{Binding products}" DisplayMemberPath="{Binding}"  d:ItemsSource="{d:SampleData  ItemCount=100}" MouseDoubleClick="ProductsListview_MouseDoubleClick" HorizontalAlignment="Left" Margin="0,208,0,0" Grid.RowSpan="2" Width="800" >
@@ -35,6 +35,16 @@
                     <GridViewColumn Header="productname" DisplayMemberBinding="{Binding ProductName}"/>
                 </GridView>
             </ListView.View>
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock FontWeight="Bold" FontSize="14" Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ListView.GroupStyle>
+            
         </ListView>
         <Button x:Name="AddProductBtn" Visibility="{Binding Path=status, Converter={StaticResource notBooleanToVisibilityConverter}}" Content="Add new Product" Grid.Row="2" HorizontalAlignment="Right" Margin="5" Padding="5" Click="AddProductBtn_Click" FontFamily="Comic Sans MS" FontWeight="Bold" FontSize="18" Opacity="0.5" BorderBrush="White"/>
         <Button x:Name="ShowCartBtn" Visibility="{Binding Path=status, Converter={StaticResource notBooleanToVisibilityShowCartBtnConverter}}" Content="Show cart" HorizontalAlignment="Left" Margin="445,63,0,0" Grid.Row="2" VerticalAlignment="Top" Height="105" Width="80" Click="ShowCartBtn_Click"/>

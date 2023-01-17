@@ -41,23 +41,16 @@ namespace PL
             InitializeComponent();
             products= tempBl.Product.GetProductList();
             statusProp = status;
-            //if (status != "admin")
-            //{
-            //    AddProductBtn.Visibility = Visibility.Hidden;
-            //    ShowCartBtn.Visibility = Visibility.Visible;
-            //}
-            //else
-            //{
-            //    AddProductBtn.Visibility = Visibility.Visible;
-            //    ShowCartBtn.Visibility = Visibility.Hidden;
-            //}
-               
-           // userStatus = status;
-            //AttributeSelector.ItemsSource
             categoriesForP = Enum.GetValues(typeof(BO.Categories));
-           // ProductsListview.ItemsSource
-            //productList = tempBl.Product.GetProductList();
+            if (statusProp == "user")
+            {
+            ProductsListview.ItemsSource = products;
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ProductsListview.ItemsSource);
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("Category");
+            view.GroupDescriptions.Add(groupDescription);
+            }
             DataContext = new {products=products,status=statusProp,categories= categoriesForP };
+            
         }
 
         private void AttributeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
