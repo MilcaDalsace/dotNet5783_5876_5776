@@ -27,39 +27,70 @@ namespace Dal
             root.Add(new XElement("OrderDate", item.OrderDate));
             root.Add(new XElement("ShipDate", item.ShipDate));
             root.Add(new XElement("DeliveryDate", item.DeliveryDate));
-            doc.Element("Orders").Add(root);
+            doc.Element("Orders")?.Add(root);
             doc.Save(@"..\xml\Order.xml");
             return item.ID;
         }
         //public  GetAll();
         public IEnumerable<DO.Order> GetAll(Func<DO.Order, bool>? func = null)
         {
-            
-           XDocument doc = XDocument.Load(@"..\xml\Order.xml");
-            //XDocument doc = LinqToXml.XmlHelper.GetPlantDocument();
-            var xmlOrders = doc.Descendants("Order");
-            List<DO.Order> someOrders = new List<DO.Order>();
-
-            foreach (var order in xmlOrders)
+            XDocument doc = XDocument.Load(@"..\xml\Order.xml");
+            var xmlOrder = doc.Descendants("Order");
+            List<DO.Order> someOrder = new List<DO.Order>();
+            xmlOrder.ToList().ForEach(order =>
             {
                 DO.Order myOrder = new DO.Order();
+                int.TryParse(order.Element("ID")?.Value, out int Id);
+                myOrder.ID = Id;
                 myOrder.CustomerName = order.Element("CustomerName")?.Value;
-                someOrders.Add(myOrder);
-            }
-            return someOrders;
+                myOrder.CustomerAdress = order.Element("CustomerAdress")?.Value;
+                myOrder.CustomerEmail = order.Element("CustomerEmail")?.Value;
+                DateTime.TryParse(order.Element("OrderDate")?.Value, out DateTime orderDate);
+                myOrder.OrderDate = orderDate;
+                DateTime.TryParse(order.Element("ShipDate")?.Value, out DateTime shipDate);
+                myOrder.ShipDate = shipDate;
+                DateTime.TryParse(order.Element("DeliveryDate")?.Value, out DateTime deliveryDate);
+                myOrder.DeliveryDate = deliveryDate;
+                someOrder.Add(myOrder);
+            });
+            return func == null?someOrder:someOrder.Where(func);
         }
         public DO.Order Read(int id)
-        { return new DO.Order(); }
+        {
+            XDocument doc = XDocument.Load(@"..\xml\Order.xml");
+            var xmlOrders = doc.Descendants("Order");
+            XElement? xOrder = xmlOrders.ToList().Find(item => Convert.ToInt32(item.Element("ID")?.Value) == id);
+            if (Convert.ToInt32(xOrder?.Element("ID")?.Value) == 0)
+                throw new ObjectNotFoundException();
+            DO.Order order = new DO.Order()
+            {
+                ID = Convert.ToInt32(xOrder?.Element("ID")?.Value),
+                CustomerName = xOrder?.Element("CustomerName")?.Value,
+                CustomerEmail = xOrder?.Element("CustomerEmail")?.Value,
+                CustomerAdress = xOrder?.Element("CustomerAdress")?.Value,
+                OrderDate = Convert.ToDateTime(xOrder?.Element("OrderDate")?.Value),
+                ShipDate = Convert.ToDateTime(xOrder?.Element("ShipDate")?.Value),
+                DeliveryDate = Convert.ToDateTime(xOrder?.Element("DeliveryDate")?.Value),
+            };
+            return order;
+
+        }
         public DO.Order ReadByFunc(Predicate<DO.Order> func)
         {
             return new DO.Order();
         }
         public void Delete(int id)
         {
+            XDocument doc = XDocument.Load(@"..\xml\Order.xml");
+            var xmlOrders = doc.Descendants("Order");
+            xmlOrders.ToList().Find(item => Convert.ToInt32(item.Element("ID")?.Value) == id)?.Remove();
         }
         public void Update(DO.Order item)
         {
-
+            XDocument doc = XDocument.Load(@"..\xml\Order.xml");
+            var xmlOrders = doc.Descendants("Order");
+            
+            xmlOrders.ToList().Find(item1 => Convert.ToInt32(item1.Element("ID")?.Value) == item.ID)?.SetValue(item);
         }
     }
 }

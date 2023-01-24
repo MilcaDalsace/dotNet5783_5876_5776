@@ -14,7 +14,16 @@ namespace Dal
     {
         public int Create(DO.Product item)
         {
-            return 1;
+            XDocument doc = XDocument.Load(@"..\xml\Product.xml");
+            XElement root = new XElement("Product");
+            root.Add(new XElement("ID", item.ID));
+            root.Add(new XElement("Name", item.Name));
+            root.Add(new XElement("Price", item.Price));
+            root.Add(new XElement("Category", item.Category));
+            root.Add(new XElement("InStock", item.InStock));
+            doc.Element("Products")?.Add(root);
+            doc.Save(@"..\xml\Product.xml");
+            return item.ID;
         }
         //public  GetAll();
         public IEnumerable<DO.Product> GetAll(Func<DO.Product, bool>? func = null)
@@ -22,7 +31,6 @@ namespace Dal
             XDocument doc = XDocument.Load(@"..\xml\Product.xml");
             var xmlProducts = doc.Descendants("Product");
             List<DO.Product> someProducts = new List<DO.Product>();
-
             foreach (var order in xmlProducts)
             {
                 DO.Product myProduct = new DO.Product();
@@ -37,10 +45,26 @@ namespace Dal
                 myProduct.InStock = productInStock;
                 someProducts.Add(myProduct);
             }
-            return someProducts;
+            return func == null?someProducts: someProducts.Where(func);
         }
         public DO.Product Read(int id)
-        { return new DO.Product(); }
+        {
+            XDocument doc = XDocument.Load(@"..\xml\Product.xml");
+            var xmlOrders = doc.Descendants("Product");
+            XElement? xOrder = xmlOrders.ToList().Find(item => Convert.ToInt32(item.Element("ID")?.Value) == id);
+            if (Convert.ToInt32(xOrder?.Element("ID")?.Value) == 0)
+                throw new ObjectNotFoundException();
+            DO.Product product = new DO.Product()
+            {
+                ID = Convert.ToInt32(xOrder?.Element("ID")?.Value),
+               
+                InStock = Convert.ToInt32(xOrder?.Element("InStock")?.Value),
+                Price = Convert.ToInt32(xOrder?.Element("Price")?.Value),
+                Name = xOrder?.Element("Name")?.Value
+            };
+            //Category =(DO.Categories)(Convert.ToInt32 (xOrder?.Element("Category")?.Value)),
+            return product;
+        }
 
 
         public DO.Product ReadByFunc(Predicate<DO.Product> func)
@@ -49,10 +73,15 @@ namespace Dal
         }
         public void Delete(int id)
         {
+            XDocument doc = XDocument.Load(@"..\xml\Product.xml");
+            var xmlOrders = doc.Descendants("Product");
+            xmlOrders.ToList().Find(item => Convert.ToInt32(item.Element("ID")?.Value) == id)?.Remove();
         }
         public void Update(DO.Product item)
         {
-
+            XDocument doc = XDocument.Load(@"..\xml\Product.xml");
+            var xmlOrders = doc.Descendants("Product");
+            xmlOrders.ToList().Find(item1 => Convert.ToInt32(item1.Element("ID")?.Value) == item.ID)?.Element("ID")?.SetValue(111);
         }
     }
 }
