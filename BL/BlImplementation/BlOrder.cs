@@ -163,7 +163,7 @@ internal class BlOrder : BLApi.IOrder
         }
     }
     public void UpdateOrder(int idOrder, int idProduct, int CurAmount, int action)
-    {//price
+    {
         try
         {
             switch (action)

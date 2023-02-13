@@ -57,19 +57,40 @@ namespace Dal
             DO.Product product = new DO.Product()
             {
                 ID = Convert.ToInt32(xOrder?.Element("ID")?.Value),
-               
                 InStock = Convert.ToInt32(xOrder?.Element("InStock")?.Value),
                 Price = Convert.ToInt32(xOrder?.Element("Price")?.Value),
                 Name = xOrder?.Element("Name")?.Value
             };
-            //Category =(DO.Categories)(Convert.ToInt32 (xOrder?.Element("Category")?.Value)),
             return product;
         }
 
 
         public DO.Product ReadByFunc(Predicate<DO.Product> func)
         {
-            return new DO.Product();
+            XDocument doc = XDocument.Load(@"..\xml\Product.xml");
+            var xmlProducts = doc.Descendants("Product");
+
+            List<DO.Product> tempProducts = new List<DO.Product> ();
+            DO.Product myProduct = new DO.Product();
+
+            foreach (var product in xmlProducts)
+            {
+                if ((product.Element("Category")?.Value).ToString()==func.ToString())
+                {
+                    //להחליף לקלט הנכון
+                    int.TryParse(product.Element("ID")?.Value, out int productId);
+                    myProduct.ID = productId;
+                    myProduct.Name = product.Element("Name")?.Value;
+                    int.TryParse(product.Element("Price")?.Value, out int productPrice);
+                    myProduct.Price = productPrice;
+                    DO.Categories.TryParse(product.Element("Category")?.Value, out DO.Categories productCategories);
+                    myProduct.Category = productCategories;
+                    int.TryParse(product.Element("InStock")?.Value, out int productInStock);
+                    myProduct.InStock = productInStock;
+                    tempProducts.Add(myProduct);
+                }
+            }
+            return tempProducts.Find(func);
         }
         public void Delete(int id)
         {

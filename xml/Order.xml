@@ -9,4 +9,13 @@
     <ShipDate>01.01.0001</ShipDate>
     <DeliveryDate>01.01.0001</DeliveryDate>
   </Order>
+  <Order>
+    <ID>123</ID>
+    <CustomerName>orit</CustomerName>
+    <CustomerEmail>orittt@gmail.com</CustomerEmail>
+    <CustomerAdress>orittt@gmail.com</CustomerAdress>
+    <OrderDate>2023-02-13T13:25:16.9977766+02:00</OrderDate>
+    <ShipDate>0001-01-01T00:00:00</ShipDate>
+    <DeliveryDate>0001-01-01T00:00:00</DeliveryDate>
+  </Order>
 </Orders>

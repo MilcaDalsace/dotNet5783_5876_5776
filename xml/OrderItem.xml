@@ -1,10 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <OrderItems>
-	<OrderItem>
-		<ID>1</ID>
-		<OrderId>1</OrderId>
-		<ProductId>1</ProductId>
-		<Price>100</Price>
-		<Amount>11</Amount>
-	</OrderItem>
+  <OrderItem>
+    <ID>1</ID>
+    <OrderId>1</OrderId>
+    <ProductId>1</ProductId>
+    <Price>100</Price>
+    <Amount>11</Amount>
+  </OrderItem>
+  <OrderItem>
+    <Price>323</Price>
+    <Amount>1</Amount>
+    <ID>0</ID>
+    <ProductId>1</ProductId>
+    <OrderId>0</OrderId>
+  </OrderItem>
 </OrderItems>
