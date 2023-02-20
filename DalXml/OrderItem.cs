@@ -24,7 +24,6 @@ namespace Dal
             doc.Save(@"..\xml\OrderItem.xml");
             return item.ID;
         }
-        //public  GetAll();
         public IEnumerable<DO.OrderItem> GetAll(Func<DO.OrderItem, bool>? func = null)
         {
             XDocument doc = XDocument.Load(@"..\xml\OrderItem.xml");
@@ -68,7 +67,8 @@ namespace Dal
        
         public DO.OrderItem ReadByFunc(Predicate<DO.OrderItem> func)
         {
-            return new DO.OrderItem();
+            IEnumerable<DO.OrderItem> orderItems = GetAll();
+            return orderItems.ToList().Find(func);
         }
         public void Delete(int id)
         {
@@ -78,9 +78,8 @@ namespace Dal
         }
         public void Update(DO.OrderItem item)
         {
-            XDocument doc = XDocument.Load(@"..\xml\OrderItem.xml");
-            var xmlOrders = doc.Descendants("OrderItem");
-            xmlOrders.ToList().Find(item1 => Convert.ToInt32(item1.Element("ID")?.Value) == item.ID)?.SetValue(item);
+            Delete(item.ID);
+            Create(item);
         }
     }
 }

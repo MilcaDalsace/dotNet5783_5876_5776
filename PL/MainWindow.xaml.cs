@@ -27,6 +27,9 @@ namespace PL
         public MainWindow()
         {
             InitializeComponent();
+            DataSourceXml ds = new DataSourceXml();
+            ds.Show();
+            ds.Close();
         }
 
         IBl bl =  BLApi.Factory.Get();

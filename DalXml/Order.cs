@@ -77,20 +77,20 @@ namespace Dal
         }
         public DO.Order ReadByFunc(Predicate<DO.Order> func)
         {
-            return new DO.Order();
+            IEnumerable<DO.Order> orders = GetAll();
+            return orders.ToList().Find(func);
         }
         public void Delete(int id)
         {
             XDocument doc = XDocument.Load(@"..\xml\Order.xml");
             var xmlOrders = doc.Descendants("Order");
             xmlOrders.ToList().Find(item => Convert.ToInt32(item.Element("ID")?.Value) == id)?.Remove();
+            return;
         }
         public void Update(DO.Order item)
         {
-            XDocument doc = XDocument.Load(@"..\xml\Order.xml");
-            var xmlOrders = doc.Descendants("Order");
-            
-            xmlOrders.ToList().Find(item1 => Convert.ToInt32(item1.Element("ID")?.Value) == item.ID)?.SetValue(item);
+          Delete(item.ID);
+          Create(item);
         }
     }
 }

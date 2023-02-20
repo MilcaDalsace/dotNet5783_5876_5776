@@ -1,10 +1,1 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Products>
-	<Product>
-		<ID>1</ID>
-		<Name>"hhh"</Name>
-		<Price>323</Price>
-		<Category>Shirt</Category>
-		<InStock>5</InStock>
-	</Product>
-</Products>
+<?xml version="1.0" encoding="utf-8"?><ArrayOfProduct xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Product><ID>877006</ID><Name>Pavlova</Name><Price>0</Price><Category>skirts</Category><InStock>100</InStock></Product><Product><ID>900039</ID><Name>puffs</Name><Price>9</Price><Category>shirts</Category><InStock>400</InStock></Product><Product><ID>336229</ID><Name>croissants</Name><Price>1</Price><Category>shirts</Category><InStock>70</InStock></Product><Product><ID>510913</ID><Name>Pavlova</Name><Price>0</Price><Category>skirts</Category><InStock>100</InStock></Product><Product><ID>253151</ID><Name>Pavlova</Name><Price>0</Price><Category>skirts</Category><InStock>100</InStock></Product><Product><ID>983746</ID><Name>birthday cake</Name><Price>8</Price><Category>babygrows</Category><InStock>500</InStock></Product><Product><ID>699937</ID><Name>Malfey</Name><Price>7</Price><Category>skirts</Category><InStock>270</InStock></Product><Product><ID>279414</ID><Name>Malfey</Name><Price>7</Price><Category>skirts</Category><InStock>270</InStock></Product><Product><ID>125794</ID><Name>croissants</Name><Price>1</Price><Category>shirts</Category><InStock>70</InStock></Product><Product><ID>421844</ID><Name>Ferrero Rocher</Name><Price>6</Price><Category>shirts</Category><InStock>300</InStock></Product></ArrayOfProduct>
