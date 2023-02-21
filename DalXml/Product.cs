@@ -13,33 +13,29 @@ namespace Dal
 {
     internal class Product:IProduct
     {
+        static int iq=5;
         public int Create(DO.Product item)
         {
-            IEnumerable<DO.Product> allProducts = GetAll().ToList();
-            DO.Product? tempProduct = allProducts?.ToList().Find(item1 => item1.ID == item.ID);
-            if (tempProduct?.ID == 0)
-            {
-                allProducts?.ToList().Add(item);
-                StreamWriter stWr = new StreamWriter("../Product.xml");
-                XmlSerializer seri = new XmlSerializer(typeof(List<Product>));
+            if(item.ID==0)
+             item.ID = iq++;
+            List<DO.Product> allProducts = GetAll().ToList();
+            allProducts.Add(item);
+                StreamWriter stWr = new StreamWriter("../xml/Product.xml");
+                XmlSerializer seri = new XmlSerializer(typeof(List<DO.Product>));
                 seri.Serialize(stWr, allProducts);
                 stWr.Close();
-            }
-            else
-            {
-                throw new ObjectAlreadyExist();
-            }
+          
             return item.ID;
         }
-        //public  GetAll();
         public IEnumerable<DO.Product> GetAll(Func<DO.Product, bool>? func = null)
-        { 
+        {
+            StreamReader read = new StreamReader("../xml/Product.xml");
             XmlSerializer seri = new XmlSerializer(typeof(List<DO.Product>));
-            StreamReader read = new StreamReader("../Product.xml");
-            IEnumerable<DO.Product>? allProducts;
-            allProducts = (IEnumerable<DO.Product>?)seri.Deserialize(read);
+            var allProducts =  (List<DO.Product>)seri.Deserialize(read);
             read.Close();
             //return w
+            if(func != null)
+                return (IEnumerable<DO.Product>)allProducts.Where(func);
             return (IEnumerable<DO.Product>)allProducts;
         }
         public DO.Product Read(int id)
@@ -60,9 +56,10 @@ namespace Dal
         public void Delete(int id)
         {
             List<DO.Product> productList = GetAll().ToList();
-            productList.Remove(Read(id));
-            StreamWriter writer = new StreamWriter("../Products.xml");
-            XmlSerializer ser = new XmlSerializer(typeof(List<Product>));
+            DO.Product product=Read(id);
+            productList.Remove(product);
+            StreamWriter writer = new StreamWriter("../xml/Product.xml");
+            XmlSerializer ser = new XmlSerializer(typeof(List<DO.Product>));
             ser.Serialize(writer, productList);
             writer.Close();
         }

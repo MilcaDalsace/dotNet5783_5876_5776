@@ -14,4 +14,18 @@
     <ProductId>1</ProductId>
     <OrderId>0</OrderId>
   </OrderItem>
+  <OrderItem>
+    <Price>1</Price>
+    <Amount>1</Amount>
+    <ID>0</ID>
+    <ProductId>1</ProductId>
+    <OrderId>0</OrderId>
+  </OrderItem>
+  <OrderItem>
+    <Price>1</Price>
+    <Amount>1</Amount>
+    <ID>0</ID>
+    <ProductId>1</ProductId>
+    <OrderId>0</OrderId>
+  </OrderItem>
 </OrderItems>

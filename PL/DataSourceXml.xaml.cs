@@ -112,14 +112,14 @@ namespace PL
 
 
 
-            var arrXmlProducts = from p in products
-                                 select new XElement("Product",
-                                                         new XAttribute("ID", p.ID),
-                                                         new XAttribute("Name", p.Name ?? throw new BO.NullException()),
-                                                         new XAttribute("Price", p.Price),
-                                                         new XAttribute("InStock", p.InStock),
-                                                         new XAttribute("Catagory", p.Category)
-                    );
+            //var arrXmlProducts = from p in products
+            //                     select new XElement("Product",
+            //                                             new XAttribute("ID", p.ID),
+            //                                             new XAttribute("Name", p.Name ?? throw new BO.NullException()),
+            //                                             new XAttribute("Price", p.Price),
+            //                                             new XAttribute("InStock", p.InStock),
+            //                                             new XAttribute("Catagory", p.Category)
+            //        );
 
             XElement? xmlProduct = XDocument.Load(@"../xml/Product.xml").Root;
             StreamWriter write = new StreamWriter("../xml/Product.xml");

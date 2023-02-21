@@ -1,9 +1,11 @@
 ﻿using BLApi;
 using BO;
 using DalApi;
+using DO;
 using PL.Order;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +18,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace PL
 {
@@ -27,9 +31,33 @@ namespace PL
         public MainWindow()
         {
             InitializeComponent();
-            DataSourceXml ds = new DataSourceXml();
-            ds.Show();
-            ds.Close();
+            // DataSourceXml ds = new DataSourceXml();
+            //ds.Show();
+            //ds.Close();
+
+
+            List<int> config = new List<int>() {};
+            int i = 1;
+            config.Add(i);
+            StreamWriter write1 = new StreamWriter("../xml/Config.xml");
+            XmlSerializer ser1 = new XmlSerializer(typeof(List<int>));
+            ser1.Serialize(write1, config);
+            write1.Close();
+
+            //List<DO.Product> products = new List<DO.Product>();
+            //products.Add(new DO.Product()
+            //{
+            //    Category = (DO.Categories)1,
+            //    ID = 1,
+            //    InStock = 1,
+            //    Name = "w",
+            //    Price = 1
+            //});
+
+            //StreamWriter write = new StreamWriter("../xml/Product.xml");
+            //XmlSerializer ser = new XmlSerializer(typeof(List<DO.Product>));
+            //ser.Serialize(write, products);
+            //write.Close();
         }
 
         IBl bl =  BLApi.Factory.Get();

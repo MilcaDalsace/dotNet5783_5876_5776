@@ -21,6 +21,9 @@ using BlImplementation;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Globalization;
+using System.IO;
+using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace PL
 {
@@ -50,7 +53,21 @@ namespace PL
             view.GroupDescriptions.Add(groupDescription);
             }
             DataContext = new {products=products,status=statusProp,categories= categoriesForP };
-            
+
+
+            //var arrXmlProducts = new XElement("Product",
+            //                                             new XAttribute("ID", 1),
+            //                                             new XAttribute("Name", "orit"),
+            //                                             new XAttribute("Price", 2),
+            //                                             new XAttribute("InStock", 2),
+            //                                             new XAttribute("Catagory",2));
+                    
+
+            //XElement? xmlProduct = XDocument.Load(@"../xml/Product.xml").Root;
+            //StreamWriter write = new StreamWriter("../xml/Product.xml");
+            //XmlSerializer ser = new XmlSerializer(typeof(List<DO.Product>));
+            //ser.Serialize(write, products);
+            //write.Close();
         }
 
         private void AttributeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -83,6 +100,8 @@ namespace PL
         {
             new CartListWindow().Show();
         }
+
+      
     }
     public class NotBooleanToVisibilityConverter1 : IValueConverter
     {
