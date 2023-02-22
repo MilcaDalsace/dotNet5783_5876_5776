@@ -1,4 +1,1 @@
-<?xml version="1.0" encoding="utf-8"?><ArrayOfProduct xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-	<Product><ID>1</ID><Name>hu</Name><Price>6</Price><Category>shirts</Category><InStock>4</InStock></Product>
-	<Product><ID>2</ID><Name>iui</Name><Price>1</Price><Category>babygrows</Category><InStock>2</InStock></Product>
-</ArrayOfProduct>
+<?xml version="1.0" encoding="utf-8"?><ArrayOfProduct xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Product><ID>2</ID><Name>iui</Name><Price>1</Price><Category>babygrows</Category><InStock>16</InStock></Product><Product><ID>1</ID><Name>hu</Name><Price>12</Price><Category>shirts</Category><InStock>7</InStock></Product><Product><ID>4</ID><Name>cc</Name><Price>44</Price><Category>skirts</Category><InStock>443</InStock></Product><Product><ID>5</ID><Name>yellow skirt</Name><Price>60</Price><Category>shirts</Category><InStock>7</InStock></Product><Product><ID>6</ID><Name>dddd</Name><Price>60</Price><Category>dresses</Category><InStock>2</InStock></Product></ArrayOfProduct>

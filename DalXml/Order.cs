@@ -22,28 +22,18 @@ namespace Dal
                 root.Add(new XElement("ID", item.ID));
             else
             {
-                //XDocument doc = XDocument.Load(@"..\xml\Order.xml");
-                //var xmlOrders = doc.Descendants("Order");
-                //xmlOrders.ToList().Find(item => Convert.ToInt32(item.Element("ID")?.Value) == id)?.Remove();
-                //doc.Element("Orders")?.ReplaceAll(xmlOrders);
-                //doc.Save(@"..\xml\Order.xml");
-
-
-                XDocument docConfig = XDocument.Load(@"..\Config.xml");
-
-                // XDocument docConfig = XDocument.Load(@"..\xml\Config.xml");
-                 var xmlOrders = docConfig.Descendants("id");
-
+                XDocument docConfig = XDocument.Load(@"..\Config.xml");                      
+                var xmlOrders = docConfig.Descendants("id");
                 int oid = Convert.ToInt32(xmlOrders.ToList()[0].Element("oid")?.Value);
-                //int oid = Convert.ToInt32(xmlOrders.ToList()[0].Element("oid")?.Value);
-                // XElement? xOrder = xmlOrders.ToList().Find(item => Convert.ToInt32(item.Element("ID")?.Value) == id);
-
-
-                // int id = Convert.ToInt32(docConfig.Element("oid")?.Value);
-                docConfig.Element("oid")?.Remove();
-                item.ID = id++;
-                docConfig.Element("id")?.Add(id);
-                docConfig.Save(@"..\xml\Config.xml");
+                int pid = Convert.ToInt32(xmlOrders.ToList()[0].Element("pid")?.Value);
+                xmlOrders.ToList().Find(item => Convert.ToInt32(item.Element("oid")?.Value) == oid)?.Remove();
+                item.ID = ++oid;
+                XElement rootC = new XElement("id");
+                rootC.Add(new XElement("oid", oid));
+                rootC.Add(new XElement("pid", pid));
+                xmlOrders.ToList().Add(rootC);
+                docConfig.Element("ids")?.Add(rootC);
+                docConfig.Save(@"..\Config.xml");
                 root.Add(new XElement("ID", item.ID));
             }  
             root.Add(new XElement("CustomerName", item.CustomerName));

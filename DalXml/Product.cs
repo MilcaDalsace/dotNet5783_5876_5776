@@ -13,11 +13,24 @@ namespace Dal
 {
     internal class Product:IProduct
     {
-        static int id=5;
+      //  static int id=5;
         public int Create(DO.Product item)
         {
-            if(item.ID==0)
-             item.ID = id++;
+            if (item.ID == 0)
+            {
+                XDocument docConfig = XDocument.Load(@"..\Config.xml");
+                var xmlOrders = docConfig.Descendants("id");
+                int oid = Convert.ToInt32(xmlOrders.ToList()[0].Element("oid")?.Value);
+                int pid = Convert.ToInt32(xmlOrders.ToList()[0].Element("pid")?.Value);
+                xmlOrders.ToList().Find(item => Convert.ToInt32(item.Element("pid")?.Value) == pid)?.Remove();
+                item.ID = ++pid;
+                XElement rootC = new XElement("id");
+                rootC.Add(new XElement("oid", oid));
+                rootC.Add(new XElement("pid", pid));
+                xmlOrders.ToList().Add(rootC);
+                docConfig.Element("ids")?.Add(rootC);
+                docConfig.Save(@"..\Config.xml");
+            }
             List<DO.Product> allProducts = GetAll().ToList();
             allProducts.Add(item);
                 StreamWriter stWr = new StreamWriter("../xml/Product.xml");
