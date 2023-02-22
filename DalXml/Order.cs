@@ -29,8 +29,9 @@ namespace Dal
                 //doc.Save(@"..\xml\Order.xml");
 
 
-
                 XDocument docConfig = XDocument.Load(@"..\xml\Config.xml");
+
+               // XDocument docConfig = XDocument.Load(@"..\xml\Config.xml");
                // var xmlOrders = docConfig.Descendants("oid");
                 int id = Convert.ToInt32(docConfig.Element("oid")?.Value);
                 docConfig.Element("oid")?.Remove();
