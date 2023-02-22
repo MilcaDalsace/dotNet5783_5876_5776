@@ -13,11 +13,11 @@ namespace Dal
 {
     internal class Product:IProduct
     {
-        static int iq=5;
+        static int id=5;
         public int Create(DO.Product item)
         {
             if(item.ID==0)
-             item.ID = iq++;
+             item.ID = id++;
             List<DO.Product> allProducts = GetAll().ToList();
             allProducts.Add(item);
                 StreamWriter stWr = new StreamWriter("../xml/Product.xml");

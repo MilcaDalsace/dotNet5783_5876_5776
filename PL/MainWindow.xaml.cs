@@ -36,13 +36,13 @@ namespace PL
             //ds.Close();
 
 
-            List<int> config = new List<int>() {};
-            int i = 1;
-            config.Add(i);
-            StreamWriter write1 = new StreamWriter("../xml/Config.xml");
-            XmlSerializer ser1 = new XmlSerializer(typeof(List<int>));
-            ser1.Serialize(write1, config);
-            write1.Close();
+            //List<int> config = new List<int>() {};
+            //int i = 1;
+            //config.Add(i);
+            //StreamWriter write1 = new StreamWriter("../xml/Config.xml");
+            //XmlSerializer ser1 = new XmlSerializer(typeof(List<int>));
+            //ser1.Serialize(write1, config);
+            //write1.Close();
 
             //List<DO.Product> products = new List<DO.Product>();
             //products.Add(new DO.Product()

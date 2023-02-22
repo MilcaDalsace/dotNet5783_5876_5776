@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?><ArrayOfProduct xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-	<Product><ID>1</ID><Name>w</Name><Price>1</Price><Category>babygrows</Category><InStock>4</InStock></Product>
-	<Product><ID>5</ID><Name>hu</Name><Price>6</Price><Category>shirts</Category><InStock>6</InStock></Product>
+	<Product><ID>1</ID><Name>hu</Name><Price>6</Price><Category>shirts</Category><InStock>4</InStock></Product>
+	<Product><ID>2</ID><Name>iui</Name><Price>1</Price><Category>babygrows</Category><InStock>2</InStock></Product>
 </ArrayOfProduct>

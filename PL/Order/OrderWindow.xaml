@@ -14,7 +14,7 @@
             <ImageBrush ImageSource="/Order/background5.jpg"/>
         </Grid.Background>
 
-        <TextBox x:Name="ordCustomerNameTxtB" IsEnabled="False" HorizontalAlignment="Left" Margin="110,20,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Opacity="20.05" />
+        <TextBox x:Name="ordCustomerNameTxtB" IsEnabled="False" Text="{Binding order.CustomerName, Mode=TwoWay}"  HorizontalAlignment="Left" Margin="110,20,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Opacity="20.05" />
         <TextBox x:Name="ordCustomerEmailTxtB" IsEnabled="False" Text="{Binding order.CustomerEmail, Mode=TwoWay }" HorizontalAlignment="Left" Margin="110,51,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Opacity="20.05"/>
         <TextBox x:Name="ordCustomerAdderssLbl" IsEnabled="False" Text="{Binding order.CustomerAdress, Mode=TwoWay }" HorizontalAlignment="Left" Margin="121,82,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="20.05"/>
         <Label x:Name="ordCustomerEmailLbl" Content="customer Email:" HorizontalAlignment="Left" Margin="15,47,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.41,-1.78" Opacity="20.05"/>
