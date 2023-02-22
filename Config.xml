@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<id>
-	<pid>3</pid>
-	<oid>3</oid>
-</id>
+<ids>
+	<id>
+		<pid>3</pid>
+	    <oid>3</oid>
+	</id>
+	
+</ids>

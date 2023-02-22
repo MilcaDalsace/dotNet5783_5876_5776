@@ -29,11 +29,17 @@ namespace Dal
                 //doc.Save(@"..\xml\Order.xml");
 
 
-                XDocument docConfig = XDocument.Load(@"..\xml\Config.xml");
+                XDocument docConfig = XDocument.Load(@"..\Config.xml");
 
-               // XDocument docConfig = XDocument.Load(@"..\xml\Config.xml");
-               // var xmlOrders = docConfig.Descendants("oid");
-                int id = Convert.ToInt32(docConfig.Element("oid")?.Value);
+                // XDocument docConfig = XDocument.Load(@"..\xml\Config.xml");
+                 var xmlOrders = docConfig.Descendants("id");
+
+                int oid = Convert.ToInt32(xmlOrders.ToList()[0].Element("oid")?.Value);
+                //int oid = Convert.ToInt32(xmlOrders.ToList()[0].Element("oid")?.Value);
+                // XElement? xOrder = xmlOrders.ToList().Find(item => Convert.ToInt32(item.Element("ID")?.Value) == id);
+
+
+                // int id = Convert.ToInt32(docConfig.Element("oid")?.Value);
                 docConfig.Element("oid")?.Remove();
                 item.ID = id++;
                 docConfig.Element("id")?.Add(id);
