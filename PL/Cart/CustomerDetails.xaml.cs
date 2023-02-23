@@ -35,17 +35,17 @@ namespace PL.Cart
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            ICart.curCartP.CustomerEmail=(sender).ToString();
+            ICart.curCartP.CustomerEmail= txt3.Text;
         }
 
         private void TextBox_TextChanged_1(object sender, TextChangedEventArgs e)
         {
-            ICart.curCartP.CustomerAdress = (sender).ToString();
+            ICart.curCartP.CustomerAdress = txt2.Text;
         }
 
         private void TextBox_TextChanged_2(object sender, TextChangedEventArgs e)
         {
-            ICart.curCartP.Name= (sender).ToString();
+            ICart.curCartP.Name= txt1.Text;
         }
     }
 }

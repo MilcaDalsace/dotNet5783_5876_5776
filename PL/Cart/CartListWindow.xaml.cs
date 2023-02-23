@@ -33,10 +33,11 @@ namespace PL.Cart
 
         private void submitOrderBtn_Click(object sender, RoutedEventArgs e)
         {
-            //ICart.curCartP.Name = "orit";
-            //ICart.curCartP.CustomerAdress = "orittt@gmail.com";
-            //ICart.curCartP.CustomerEmail = "orittt@gmail.com";
-            new CustomerDetails().Show();
+            
+            new CustomerDetails().ShowDialog();
+            ICart.curCartP.Name = ICart.curCartP.Name;
+            ICart.curCartP.CustomerAdress = ICart.curCartP.CustomerAdress;
+            ICart.curCartP.CustomerEmail = ICart.curCartP.CustomerEmail;
             tempBl.Cart.SaveCart(ICart.curCartP);
         }
 

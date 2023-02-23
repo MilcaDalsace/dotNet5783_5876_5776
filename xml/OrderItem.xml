@@ -168,4 +168,25 @@
     <ProductId>6</ProductId>
     <OrderId>10</OrderId>
   </OrderItem>
+  <OrderItem>
+    <Price>12</Price>
+    <Amount>1</Amount>
+    <ID>0</ID>
+    <ProductId>1</ProductId>
+    <OrderId>11</OrderId>
+  </OrderItem>
+  <OrderItem>
+    <Price>1</Price>
+    <Amount>1</Amount>
+    <ID>0</ID>
+    <ProductId>2</ProductId>
+    <OrderId>12</OrderId>
+  </OrderItem>
+  <OrderItem>
+    <Price>1</Price>
+    <Amount>3</Amount>
+    <ID>0</ID>
+    <ProductId>2</ProductId>
+    <OrderId>13</OrderId>
+  </OrderItem>
 </OrderItems>

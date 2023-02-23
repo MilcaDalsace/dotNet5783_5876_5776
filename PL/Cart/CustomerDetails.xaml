@@ -10,9 +10,9 @@
         <Label Content="name" HorizontalAlignment="Left" Margin="84,105,0,0" VerticalAlignment="Top"/>
         <Label Content="address" HorizontalAlignment="Left" Margin="84,191,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.538,5.271"/>
         <Label Content="email" HorizontalAlignment="Left" Margin="84,270,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.908,5.154"/>
-        <TextBox HorizontalAlignment="Left" Margin="84,136,0,0" TextWrapping="Wrap" Text="name" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged_2"/>
-        <TextBox HorizontalAlignment="Left" Margin="84,222,0,0" TextWrapping="Wrap" Text="address" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged_1"/>
-        <TextBox HorizontalAlignment="Left" Margin="71,301,0,0" TextWrapping="Wrap" Text="email" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
+        <TextBox Name="txt1" HorizontalAlignment="Left" Margin="84,136,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged_2"/>
+        <TextBox Name="txt2" HorizontalAlignment="Left" Margin="84,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged_1"/>
+        <TextBox Name="txt3" HorizontalAlignment="Left" Margin="71,301,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
         <Button Content="submit" Margin="10,375,478,10" Click="Button_Click"/>
 
     </Grid>
