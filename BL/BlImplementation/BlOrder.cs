@@ -276,5 +276,11 @@ internal class BlOrder : BLApi.IOrder
         }
         return orderTracking;
     }
+    public int? OrderSelection()
+    {
+        IEnumerable<DO.Order>? orders = CDal?.Order.GetAll().Where(item => item.OrderDate != DateTime.MinValue)
+            .OrderBy(item => item.ShipDate != DateTime.MinValue ? item.ShipDate : item.DeliveryDate);
+        return orders?.First().ID;
+    }
 }
 

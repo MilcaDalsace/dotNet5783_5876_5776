@@ -189,4 +189,11 @@
     <ProductId>2</ProductId>
     <OrderId>13</OrderId>
   </OrderItem>
+  <OrderItem>
+    <Price>44</Price>
+    <Amount>1</Amount>
+    <ID>0</ID>
+    <ProductId>4</ProductId>
+    <OrderId>14</OrderId>
+  </OrderItem>
 </OrderItems>
