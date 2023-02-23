@@ -36,5 +36,6 @@
             <TextBox x:Name="OrderTrackingTB" HorizontalAlignment="Left"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" UndoLimit="47" FontSize="18" FontFamily="Comic Sans MS" FontWeight="Bold" BorderBrush="White" Opacity="0.5"/>
             <Button x:Name="CheckOrderIdBtn" Content="Submit" HorizontalAlignment="Left" VerticalAlignment="Top" Click="CheckOrderIdBtn_Click" FontSize="18" FontFamily="Comic Sans MS" FontWeight="Bold" BorderBrush="White" Opacity="0.5"/>
         </StackPanel>
+        <Button x:Name="btnSimulator" Content="simulator" HorizontalAlignment="Left" Margin="94,54,0,0" Grid.Row="1" VerticalAlignment="Top" Height="50" Width="98"/>
     </Grid>
 </Window>
