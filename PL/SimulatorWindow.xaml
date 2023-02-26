@@ -1,13 +1,20 @@
-﻿<Window x:Class="PL.Simulator"
+﻿<Window x:Class="PL.SimulatorWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="Simulator" Height="450" Width="800">
+        Title="SimulatorWindow" Height="450" Width="800">
     <Grid>
-        <Button Content="stopSimulator" HorizontalAlignment="Left" Margin="87,332,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.245,13.793"/>
+        <Button Content="finishSimulator" HorizontalAlignment="Left" Margin="87,332,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.245,13.793" Click="Button_Click"/>
+        <TextBlock x:Name="timerTxtBlock" Margin="382,237,110,92" Text="00:00:00"></TextBlock>
+        <Label Margin="39,35,709,363" Content="order"></Label>
+        <TextBox x:Name="Txtorder" Margin="118,35,574,346" RenderTransformOrigin="2.462,-0.056"></TextBox>
+        <Label Margin="39,110,709,288" Content="status"></Label>
+        <TextBox x:Name="Txtstatus" Margin="118,110,574,269" RenderTransformOrigin="2.462,-0.056"/>
+        <TextBox x:Name="txtsimulator" Text="" Margin="354,265,42,10" RenderTransformOrigin="2.462,-0.056"/>
+        <Label Name="lblStatus" Margin="556,224,192,174" Content="go"></Label>
 
     </Grid>
 </Window>

@@ -87,7 +87,6 @@ namespace Dal
                 ShipDate = Convert.ToDateTime(xOrder?.Element("ShipDate")?.Value),
                 DeliveryDate = Convert.ToDateTime(xOrder?.Element("DeliveryDate")?.Value),
             };
-           // order.ID = Convert.ToInt32(xOrder?.Element("ID")?.Value);
             return order;
 
         }

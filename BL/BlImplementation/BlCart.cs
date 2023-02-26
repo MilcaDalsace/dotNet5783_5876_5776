@@ -22,61 +22,63 @@ namespace BlImplementation
         public BO.Cart Add(BO.Cart CurrCart, int product)
         {
             bool flag = false;
-            try
+            lock (CDal ?? throw new BO.NullException())
             {
-                //get the product from the list
-                DO.Product ProductToAdd = CDal?.product.Read(product)??throw new NullException();
-                //Checking if the product is already in the basket and if
-                //so just updating the quantity
-                if (CurrCart.ItemOrderList != null)
-                    CurrCart.ItemOrderList.ToList().ForEach(Curr=>
-                    {
-                        if (Curr.ProductId == product)
-                        {
-                            flag = true;
-                            if (ProductToAdd.InStock >= 1)
-                            {
-                                Curr.Amount++;
-                                Curr.FinalPrice += ProductToAdd.Price;
-                                CurrCart.FinalPrice += ProductToAdd.Price;
-                            }
-                            else
-                                throw new BO.OutOfStockExcption();
-                        }
-                    });
-                else
-                CurrCart.ItemOrderList=new List<BO.OrderItem>();
-                //If the product does not exist, create a product
-                //in a new basket and add it to the basket
-                if (!flag)
+                try
                 {
-                    if (ProductToAdd.InStock >= 1)
-                    {
-                        BO.OrderItem orderItemToAdd = new BO.OrderItem()
+                    //get the product from the list
+                    DO.Product ProductToAdd = CDal?.product.Read(product) ?? throw new NullException();
+                    //Checking if the product is already in the basket and if
+                    //so just updating the quantity
+                    if (CurrCart.ItemOrderList != null)
+                        CurrCart.ItemOrderList.ToList().ForEach(Curr =>
                         {
-                            Id = 0,
-                            ProductId = product,
-                            Price = ProductToAdd.Price,
-                            FinalPrice = ProductToAdd.Price,
-                            ProductName = ProductToAdd.Name,
-                            Amount = 1
-                        };
-                        CurrCart.FinalPrice += orderItemToAdd.Price;
-                        CurrCart.ItemOrderList.Add(orderItemToAdd);
-
-                    }
+                            if (Curr.ProductId == product)
+                            {
+                                flag = true;
+                                if (ProductToAdd.InStock >= 1)
+                                {
+                                    Curr.Amount++;
+                                    Curr.FinalPrice += ProductToAdd.Price;
+                                    CurrCart.FinalPrice += ProductToAdd.Price;
+                                }
+                                else
+                                    throw new BO.OutOfStockExcption();
+                            }
+                        });
                     else
-                        throw new BO.OutOfStockExcption();
+                        CurrCart.ItemOrderList = new List<BO.OrderItem>();
+                    //If the product does not exist, create a product
+                    //in a new basket and add it to the basket
+                    if (!flag)
+                    {
+                        if (ProductToAdd.InStock >= 1)
+                        {
+                            BO.OrderItem orderItemToAdd = new BO.OrderItem()
+                            {
+                                Id = 0,
+                                ProductId = product,
+                                Price = ProductToAdd.Price,
+                                FinalPrice = ProductToAdd.Price,
+                                ProductName = ProductToAdd.Name,
+                                Amount = 1
+                            };
+                            CurrCart.FinalPrice += orderItemToAdd.Price;
+                            CurrCart.ItemOrderList.Add(orderItemToAdd);
+
+                        }
+                        else
+                            throw new BO.OutOfStockExcption();
+                    }
+
                 }
-
+                catch (ObjectNotFoundException ex)
+                {
+                    //Throws an error if the data layer did not find such a product
+                    throw new BO.NoSuchObjectExcption(ex);
+                }
+                return CurrCart;
             }
-            catch (ObjectNotFoundException ex)
-            {
-                //Throws an error if the data layer did not find such a product
-                throw new BO.NoSuchObjectExcption(ex);
-            }
-            return CurrCart;
-
         }
         /// <summary>
         /// A function that updates the quantity of an item in the basket

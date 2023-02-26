@@ -31,11 +31,18 @@ namespace PL.Cart
         }
 
         private void changeAmountBtn_Click(object sender, RoutedEventArgs e)
-        {
+        { 
+            int difference;
             ICart.curCartP.CustomerAdress = "l";            
             try {
-            tempBl.Cart.UpdateAmount(ICart.curCartP, curProduct.ProductId, Convert.ToInt32(amountTxt.Text));
-            Close(); 
+                if (Convert.ToInt32(amountTxt.Text) > curProduct.Amount)
+                     difference = Convert.ToInt32(amountTxt.Text) - curProduct.Amount;
+                else
+                    difference =curProduct.Amount- Convert.ToInt32(amountTxt.Text)  ;
+                tempBl.Cart.UpdateAmount(ICart.curCartP, curProduct.ProductId, Convert.ToInt32(amountTxt.Text));
+                curProduct.FinalPrice = (Convert.ToInt32(curProduct.FinalPrice) + curProduct.Price * difference);
+                DataContext = new { product = curProduct };
+                Close(); 
             }
             catch (BO.OutOfStockExcption ex)
             {

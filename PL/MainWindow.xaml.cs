@@ -130,5 +130,10 @@ namespace PL
         {
             new ProductListWindow("user").ShowDialog();
         }
+
+        private void btnSimulator_Click(object sender, RoutedEventArgs e)
+        {
+            new SimulatorWindow().ShowDialog();
+        }
     }
 }

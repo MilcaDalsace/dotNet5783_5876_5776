@@ -1,121 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Orders>
   <Order>
-    <ID>1</ID>
-    <CustomerName>"orit"</CustomerName>
-    <CustomerEmail>"ooo@gmail.com</CustomerEmail>
-    <CustomerAdress>"bb"</CustomerAdress>
-    <OrderDate>0001-01-01T00:00:00</OrderDate>
-    <ShipDate>0001-01-01T00:00:00</ShipDate>
-    <DeliveryDate>0001-01-01T00:00:00</DeliveryDate>
-  </Order>
-  <Order>
     <ID>2</ID>
     <CustomerName>orit</CustomerName>
     <CustomerEmail>orittt@gmail.com</CustomerEmail>
     <CustomerAdress>orittt@gmail.com</CustomerAdress>
     <OrderDate>2023-02-22T12:12:15.2674945+02:00</OrderDate>
-    <ShipDate>0001-01-01T00:00:00</ShipDate>
-    <DeliveryDate>0001-01-01T00:00:00</DeliveryDate>
-  </Order>
-  <Order>
-    <ID>3</ID>
-    <CustomerName>orit</CustomerName>
-    <CustomerEmail>orittt@gmail.com</CustomerEmail>
-    <CustomerAdress>orittt@gmail.com</CustomerAdress>
-    <OrderDate>2023-02-22T18:44:23.3127717+02:00</OrderDate>
-    <ShipDate>0001-01-01T00:00:00</ShipDate>
-    <DeliveryDate>0001-01-01T00:00:00</DeliveryDate>
-  </Order>
-  <Order>
-    <ID>4</ID>
-    <CustomerName>orit</CustomerName>
-    <CustomerEmail>orittt@gmail.com</CustomerEmail>
-    <CustomerAdress>orittt@gmail.com</CustomerAdress>
-    <OrderDate>2023-02-22T18:56:54.9937362+02:00</OrderDate>
-    <ShipDate>0001-01-01T00:00:00</ShipDate>
-    <DeliveryDate>0001-01-01T00:00:00</DeliveryDate>
-  </Order>
-  <Order>
-    <ID>4</ID>
-    <CustomerName>orit</CustomerName>
-    <CustomerEmail>orittt@gmail.com</CustomerEmail>
-    <CustomerAdress>orittt@gmail.com</CustomerAdress>
-    <OrderDate>2023-02-22T18:58:23.3633871+02:00</OrderDate>
-    <ShipDate>0001-01-01T00:00:00</ShipDate>
-    <DeliveryDate>0001-01-01T00:00:00</DeliveryDate>
-  </Order>
-  <Order>
-    <ID>4</ID>
-    <CustomerName>orit</CustomerName>
-    <CustomerEmail>orittt@gmail.com</CustomerEmail>
-    <CustomerAdress>orittt@gmail.com</CustomerAdress>
-    <OrderDate>2023-02-22T19:14:49.6078285+02:00</OrderDate>
-    <ShipDate>0001-01-01T00:00:00</ShipDate>
-    <DeliveryDate>0001-01-01T00:00:00</DeliveryDate>
-  </Order>
-  <Order>
-    <ID>5</ID>
-    <CustomerName>orit</CustomerName>
-    <CustomerEmail>orittt@gmail.com</CustomerEmail>
-    <CustomerAdress>orittt@gmail.com</CustomerAdress>
-    <OrderDate>2023-02-22T19:26:40.3559275+02:00</OrderDate>
-    <ShipDate>0001-01-01T00:00:00</ShipDate>
-    <DeliveryDate>0001-01-01T00:00:00</DeliveryDate>
-  </Order>
-  <Order>
-    <ID>6</ID>
-    <CustomerName>orit</CustomerName>
-    <CustomerEmail>orittt@gmail.com</CustomerEmail>
-    <CustomerAdress>orittt@gmail.com</CustomerAdress>
-    <OrderDate>2023-02-22T19:27:30.9048999+02:00</OrderDate>
-    <ShipDate>0001-01-01T00:00:00</ShipDate>
-    <DeliveryDate>0001-01-01T00:00:00</DeliveryDate>
-  </Order>
-  <Order>
-    <ID>7</ID>
-    <CustomerName>orit</CustomerName>
-    <CustomerEmail>orittt@gmail.com</CustomerEmail>
-    <CustomerAdress>orittt@gmail.com</CustomerAdress>
-    <OrderDate>2023-02-22T19:27:33.6804612+02:00</OrderDate>
-    <ShipDate>0001-01-01T00:00:00</ShipDate>
-    <DeliveryDate>0001-01-01T00:00:00</DeliveryDate>
-  </Order>
-  <Order>
-    <ID>8</ID>
-    <CustomerName>orit</CustomerName>
-    <CustomerEmail>orittt@gmail.com</CustomerEmail>
-    <CustomerAdress>orittt@gmail.com</CustomerAdress>
-    <OrderDate>2023-02-22T19:27:58.3511465+02:00</OrderDate>
-    <ShipDate>0001-01-01T00:00:00</ShipDate>
-    <DeliveryDate>0001-01-01T00:00:00</DeliveryDate>
-  </Order>
-  <Order>
-    <ID>9</ID>
-    <CustomerName>orit</CustomerName>
-    <CustomerEmail>orittt@gmail.com</CustomerEmail>
-    <CustomerAdress>orittt@gmail.com</CustomerAdress>
-    <OrderDate>2023-02-22T19:28:50.4677702+02:00</OrderDate>
-    <ShipDate>0001-01-01T00:00:00</ShipDate>
-    <DeliveryDate>0001-01-01T00:00:00</DeliveryDate>
-  </Order>
-  <Order>
-    <ID>10</ID>
-    <CustomerName>orit</CustomerName>
-    <CustomerEmail>orittt@gmail.com</CustomerEmail>
-    <CustomerAdress>orittt@gmail.com</CustomerAdress>
-    <OrderDate>2023-02-22T19:43:20.7912379+02:00</OrderDate>
-    <ShipDate>0001-01-01T00:00:00</ShipDate>
-    <DeliveryDate>0001-01-01T00:00:00</DeliveryDate>
-  </Order>
-  <Order>
-    <ID>11</ID>
-    <CustomerName>System.Windows.Controls.TextBox: ddd</CustomerName>
-    <CustomerEmail>System.Windows.Controls.TextBox: ddd@gmail.com</CustomerEmail>
-    <CustomerAdress>System.Windows.Controls.TextBox: ddd</CustomerAdress>
-    <OrderDate>2023-02-23T14:42:57.0017226+02:00</OrderDate>
-    <ShipDate>0001-01-01T00:00:00</ShipDate>
-    <DeliveryDate>0001-01-01T00:00:00</DeliveryDate>
+    <ShipDate>2023-02-26T15:03:01.9128822+02:00</ShipDate>
+    <DeliveryDate>2023-02-26T15:54:50.1556768+02:00</DeliveryDate>
   </Order>
   <Order>
     <ID>12</ID>
@@ -123,8 +15,44 @@
     <CustomerEmail>s@gmail.com</CustomerEmail>
     <CustomerAdress>s</CustomerAdress>
     <OrderDate>2023-02-23T14:56:46.6616719+02:00</OrderDate>
-    <ShipDate>2023-02-23T14:57:06.4682542+02:00</ShipDate>
-    <DeliveryDate>2023-02-23T14:57:10.7959576+02:00</DeliveryDate>
+    <ShipDate>2023-02-26T15:54:47.3288634+02:00</ShipDate>
+    <DeliveryDate>2023-02-26T17:08:23.5119674+02:00</DeliveryDate>
+  </Order>
+  <Order>
+    <ID>5</ID>
+    <CustomerName>orit</CustomerName>
+    <CustomerEmail>orittt@gmail.com</CustomerEmail>
+    <CustomerAdress>orittt@gmail.com</CustomerAdress>
+    <OrderDate>2023-02-22T19:26:40.3559275+02:00</OrderDate>
+    <ShipDate>2023-02-26T15:05:30.9621372+02:00</ShipDate>
+    <DeliveryDate>2023-02-26T17:08:41.056377+02:00</DeliveryDate>
+  </Order>
+  <Order>
+    <ID>9</ID>
+    <CustomerName>orit</CustomerName>
+    <CustomerEmail>orittt@gmail.com</CustomerEmail>
+    <CustomerAdress>orittt@gmail.com</CustomerAdress>
+    <OrderDate>2023-02-22T19:28:50.4677702+02:00</OrderDate>
+    <ShipDate>2023-02-26T15:05:49.2272085+02:00</ShipDate>
+    <DeliveryDate>2023-02-26T17:12:08.255486+02:00</DeliveryDate>
+  </Order>
+  <Order>
+    <ID>10</ID>
+    <CustomerName>orit</CustomerName>
+    <CustomerEmail>orittt@gmail.com</CustomerEmail>
+    <CustomerAdress>orittt@gmail.com</CustomerAdress>
+    <OrderDate>2023-02-22T19:43:20.7912379+02:00</OrderDate>
+    <ShipDate>2023-02-26T15:54:32.5245109+02:00</ShipDate>
+    <DeliveryDate>2023-02-26T17:12:13.0191168+02:00</DeliveryDate>
+  </Order>
+  <Order>
+    <ID>11</ID>
+    <CustomerName>System.Windows.Controls.TextBox: ddd</CustomerName>
+    <CustomerEmail>System.Windows.Controls.TextBox: ddd@gmail.com</CustomerEmail>
+    <CustomerAdress>System.Windows.Controls.TextBox: ddd</CustomerAdress>
+    <OrderDate>2023-02-23T14:42:57.0017226+02:00</OrderDate>
+    <ShipDate>2023-02-26T15:54:36.6895445+02:00</ShipDate>
+    <DeliveryDate>2023-02-26T17:12:18.2048812+02:00</DeliveryDate>
   </Order>
   <Order>
     <ID>13</ID>
@@ -132,8 +60,8 @@
     <CustomerEmail>x@gmail.com</CustomerEmail>
     <CustomerAdress>x</CustomerAdress>
     <OrderDate>2023-02-23T15:03:07.7723095+02:00</OrderDate>
-    <ShipDate>0001-01-01T00:00:00</ShipDate>
-    <DeliveryDate>0001-01-01T00:00:00</DeliveryDate>
+    <ShipDate>2023-02-26T15:54:40.3802935+02:00</ShipDate>
+    <DeliveryDate>2023-02-26T17:12:21.0360341+02:00</DeliveryDate>
   </Order>
   <Order>
     <ID>14</ID>
@@ -141,7 +69,115 @@
     <CustomerEmail>xx@k.k</CustomerEmail>
     <CustomerAdress>x</CustomerAdress>
     <OrderDate>2023-02-23T17:08:00.0564551+02:00</OrderDate>
+    <ShipDate>2023-02-26T15:54:44.4365316+02:00</ShipDate>
+    <DeliveryDate>2023-02-26T17:12:25.6819461+02:00</DeliveryDate>
+  </Order>
+  <Order>
+    <ID>7</ID>
+    <CustomerName>orit</CustomerName>
+    <CustomerEmail>orittt@gmail.com</CustomerEmail>
+    <CustomerAdress>orittt@gmail.com</CustomerAdress>
+    <OrderDate>2023-02-22T19:27:33.6804612+02:00</OrderDate>
+    <ShipDate>2023-02-26T15:05:39.6792656+02:00</ShipDate>
+    <DeliveryDate>2023-02-26T17:46:30.9571861+02:00</DeliveryDate>
+  </Order>
+  <Order>
+    <ID>6</ID>
+    <CustomerName>orit</CustomerName>
+    <CustomerEmail>orittt@gmail.com</CustomerEmail>
+    <CustomerAdress>orittt@gmail.com</CustomerAdress>
+    <OrderDate>2023-02-22T19:27:30.9048999+02:00</OrderDate>
+    <ShipDate>2023-02-26T17:34:06.213209+02:00</ShipDate>
+    <DeliveryDate>2023-02-26T17:46:42.2521178+02:00</DeliveryDate>
+  </Order>
+  <Order>
+    <ID>8</ID>
+    <CustomerName>orit</CustomerName>
+    <CustomerEmail>orittt@gmail.com</CustomerEmail>
+    <CustomerAdress>orittt@gmail.com</CustomerAdress>
+    <OrderDate>2023-02-22T19:27:58.3511465+02:00</OrderDate>
+    <ShipDate>2023-02-26T17:30:03.5805775+02:00</ShipDate>
+    <DeliveryDate>2023-02-26T19:25:49.1026467+02:00</DeliveryDate>
+  </Order>
+  <Order>
+    <ID>1</ID>
+    <CustomerName>"orit"</CustomerName>
+    <CustomerEmail>"ooo@gmail.com</CustomerEmail>
+    <CustomerAdress>"bb"</CustomerAdress>
+    <OrderDate>2023-02-22T19:27:58.3511465+02:00</OrderDate>
+    <ShipDate>2023-02-26T19:37:23.3587962+02:00</ShipDate>
+    <DeliveryDate>2023-02-26T19:41:45.3283977+02:00</DeliveryDate>
+  </Order>
+  <Order>
+    <ID>15</ID>
+    <CustomerName>x</CustomerName>
+    <CustomerEmail>x@gmail.com</CustomerEmail>
+    <CustomerAdress>x</CustomerAdress>
+    <OrderDate>2023-02-26T18:43:25.4088373+02:00</OrderDate>
+    <ShipDate>2023-02-26T19:41:36.832246+02:00</ShipDate>
+    <DeliveryDate>2023-02-26T19:41:49.4986751+02:00</DeliveryDate>
+  </Order>
+  <Order>
+    <ID>3</ID>
+    <CustomerName>orit</CustomerName>
+    <CustomerEmail>orittt@gmail.com</CustomerEmail>
+    <CustomerAdress>orittt@gmail.com</CustomerAdress>
+    <OrderDate>2023-02-22T18:44:23.3127717+02:00</OrderDate>
+    <ShipDate>2023-02-26T15:03:04.8567032+02:00</ShipDate>
+    <DeliveryDate>2023-02-26T19:46:13.5568026+02:00</DeliveryDate>
+  </Order>
+  <Order>
+    <ID>4</ID>
+    <CustomerName>orit</CustomerName>
+    <CustomerEmail>orittt@gmail.com</CustomerEmail>
+    <CustomerAdress>orittt@gmail.com</CustomerAdress>
+    <OrderDate>2023-02-22T18:56:54.9937362+02:00</OrderDate>
+    <ShipDate>2023-02-26T15:03:08.96936+02:00</ShipDate>
+    <DeliveryDate>2023-02-26T19:46:15.6890329+02:00</DeliveryDate>
+  </Order>
+  <Order>
+    <ID>16</ID>
+    <CustomerName>c</CustomerName>
+    <CustomerEmail>c@k.m</CustomerEmail>
+    <CustomerAdress>c</CustomerAdress>
+    <OrderDate>2023-02-26T18:55:37.8464563+02:00</OrderDate>
+    <ShipDate>2023-02-26T19:41:42.6846774+02:00</ShipDate>
+    <DeliveryDate>2023-02-26T19:46:18.5851895+02:00</DeliveryDate>
+  </Order>
+  <Order>
+    <ID>20</ID>
+    <CustomerName>f</CustomerName>
+    <CustomerEmail>f@h.k</CustomerEmail>
+    <CustomerAdress>f</CustomerAdress>
+    <OrderDate>2023-02-26T20:03:20.3347921+02:00</OrderDate>
     <ShipDate>0001-01-01T00:00:00</ShipDate>
     <DeliveryDate>0001-01-01T00:00:00</DeliveryDate>
+  </Order>
+  <Order>
+    <ID>17</ID>
+    <CustomerName>x</CustomerName>
+    <CustomerEmail>x@m.m</CustomerEmail>
+    <CustomerAdress>x</CustomerAdress>
+    <OrderDate>2023-02-26T19:46:07.654388+02:00</OrderDate>
+    <ShipDate>2023-02-26T19:46:21.0577977+02:00</ShipDate>
+    <DeliveryDate>2023-02-26T20:09:57.3007043+02:00</DeliveryDate>
+  </Order>
+  <Order>
+    <ID>18</ID>
+    <CustomerName>e</CustomerName>
+    <CustomerEmail>e@h.l</CustomerEmail>
+    <CustomerAdress>e</CustomerAdress>
+    <OrderDate>2023-02-26T19:47:13.1877703+02:00</OrderDate>
+    <ShipDate>2023-02-26T19:47:19.3130138+02:00</ShipDate>
+    <DeliveryDate>2023-02-26T20:10:02.2938158+02:00</DeliveryDate>
+  </Order>
+  <Order>
+    <ID>19</ID>
+    <CustomerName>f</CustomerName>
+    <CustomerEmail>f@m.l</CustomerEmail>
+    <CustomerAdress>f</CustomerAdress>
+    <OrderDate>2023-02-26T19:51:07.6930056+02:00</OrderDate>
+    <ShipDate>2023-02-26T19:51:13.2100092+02:00</ShipDate>
+    <DeliveryDate>2023-02-26T20:10:05.8072569+02:00</DeliveryDate>
   </Order>
 </Orders>

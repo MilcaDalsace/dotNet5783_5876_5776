@@ -14,7 +14,7 @@ namespace BlImplementation;
 
 internal class BlOrder : BLApi.IOrder
 {
-    IDal ? CDal = DalApi.Factory.Get();
+    IDal? CDal = DalApi.Factory.Get();
     /// <summary>
     /// A function that returns a list of orders
     /// I don't get anything
@@ -23,7 +23,7 @@ internal class BlOrder : BLApi.IOrder
     {
         float sum = 0;
         List<BO.OrderForList> listToReturn = new List<BO.OrderForList>();
-        IEnumerable<DO.Order> list = CDal?.Order.GetAll()??throw new BO.NullException();
+        IEnumerable<DO.Order> list = CDal?.Order.GetAll() ?? throw new BO.NullException();
         try
         {
             list.ToList().ForEach(order =>
@@ -66,7 +66,8 @@ internal class BlOrder : BLApi.IOrder
     {
         float sum = 0;
         DO.Order currOrder = new DO.Order();
-        IEnumerable<DO.OrderItem> orderItemsIenum = CDal?.orderItem.GetAll()??throw new BO.NullException();
+        lock (CDal ?? throw new BO.NullException()) { 
+            IEnumerable<DO.OrderItem> orderItemsIenum = CDal?.orderItem.GetAll() ?? throw new BO.NullException();
         List<BO.OrderItem> orderItems = new List<BO.OrderItem>();
         orderItemsIenum.ToList().ForEach(orderItem =>
         {
@@ -86,7 +87,7 @@ internal class BlOrder : BLApi.IOrder
             try
             {
                 currOrder = CDal.Order.Read(idOrder);
-                orderItems.ToList().ForEach(item=>sum += item.Price * item.Amount);   
+                orderItems.ToList().ForEach(item => sum += item.Price * item.Amount);
             }
             catch (ObjectNotFoundException ex)
             {
@@ -108,6 +109,7 @@ internal class BlOrder : BLApi.IOrder
             return orderToReturn;
         }
         throw new BO.OneFieldsInCorrect();
+        }
     }
     /// <summary>
     ///A function that receives an order code and updates an order shipment 
@@ -118,7 +120,7 @@ internal class BlOrder : BLApi.IOrder
         DO.Order orderToUpdate = new DO.Order();
         try
         {
-            orderToUpdate = CDal?.Order.Read(idOrder)??throw new BO.NullException();
+            orderToUpdate = CDal?.Order.Read(idOrder) ?? throw new BO.NullException();
             if (orderStatus(orderToUpdate) == BO.Status.received)
             {
                 orderToUpdate.ShipDate = DateTime.Now;
@@ -142,7 +144,7 @@ internal class BlOrder : BLApi.IOrder
     {
         try
         {
-            DO.Order order = CDal?.Order.Read(idOrder)??throw new BO.NullException();
+            DO.Order order = CDal?.Order.Read(idOrder) ?? throw new BO.NullException();
             if (orderStatus(order) == BO.Status.sent)
             {
                 order.DeliveryDate = DateTime.Now;
@@ -169,7 +171,7 @@ internal class BlOrder : BLApi.IOrder
             switch (action)
             {
                 case 1:
-                    DO.OrderItem baseItem = CDal?.orderItem.ReadByFunc(item => item.OrderId == idOrder && item.ProductId == idProduct)??throw new BO.NullException();
+                    DO.OrderItem baseItem = CDal?.orderItem.ReadByFunc(item => item.OrderId == idOrder && item.ProductId == idProduct) ?? throw new BO.NullException();
                     CDal.orderItem.Delete(baseItem.ID);
                     break;
                 case 2:
@@ -184,7 +186,7 @@ internal class BlOrder : BLApi.IOrder
                     CDal?.orderItem.Create(newOrder);
                     break;
                 case 3:
-                    float price = CDal?.product.Read(idProduct).Price??throw new BO.NullException();
+                    float price = CDal?.product.Read(idProduct).Price ?? throw new BO.NullException();
                     DO.OrderItem baseItemForUpdate = CDal.orderItem.ReadByFunc(item => item.OrderId == idOrder && item.ProductId == idProduct);
                     baseItemForUpdate.Amount = CurAmount;
                     baseItemForUpdate.Price = price * CurAmount;
@@ -247,27 +249,27 @@ internal class BlOrder : BLApi.IOrder
             BO.Order order = new BO.Order();
             order = GetOrderDetails(idOrder);
             DO.Order orderDO = new DO.Order
-            { 
+            {
                 CustomerAdress = order.CustomerAdress,
                 CustomerEmail = order.CustomerEmail,
                 CustomerName = order.CustomerName,
                 DeliveryDate = order.DeliveryDate,
                 ID = idOrder,
                 OrderDate = order.OrderDate,
-                ShipDate= order.ShipDate
+                ShipDate = order.ShipDate
             };
             orderTracking.ID = order.ID;
             orderTracking.OrderStatus = order.OrderStatus;
             orderTracking.DateAndStatus = new List<(DateTime, string)?> { };
             orderTracking.DateAndStatus.Add((order.OrderDate, "Received"));
-            BO.Status a= orderStatus(orderDO);
+            BO.Status a = orderStatus(orderDO);
             if (orderStatus(orderDO) == BO.Status.arrived)
             {
-            orderTracking.DateAndStatus.Add((order.ShipDate, "Sent"));
-            orderTracking.DateAndStatus.Add((order.DeliveryDate, "Arrived"));
+                orderTracking.DateAndStatus.Add((order.ShipDate, "Sent"));
+                orderTracking.DateAndStatus.Add((order.DeliveryDate, "Arrived"));
             }
             else
-                if(orderStatus(orderDO) == BO.Status.sent)
+                if (orderStatus(orderDO) == BO.Status.sent)
                 orderTracking.DateAndStatus.Add((order.ShipDate, "Sent"));
         }
         catch (ObjectNotFoundException ex)
@@ -278,9 +280,17 @@ internal class BlOrder : BLApi.IOrder
     }
     public int? OrderSelection()
     {
-        IEnumerable<DO.Order>? orders = CDal?.Order.GetAll().Where(item => item.OrderDate != DateTime.MinValue)
-            .OrderBy(item => item.ShipDate != DateTime.MinValue ? item.ShipDate : item.DeliveryDate);
-        return orders?.First().ID;
+        IEnumerable<DO.Order>? orders = CDal?.Order.GetAll().Where(item => item.DeliveryDate == DateTime.MinValue)
+            .OrderBy(item => item.ShipDate != DateTime.MinValue ? item.ShipDate : item.OrderDate);
+        try
+        {
+            return orders?.First().ID;
+        }
+
+        catch (Exception ex)
+        {
+            return null;
+        };
     }
 }
 

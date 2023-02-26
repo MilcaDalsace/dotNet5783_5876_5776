@@ -26,19 +26,32 @@ namespace PL.Cart
         public CartListWindow()
         {
             InitializeComponent();
-            cart=ICart.curCartP.ItemOrderList;
-            DataContext =cart;
+            cart = ICart.curCartP.ItemOrderList;
+            DataContext = cart;
             //CartLstview.ItemsSource = 
         }
 
         private void submitOrderBtn_Click(object sender, RoutedEventArgs e)
         {
-            
+
             new CustomerDetails().ShowDialog();
             ICart.curCartP.Name = ICart.curCartP.Name;
             ICart.curCartP.CustomerAdress = ICart.curCartP.CustomerAdress;
             ICart.curCartP.CustomerEmail = ICart.curCartP.CustomerEmail;
-            tempBl.Cart.SaveCart(ICart.curCartP);
+            try
+            {
+                tempBl.Cart.SaveCart(ICart.curCartP);
+                //can remove
+                ICart.curCartP = new BO.Cart();
+            }
+            catch (BO.OutOfStockExcption ex)
+            {
+                MessageBox.Show(ex.Message);    
+            }
+            catch (BO.OneFieldsInCorrect ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void CartLstview_MouseDoubleClick(object sender, MouseButtonEventArgs e)

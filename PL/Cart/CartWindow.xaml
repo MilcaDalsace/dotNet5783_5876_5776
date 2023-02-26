@@ -11,10 +11,10 @@
         <Label Content="product price" HorizontalAlignment="Left" Margin="34,118,0,0" VerticalAlignment="Top"/>
         <Label Content="amount in cart" HorizontalAlignment="Left" Margin="34,178,0,0" VerticalAlignment="Top"/>
         <Label Content="final price" HorizontalAlignment="Left" Margin="34,269,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="nameTxt" Text="{Binding product.ProductName}" HorizontalAlignment="Left" Margin="120,47,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="101" RenderTransformOrigin="0.492,-2.503"/>
-        <TextBox x:Name="priceTxt" Text="{Binding product.Price}" HorizontalAlignment="Left" Margin="126,122,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <TextBox IsEnabled="False" x:Name="nameTxt" Text="{Binding product.ProductName}" HorizontalAlignment="Left" Margin="120,47,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="101" RenderTransformOrigin="0.492,-2.503"/>
+        <TextBox IsEnabled="False" x:Name="priceTxt" Text="{Binding product.Price}" HorizontalAlignment="Left" Margin="126,122,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="amountTxt" Text="{Binding product.Amount}" HorizontalAlignment="Left" Margin="126,182,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" TextChanged="amountTxt_TextChanged"/>
-        <TextBox x:Name="finalPriceTxt" Text="{Binding product.FinalPrice}" HorizontalAlignment="Left" Margin="115,277,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="finalPriceTxt_TextChanged"/>
+        <TextBox IsEnabled="False" x:Name="finalPriceTxt" Text="{Binding product.FinalPrice}" HorizontalAlignment="Left" Margin="115,277,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="finalPriceTxt_TextChanged"/>
         <Button x:Name="changeAmountBtn" Content="change" HorizontalAlignment="Left" Margin="300,178,0,0" VerticalAlignment="Top" Width="75" Height="39" Click="changeAmountBtn_Click"/>
         <Button x:Name="deleteBtn" Content="delete product" HorizontalAlignment="Left" Margin="535,182,0,0" VerticalAlignment="Top" Click="deleteBtn_Click"/>
 
